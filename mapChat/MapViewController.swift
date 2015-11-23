@@ -56,23 +56,40 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     }
     
     override func viewDidLoad() {
+        print("Running the code here")
         mapView.delegate = self
     }
     
+    //Here is all the magic happens:
+    //IMPORTANT: need to se canShowCallout = true, the default is hidden!
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        print("Running the code here")
+
         
-        let view: MKPinAnnotationView
+        let view: MKAnnotationView
+        let reusedId = "myPin"
         
-        if let v = mapView.dequeueReusableAnnotationViewWithIdentifier(color.toString()){
-            view = v as! MKPinAnnotationView
+        if let v = mapView.dequeueReusableAnnotationViewWithIdentifier(reusedId){
+            view = v
         }else{
-            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: color.toString())
+            view = MKAnnotationView(annotation: annotation, reuseIdentifier: reusedId)
         }
         
-        view.pinTintColor = color
+        //view.pinTintColor = color
         
         view.canShowCallout = true
+        
+        if let detailImage = UIImage(named: "firehose"){
+            view.detailCalloutAccessoryView = UIImageView(image: detailImage)
+            print("22")
+        }
+        
+        if let extIcon = UIImage(named: "firehose"){
+            view.image = extIcon
+            print("found the image")
+        }else{
+            print("didn't find the image")
+        }
+        
         
         return view
     }
