@@ -7,19 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA86D2F71C01A0BC001C088B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA86D2F61C01A0BC001C088B /* MapKit.framework */; };
 		DAA89DAC1BFE8D3A005FB53E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA89DAB1BFE8D3A005FB53E /* AppDelegate.swift */; };
 		DAA89DAE1BFE8D3A005FB53E /* CurrentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA89DAD1BFE8D3A005FB53E /* CurrentLocationViewController.swift */; };
-		DAA89DB01BFE8D3A005FB53E /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA89DAF1BFE8D3A005FB53E /* SecondViewController.swift */; };
+		DAA89DB01BFE8D3A005FB53E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA89DAF1BFE8D3A005FB53E /* MapViewController.swift */; };
 		DAA89DB31BFE8D3A005FB53E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA89DB11BFE8D3A005FB53E /* Main.storyboard */; };
 		DAA89DB51BFE8D3A005FB53E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAA89DB41BFE8D3A005FB53E /* Assets.xcassets */; };
 		DAA89DB81BFE8D3A005FB53E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA89DB61BFE8D3A005FB53E /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA86D2F61C01A0BC001C088B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		DAA89DA81BFE8D3A005FB53E /* mapChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mapChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAA89DAB1BFE8D3A005FB53E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAA89DAD1BFE8D3A005FB53E /* CurrentLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationViewController.swift; sourceTree = "<group>"; };
-		DAA89DAF1BFE8D3A005FB53E /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		DAA89DAF1BFE8D3A005FB53E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		DAA89DB21BFE8D3A005FB53E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DAA89DB41BFE8D3A005FB53E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DAA89DB71BFE8D3A005FB53E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -31,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA86D2F71C01A0BC001C088B /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +43,7 @@
 		DAA89D9F1BFE8D3A005FB53E = {
 			isa = PBXGroup;
 			children = (
+				DA86D2F61C01A0BC001C088B /* MapKit.framework */,
 				DAA89DAA1BFE8D3A005FB53E /* mapChat */,
 				DAA89DA91BFE8D3A005FB53E /* Products */,
 			);
@@ -58,7 +62,7 @@
 			children = (
 				DAA89DAB1BFE8D3A005FB53E /* AppDelegate.swift */,
 				DAA89DAD1BFE8D3A005FB53E /* CurrentLocationViewController.swift */,
-				DAA89DAF1BFE8D3A005FB53E /* SecondViewController.swift */,
+				DAA89DAF1BFE8D3A005FB53E /* MapViewController.swift */,
 				DAA89DB11BFE8D3A005FB53E /* Main.storyboard */,
 				DAA89DB41BFE8D3A005FB53E /* Assets.xcassets */,
 				DAA89DB61BFE8D3A005FB53E /* LaunchScreen.storyboard */,
@@ -138,7 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAA89DB01BFE8D3A005FB53E /* SecondViewController.swift in Sources */,
+				DAA89DB01BFE8D3A005FB53E /* MapViewController.swift in Sources */,
 				DAA89DAC1BFE8D3A005FB53E /* AppDelegate.swift in Sources */,
 				DAA89DAE1BFE8D3A005FB53E /* CurrentLocationViewController.swift in Sources */,
 			);
