@@ -78,12 +78,12 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         
         view.canShowCallout = true
         
-        if let detailImage = UIImage(named: "firehose"){
+        if let detailImage = UIImage(named: "red"){
             view.detailCalloutAccessoryView = UIImageView(image: detailImage)
             print("22")
         }
         
-        if let extIcon = UIImage(named: "firehose"){
+        if let extIcon = UIImage(named: "super"){
             view.image = extIcon
             print("found the image")
         }else{
