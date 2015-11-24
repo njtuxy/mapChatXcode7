@@ -33,14 +33,11 @@ class Annotation : NSObject, MKAnnotation{
     }
 }
 
-class MapViewController: UIViewController, MKMapViewDelegate{
+class MapViewController: UIViewController, MKMapViewDelegate, ENSideMenuDelegate{
+    
     @IBOutlet weak var mapView: MKMapView!
-
     var managedObjectContext: NSManagedObjectContext!
     
-//    let distance: CLLocationDistance = 700
-//    let pitch: CGFloat = 65
-
     let color = UIColor(red: 0.4, green: 0.8, blue: 0.6, alpha: 1.0)
     let location = CLLocationCoordinate2D(latitude: 37.782736, longitude:-122.400983)
     
@@ -56,8 +53,10 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     }
     
     override func viewDidLoad() {
-        print("Running the code here")
+        //Setting the map view delegate
         mapView.delegate = self
+        //Setting the sideMenu delegate
+        self.sideMenuController()?.sideMenu?.delegate = self
     }
     
     //Here is all the magic happens:
@@ -123,6 +122,38 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     @IBAction func showLocations() {
             
     }
+
+    //SideMenu Bar Button
+    @IBAction func toggleSideMenu(sender: AnyObject) {
+        toggleSideMenuView()
+    }
+
+    
+    //SideMenu Functions
+    func sideMenuWillOpen() {
+        print("sideMenuWillOpen")
+    }
+    
+    func sideMenuWillClose() {
+        print("sideMenuWillClose")
+    }
+    
+    func sideMenuShouldOpenSideMenu() -> Bool {
+        print("sideMenuShouldOpenSideMenu")
+        return true
+    }
+    
+    func sideMenuDidClose() {
+        print("sideMenuDidClose")
+    }
+    
+    func sideMenuDidOpen() {
+        print("sideMenuDidOpen")
+    }
+    
+    
+
+    
 }
 
 //extension MapViewController: MKMapViewDelegate { }
