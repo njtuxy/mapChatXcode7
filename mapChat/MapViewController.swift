@@ -79,12 +79,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, ENSideMenuDelegate
         
         if let detailImage = UIImage(named: "red"){
             view.detailCalloutAccessoryView = UIImageView(image: detailImage)
-            print("22")
         }
         
         if let extIcon = UIImage(named: "super"){
             view.image = extIcon
-            print("found the image")
         }else{
             print("didn't find the image")
         }

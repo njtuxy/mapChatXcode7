@@ -40,7 +40,7 @@ class SideMenuTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return 4
+        return 2
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -49,20 +49,22 @@ class SideMenuTableViewController: UITableViewController {
         
         if (cell == nil) {
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "CELL")
-            cell!.backgroundColor = UIColor.clearColor()
-            cell!.textLabel?.textColor = UIColor.darkGrayColor()
+            cell!.backgroundColor = UIColor.blackColor()
+            cell!.textLabel?.textColor = UIColor.whiteColor()
+            cell!.textLabel?.font = UIFont(name:"Avenir", size:15)
             let selectedBackgroundView = UIView(frame: CGRectMake(0, 0, cell!.frame.size.width, cell!.frame.size.height))
-            selectedBackgroundView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+//            selectedBackgroundView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
             cell!.selectedBackgroundView = selectedBackgroundView
         }
         
-        cell!.textLabel?.text = "ViewController #\(indexPath.row+1)"
+//        cell!.textLabel?.text = "ViewController #\(indexPath.row+1)"
+        cell!.textLabel?.text = "Yan Xia"
         
         return cell!
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 50.0
+        return 40.0
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -76,14 +78,15 @@ class SideMenuTableViewController: UITableViewController {
         selectedMenuItem = indexPath.row
         
         //Present new view controller
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
-        var destViewController : UIViewController
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
+//        var destViewController : UIViewController
         switch (indexPath.row) {
         case 0:
 //            destViewController = mainStoryboard.instantiateViewControllerWithIdentifier("ViewController1")
+            print("PPPPPPPP")
             break
         case 1:
-//            destViewController = mainStoryboard.instantiateViewControllerWithIdentifier("ViewController2")
+//            destViewController = mainStoryboard.instfantiateViewControllerWithIdentifier("ViewController2")
             print("Finish case 1")
             break
         case 2:
@@ -95,7 +98,10 @@ class SideMenuTableViewController: UITableViewController {
 //            destViewController = mainStoryboard.instantiateViewControllerWithIdentifier("ViewController4")
             break
         }
+        
+        toggleSideMenuView()
 //        sideMenuController()?.setContentViewController(destViewController)
+
         print("Finish the loop")
     }
 
