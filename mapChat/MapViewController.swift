@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreData
+import Firebase
 
 extension UIColor{
     final func toString() -> String{
