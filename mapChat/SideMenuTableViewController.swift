@@ -17,7 +17,8 @@ class SideMenuTableViewController: UITableViewController {
         // Customize apperance of table view
         tableView.contentInset = UIEdgeInsetsMake(64.0, 0, 0, 0) //
         tableView.separatorStyle = .None
-        tableView.backgroundColor = UIColor.clearColor()
+//        tableView.backgroundColor = UIColor.clearColor()
+        tableView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
         tableView.scrollsToTop = false
         
         // Preserve selection between presentations
