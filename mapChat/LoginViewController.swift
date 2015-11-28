@@ -26,13 +26,45 @@ class LoginViewController: UIViewController {
     @IBAction func logIn(sender: UIButton) {
         let username = txtUsername.text!
         let password = txtPassword.text!
-        FirebaseHelper.loginWithEmail(username, password: password)
-        updateLoginStatus()
+        
+        if(username == ""){
+            self.noticeOnlyText("username is empty!")
+            delay(1){
+                self.clearAllNotice()
+            }
+            return
+        }
+
+        if(password == ""){
+            self.noticeOnlyText("password is empty!")
+            delay(1){
+                self.clearAllNotice()
+            }
+            return
+        }
+
+        
+        
+//        FirebaseHelper.loginWithEmail(username, password: password)
+//        while(!FirebaseHelper.userAlreadyLoggedIn()){
+//            self.pleaseWait()
+//        }
+//        updateLoginStatus()
+    }
+    
+    
+    func delay(delay:Double, closure:()->()) {
+        
+        dispatch_after(
+            dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
+        
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLoginStatus()
+
 
 //        showCurrentLoggedInStatus(FirebaseHelper.userAlreadyLoggedIn())
         
