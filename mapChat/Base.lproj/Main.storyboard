@@ -74,7 +74,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Tag" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Tag" image="super" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="LongtitudeLabel" destination="AnQ-vR-uGQ" id="siO-Bi-tjR"/>
                         <outlet property="addressLabel" destination="jwB-Ui-T59" id="I4A-QY-qmh"/>
@@ -150,6 +150,79 @@
             </objects>
             <point key="canvasLocation" x="1102" y="596"/>
         </scene>
+        <!--Account-->
+        <scene sceneID="ONX-zA-te3">
+            <objects>
+                <viewController id="7Pa-VC-lSY" customClass="LoginViewController" customModule="mapChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NI3-cp-ONr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="Ws9-dK-pXK">
+                                <rect key="frame" x="92" y="169" width="136" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="AlL-Dv-io3">
+                                <rect key="frame" x="92" y="278" width="136" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cZr-1d-lYx">
+                                <rect key="frame" x="92" y="140" width="76" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TiM-Qm-cU5">
+                                <rect key="frame" x="94" y="249" width="74" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uYC-Gy-LJb">
+                                <rect key="frame" x="139" y="367" width="42" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Log In">
+                                    <color key="titleShadowColor" red="0.32094412960000002" green="0.65676761110000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="logIn:" destination="7Pa-VC-lSY" eventType="touchUpInside" id="F0Z-qa-XvR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iEm-Tl-ccm">
+                                <rect key="frame" x="136" y="452" width="52" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Log out"/>
+                                <connections>
+                                    <action selector="logOut:" destination="7Pa-VC-lSY" eventType="touchUpInside" id="h5H-hC-LV3"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QAb-f1-WZ3">
+                                <rect key="frame" x="0.0" y="52" width="320" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Account" image="Account" id="1RK-p4-pbN"/>
+                    <connections>
+                        <outlet property="currentLoginStatus" destination="QAb-f1-WZ3" id="cGA-j9-eEl"/>
+                        <outlet property="txtPassword" destination="AlL-Dv-io3" id="gln-X7-org"/>
+                        <outlet property="txtUsername" destination="Ws9-dK-pXK" id="p9d-53-s41"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W8g-vg-4bz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1140" y="1312"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="bvw-lu-WqU">
             <objects>
@@ -163,17 +236,19 @@
                     <connections>
                         <segue destination="GXN-X8-7Uc" kind="relationship" relationship="viewControllers" id="lQa-Ro-8zt"/>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="LZL-Vb-mto"/>
+                        <segue destination="7Pa-VC-lSY" kind="relationship" relationship="viewControllers" id="z9g-cQ-c97"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8u0-0d-qT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="570" y="235"/>
+            <point key="canvasLocation" x="366" y="499"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Account" width="25" height="25"/>
         <image name="Contacts-Filled-25" width="25" height="25"/>
         <image name="Locate-25" width="25" height="25"/>
         <image name="Map-25" width="25" height="25"/>
-        <image name="first" width="30" height="30"/>
+        <image name="super" width="50" height="50"/>
     </resources>
 </document>

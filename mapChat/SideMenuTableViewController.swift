@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
 class SideMenuTableViewController: UITableViewController {
 
     var selectedMenuItem : Int = 0
+    var myRootRef = Firebase(url:"https://qd.firebaseio.com")
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -77,6 +82,31 @@ class SideMenuTableViewController: UITableViewController {
         }
         
         selectedMenuItem = indexPath.row
+        
+
+        
+//        //login 
+//        myRootRef.createUser("bobtony1@example.com", password: "correcthorsebatterystaple",
+//            withValueCompletionBlock: { error, result in
+//                if error != nil {
+//                    // There was an error creating the account
+//                } else {
+//                    let uid = result["uid"] as? String
+//                    print("Successfully created user account with uid: \(uid)")
+//                }
+//        })
+//        
+//        
+//        myRootRef.authUser("bobtony1@example.com", password: "correcthorsebatterystaple",
+//            withCompletionBlock: { error, authData in
+//                if error != nil {
+//                     print("There is an error when loggin in")
+//                } else {
+//                    print("we are logged in")
+//                }
+//        })
+        
+        
         
         //Present new view controller
 //        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
