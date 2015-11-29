@@ -21,6 +21,11 @@ struct FirebaseHelper {
         }
     }
     
+    func showError(error: NSError) -> NSError{
+        return error
+    }
+
+    
     static func loginWithEmail(email: String, password: String){
         myRootRef.authUser(email, password: password) {
             error, authData in
@@ -28,6 +33,7 @@ struct FirebaseHelper {
                 // an error occured while attempting login
             } else {
                 // user is logged in, check authData for data
+
             }
         }
         

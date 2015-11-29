@@ -20,6 +20,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func logOut(sender: AnyObject) {
         FirebaseHelper.logOut()
+        showNoticeTextWithDelay("You have logged out!", delay: 2)
         updateLoginStatus()
     }
     
@@ -28,20 +29,30 @@ class LoginViewController: UIViewController {
         let password = txtPassword.text!
         
         if(username == ""){
-            self.noticeOnlyText("username is empty!")
-            delay(1){
-                self.clearAllNotice()
-            }
+            self.showNoticeTextWithDelay("username is empty", delay: 1)
             return
         }
 
         if(password == ""){
-            self.noticeOnlyText("password is empty!")
-            delay(1){
-                self.clearAllNotice()
-            }
+            self.showNoticeTextWithDelay("password is empty", delay: 1)
+            
             return
         }
+        
+        //Authenticate with firebase
+        FirebaseHelper.myRootRef.authUser(username, password:password){
+                error, authData in
+                if error != nil {
+                    self.showNoticeTextWithDelay(error.localizedDescription, delay: 2)
+
+                } else {
+                    // user is logged in, check authData for data
+                    self.showNoticeTextWithDelay("Logged in succesfully!", delay: 1)
+                    self.updateLoginStatus()
+                }
+            }
+        
+        
 
         
         
@@ -57,8 +68,13 @@ class LoginViewController: UIViewController {
         
         dispatch_after(
             dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
-        
-        
+    }
+    
+    func showNoticeTextWithDelay(text:String, delay:Double){
+        self.noticeOnlyText(text)
+        self.delay(delay){
+            self.clearAllNotice()
+        }
     }
     
     override func viewDidLoad() {
@@ -86,7 +102,8 @@ class LoginViewController: UIViewController {
         }else{
             currentLoginStatus.text = "not logged in"
         }
-        
     }
+    
+    
 
 }
