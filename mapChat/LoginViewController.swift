@@ -16,6 +16,8 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var txtUsername: UITextField!
     
+    @IBOutlet weak var loginButton: UIButton!
+    
     @IBOutlet weak var txtPassword: UITextField!
     
     @IBAction func logOut(sender: AnyObject) {
@@ -53,6 +55,8 @@ class LoginViewController: UIViewController {
             }
         
         
+        
+        
 
         
         
@@ -63,6 +67,14 @@ class LoginViewController: UIViewController {
 //        updateLoginStatus()
     }
     
+    
+    func disableLoginItems(){
+        self.txtUsername.borderStyle = UITextBorderStyle.None
+        self.txtPassword.borderStyle = UITextBorderStyle.None
+        self.txtUsername.enabled = false
+        self.txtPassword.enabled = false
+        self.loginButton.enabled = false 
+    }
     
     func delay(delay:Double, closure:()->()) {
         
@@ -99,6 +111,7 @@ class LoginViewController: UIViewController {
 
         if FirebaseHelper.userAlreadyLoggedIn(){
             currentLoginStatus.text = "already logged in"
+            disableLoginItems()
         }else{
             currentLoginStatus.text = "not logged in"
         }
