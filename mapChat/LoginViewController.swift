@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController , UITextFieldDelegate{
 
     @IBOutlet weak var currentLoginStatus: UILabel!
     
@@ -99,6 +99,10 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        txtUsername.delegate = self
+        txtPassword.delegate = self
+        
         updateLoginStatus()
 
 
@@ -108,6 +112,20 @@ class LoginViewController: UIViewController {
         
         
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if (textField == self.txtPassword) {
+            textField.resignFirstResponder()
+            // call the login logic
+//            login();
+            
+        } else if (textField == self.txtUsername) {
+            textField.resignFirstResponder()
+//            self.passwordText.becomeFirstResponder();
+        }
+        
+        return true;
     }
     
     override func didReceiveMemoryWarning() {
