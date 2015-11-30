@@ -7,11 +7,10 @@
 //
 
 import UIKit
-
+import Firebase
 
 class LoginViewController: UIViewController {
 
-    
     @IBOutlet weak var currentLoginStatus: UILabel!
     
     @IBOutlet weak var txtUsername: UITextField!
@@ -23,6 +22,8 @@ class LoginViewController: UIViewController {
     @IBAction func logOut(sender: AnyObject) {
         FirebaseHelper.logOut()
         showNoticeTextWithDelay("You have logged out!", delay: 2)
+        self.removeAuthDataFromNSUserDefaults()
+        enableLoginItems()
         updateLoginStatus()
     }
     
@@ -51,20 +52,11 @@ class LoginViewController: UIViewController {
                     // user is logged in, check authData for data
                     self.showNoticeTextWithDelay("Logged in succesfully!", delay: 1)
                     self.updateLoginStatus()
-                }
+                    
+                    //Save authData with NSUserDefaults
+                    self.saveAuthDataIntoNSUserDefaults(authData)
             }
-        
-        
-        
-        
-
-        
-        
-//        FirebaseHelper.loginWithEmail(username, password: password)
-//        while(!FirebaseHelper.userAlreadyLoggedIn()){
-//            self.pleaseWait()
-//        }
-//        updateLoginStatus()
+        }
     }
     
     
@@ -73,8 +65,24 @@ class LoginViewController: UIViewController {
         self.txtPassword.borderStyle = UITextBorderStyle.None
         self.txtUsername.enabled = false
         self.txtPassword.enabled = false
-        self.loginButton.enabled = false 
+        self.loginButton.enabled = false
+        
+        //if the current textBox is empty, and there is auth data, fill int he textFile user authData
+        if self.txtUsername.text == "" {
+            self.txtUsername.text = readLoginEmailFromNSUserDefaults()
+        }
+        
+            
     }
+
+    func enableLoginItems(){
+        self.txtUsername.borderStyle = UITextBorderStyle.RoundedRect
+        self.txtPassword.borderStyle = UITextBorderStyle.RoundedRect
+        self.txtUsername.enabled = true
+        self.txtPassword.enabled = true
+        self.loginButton.enabled = true
+    }
+        
     
     func delay(delay:Double, closure:()->()) {
         
@@ -117,6 +125,32 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func saveAuthDataIntoNSUserDefaults(authData: FAuthData){
+        //Save authData with NSUserDefaults
+        let email = authData.providerData["email"]
+        let uid = authData.uid
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(email, forKey: "firebase_email")
+        defaults.setObject(uid, forKey: "firebase_uid")
+    }
     
+    func removeAuthDataFromNSUserDefaults(){
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey("firebase_email")
+        defaults.removeObjectForKey("firebase_uid")
+    }
+    
+    func readLoginEmailFromNSUserDefaults() -> String{
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let email = defaults.objectForKey("firebase_email")
+        return email as! String
+    }
+
+    func readUidFromNSUserDefaults() -> String{
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let uid = defaults.objectForKey("firebase_uid")
+        return uid as! String
+    }
+
 
 }
