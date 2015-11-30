@@ -212,7 +212,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Account" image="Account" id="1RK-p4-pbN"/>
+                    <tabBarItem key="tabBarItem" title="Account" image="Settings-25" id="1RK-p4-pbN"/>
                     <connections>
                         <outlet property="currentLoginStatus" destination="QAb-f1-WZ3" id="cGA-j9-eEl"/>
                         <outlet property="loginButton" destination="uYC-Gy-LJb" id="YL1-Se-hDj"/>
@@ -222,7 +222,80 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W8g-vg-4bz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1140" y="1312"/>
+            <point key="canvasLocation" x="1102" y="1255"/>
+        </scene>
+        <!--Message-->
+        <scene sceneID="Kzy-ks-pBo">
+            <objects>
+                <viewController id="UYs-A5-UJf" customClass="MessageViewController" customModule="mapChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NI9-sA-Ad7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="plc-nx-hun">
+                                <rect key="frame" x="10" y="143" width="300" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ShQ-jz-MOn">
+                                <rect key="frame" x="137" y="323" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.3750433723689004" green="0.74569822205302083" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Send"/>
+                                <connections>
+                                    <action selector="sendMessage:" destination="UYs-A5-UJf" eventType="touchUpInside" id="rQ3-Dv-XcU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Message" image="Chat-25" id="Syo-9y-apV"/>
+                    <connections>
+                        <outlet property="txtMessage" destination="plc-nx-hun" id="EZg-57-aEz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lI0-Vm-nbO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1102" y="1935"/>
+        </scene>
+        <!--Contacts-->
+        <scene sceneID="Hgv-Qy-iVl">
+            <objects>
+                <tableViewController id="7Ez-NX-hb1" customClass="ContacsViewController" customModule="mapChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="8Am-Y2-GRf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ContactListItem" id="0WM-oZ-zwt">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0WM-oZ-zwt" id="f3Z-II-lei">
+                                    <rect key="frame" x="0.0" y="0.0" width="281" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BYW-ON-JX6">
+                                            <rect key="frame" x="8" y="8" width="274" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="7Ez-NX-hb1" id="l8V-p9-qJY"/>
+                            <outlet property="delegate" destination="7Ez-NX-hb1" id="0az-ZV-G8r"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Contacts" image="Contacts-25" id="g6b-cU-xJQ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="njJ-kW-tgZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1102" y="2795"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="bvw-lu-WqU">
@@ -238,18 +311,22 @@
                         <segue destination="GXN-X8-7Uc" kind="relationship" relationship="viewControllers" id="lQa-Ro-8zt"/>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="LZL-Vb-mto"/>
                         <segue destination="7Pa-VC-lSY" kind="relationship" relationship="viewControllers" id="z9g-cQ-c97"/>
+                        <segue destination="UYs-A5-UJf" kind="relationship" relationship="viewControllers" id="l3d-Z4-Kxh"/>
+                        <segue destination="7Ez-NX-hb1" kind="relationship" relationship="viewControllers" id="RQX-V4-2o4"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8u0-0d-qT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="366" y="499"/>
+            <point key="canvasLocation" x="-547" y="2399"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Account" width="25" height="25"/>
+        <image name="Chat-25" width="25" height="25"/>
+        <image name="Contacts-25" width="25" height="25"/>
         <image name="Contacts-Filled-25" width="25" height="25"/>
         <image name="Locate-25" width="25" height="25"/>
         <image name="Map-25" width="25" height="25"/>
+        <image name="Settings-25" width="25" height="25"/>
         <image name="super" width="50" height="50"/>
     </resources>
 </document>

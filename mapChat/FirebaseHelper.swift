@@ -42,4 +42,31 @@ struct FirebaseHelper {
     static func logOut(){
         myRootRef.unauth()
     }
+    
+    func saveAuthDataIntoNSUserDefaults(authData: FAuthData){
+        //Save authData with NSUserDefaults
+        let email = authData.providerData["email"]
+        let uid = authData.uid
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(email, forKey: "firebase_email")
+        defaults.setObject(uid, forKey: "firebase_uid")
+    }
+    
+    func removeAuthDataFromNSUserDefaults(){
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey("firebase_email")
+        defaults.removeObjectForKey("firebase_uid")
+    }
+    
+    func readLoginEmailFromNSUserDefaults() -> String{
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let email = defaults.objectForKey("firebase_email")
+        return email as! String
+    }
+    
+    static func readUidFromNSUserDefaults() -> String{
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let uid = defaults.objectForKey("firebase_uid")
+        return uid as! String
+    }
 }
