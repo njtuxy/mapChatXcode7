@@ -43,7 +43,7 @@ struct FirebaseHelper {
         myRootRef.unauth()
     }
     
-    func saveAuthDataIntoNSUserDefaults(authData: FAuthData){
+    static func saveAuthDataIntoNSUserDefaults(authData: FAuthData){
         //Save authData with NSUserDefaults
         let email = authData.providerData["email"]
         let uid = authData.uid
@@ -52,13 +52,13 @@ struct FirebaseHelper {
         defaults.setObject(uid, forKey: "firebase_uid")
     }
     
-    func removeAuthDataFromNSUserDefaults(){
+    static func removeAuthDataFromNSUserDefaults(){
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.removeObjectForKey("firebase_email")
         defaults.removeObjectForKey("firebase_uid")
     }
     
-    func readLoginEmailFromNSUserDefaults() -> String{
+    static func readLoginEmailFromNSUserDefaults() -> String{
         let defaults = NSUserDefaults.standardUserDefaults()
         let email = defaults.objectForKey("firebase_email")
         return email as! String
@@ -69,4 +69,11 @@ struct FirebaseHelper {
         let uid = defaults.objectForKey("firebase_uid")
         return uid as! String
     }
+    
+    static func saveUserInfoInFirebase(uid: String, email: String){
+        let user = myRootRef.childByAppendingPath("users").childByAppendingPath(uid)
+        let user_info = ["email": email]
+        user.updateChildValues(user_info)
+    }        
+    
 }

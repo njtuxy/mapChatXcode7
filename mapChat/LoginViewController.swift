@@ -54,7 +54,10 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
                     self.updateLoginStatus()
                     
                     //Save authData with NSUserDefaults
-                    self.saveAuthDataIntoNSUserDefaults(authData)
+                    FirebaseHelper.saveAuthDataIntoNSUserDefaults(authData)
+                    let uid = FirebaseHelper.readUidFromNSUserDefaults()
+                    let email = FirebaseHelper.readLoginEmailFromNSUserDefaults()
+                    FirebaseHelper.saveUserInfoInFirebase(uid, email: email)
             }
         }
     }
