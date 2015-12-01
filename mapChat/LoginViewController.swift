@@ -60,6 +60,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
                     FirebaseHelper.saveUserInfoInFirebase(uid, email: email)
             }
         }
+        
     }
     
     

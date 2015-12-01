@@ -11,6 +11,7 @@ import Firebase
 
 struct FirebaseHelper {
     static let myRootRef = Firebase(url:"https://qd.firebaseio.com")
+//    static var user_email_list = [String]()
     
     static func userAlreadyLoggedIn()-> Bool{
         if myRootRef.authData == nil{
@@ -74,6 +75,15 @@ struct FirebaseHelper {
         let user = myRootRef.childByAppendingPath("users").childByAppendingPath(uid)
         let user_info = ["email": email]
         user.updateChildValues(user_info)
-    }        
+    }
+    
+//    static func getAllUsersFromFirebase(){
+//        let users = myRootRef.childByAppendingPath("users")
+//        users.queryOrderedByChild("email").observeEventType(.ChildAdded, withBlock: { snapshot in
+//            if let email = snapshot.value["email"] as? String {
+//                user_email_list.append(email)
+//            }
+//        })
+//    }
     
 }
