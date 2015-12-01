@@ -11,6 +11,7 @@
 		DA2326741C0CFB0600094165 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2326731C0CFB0600094165 /* MessageViewController.swift */; };
 		DA2326761C0CFD8100094165 /* PopupNoticeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2326751C0CFD8100094165 /* PopupNoticeHelper.swift */; };
 		DA23267A1C0D0E8D00094165 /* ContacsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2326791C0D0E8D00094165 /* ContacsViewController.swift */; };
+		DA23267C1C0E2EFA00094165 /* AddNewContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23267B1C0E2EFA00094165 /* AddNewContactViewController.swift */; };
 		DA2E0F1D1C0831A900C508E0 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2E0F1C1C0831A900C508E0 /* FirebaseHelper.swift */; };
 		DA2E0F1F1C09382900C508E0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2E0F1E1C09382900C508E0 /* LoginViewController.swift */; };
 		DA7AC64E1C0982D5001B9D39 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7AC64D1C0982D5001B9D39 /* SwiftNotice.swift */; };
@@ -36,6 +37,7 @@
 		DA2326731C0CFB0600094165 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		DA2326751C0CFD8100094165 /* PopupNoticeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupNoticeHelper.swift; sourceTree = "<group>"; };
 		DA2326791C0D0E8D00094165 /* ContacsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContacsViewController.swift; sourceTree = "<group>"; };
+		DA23267B1C0E2EFA00094165 /* AddNewContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewContactViewController.swift; sourceTree = "<group>"; };
 		DA2E0F1C1C0831A900C508E0 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		DA2E0F1E1C09382900C508E0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DA7AC64D1C0982D5001B9D39 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				DA2E0F1E1C09382900C508E0 /* LoginViewController.swift */,
 				DA2326731C0CFB0600094165 /* MessageViewController.swift */,
 				DA2326791C0D0E8D00094165 /* ContacsViewController.swift */,
+				DA23267B1C0E2EFA00094165 /* AddNewContactViewController.swift */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				DAAB80711C04DB30003065F7 /* SideMenuController2.swift in Sources */,
 				DAA89DAE1BFE8D3A005FB53E /* CurrentLocationViewController.swift in Sources */,
 				DAAB806F1C04DAC9003065F7 /* SideMenuTableViewController.swift in Sources */,
+				DA23267C1C0E2EFA00094165 /* AddNewContactViewController.swift in Sources */,
 				DA2E0F1F1C09382900C508E0 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
