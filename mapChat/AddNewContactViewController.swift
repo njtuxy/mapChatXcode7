@@ -19,9 +19,15 @@ class AddNewContactViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ContactListItem", forIndexPath: indexPath)
         
+        let index = indexPath.row
         // Configure the cell...
         let label = cell.viewWithTag(1001) as! UILabel
-        label.text = self.user_email_list[indexPath.row]
+        label.text = self.user_email_list[index]
+        
+        let button = cell.viewWithTag(1002) as! UIButton
+        button.tag = index
+        button.addTarget(self, action: "addThisUser:", forControlEvents: .TouchUpInside)
+        
         return cell
         
     }
@@ -49,6 +55,11 @@ class AddNewContactViewController: UITableViewController {
         })
         
         
+    }
+    
+    
+    func addThisUser(sender: UIButton){
+        print(sender.tag)
     }
     
     //    func getAllUsersFromFirebase(){
