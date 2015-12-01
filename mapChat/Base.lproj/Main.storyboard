@@ -259,20 +259,20 @@
             </objects>
             <point key="canvasLocation" x="1102" y="1935"/>
         </scene>
-        <!--Contacts-->
+        <!--Contacs View Controller-->
         <scene sceneID="Hgv-Qy-iVl">
             <objects>
                 <tableViewController id="7Ez-NX-hb1" customClass="ContacsViewController" customModule="mapChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="8Am-Y2-GRf">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="39" sectionHeaderHeight="28" sectionFooterHeight="28" id="8Am-Y2-GRf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ContactListItem" id="0WM-oZ-zwt">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ContactListItem" rowHeight="39" id="0WM-oZ-zwt">
+                                <rect key="frame" x="0.0" y="92" width="320" height="39"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0WM-oZ-zwt" id="f3Z-II-lei">
-                                    <rect key="frame" x="0.0" y="0.0" width="281" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="281" height="38"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BYW-ON-JX6">
@@ -291,11 +291,11 @@
                             <outlet property="delegate" destination="7Ez-NX-hb1" id="0az-ZV-G8r"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Contacts" image="Contacts-25" id="g6b-cU-xJQ"/>
+                    <navigationItem key="navigationItem" id="WYh-jU-WpG"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="njJ-kW-tgZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1102" y="2795"/>
+            <point key="canvasLocation" x="1629" y="2928"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="bvw-lu-WqU">
@@ -312,12 +312,31 @@
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="LZL-Vb-mto"/>
                         <segue destination="7Pa-VC-lSY" kind="relationship" relationship="viewControllers" id="z9g-cQ-c97"/>
                         <segue destination="UYs-A5-UJf" kind="relationship" relationship="viewControllers" id="l3d-Z4-Kxh"/>
-                        <segue destination="7Ez-NX-hb1" kind="relationship" relationship="viewControllers" id="RQX-V4-2o4"/>
+                        <segue destination="X2q-9N-cG8" kind="relationship" relationship="viewControllers" id="RQX-V4-2o4"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8u0-0d-qT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-547" y="2399"/>
+        </scene>
+        <!--Contacts-->
+        <scene sceneID="f8k-eD-FG6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="X2q-9N-cG8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Contacts" image="Contacts-25" id="g6b-cU-xJQ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PyI-Jk-E83">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7Ez-NX-hb1" kind="relationship" relationship="rootViewController" id="Myg-Xv-ECV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xyw-zI-oGl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1097" y="2928"/>
         </scene>
     </scenes>
     <resources>
