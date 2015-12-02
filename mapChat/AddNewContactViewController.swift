@@ -18,8 +18,8 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
     //    var email_uid_pairs = [String: String]()
     
     struct User {
-        var uid: String
-        var email: String
+        var uid: String!
+        var email: String!
     }
     
     var usersArray = [User]()
@@ -67,43 +67,31 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
         users.queryOrderedByChild("email").observeEventType(.ChildAdded, withBlock: { snapshot in
             
             if let email = snapshot.value["email"] as? String {
-                if let uid = snapshot.value["uid"]{
-                    t_usersArray.append(User(uid: String(uid), email: email))
+                if let uid = snapshot.value["uid"] as? String {
+                    t_usersArray.append(User(uid: uid, email: email))
                 }
             }
             self.usersArray = t_usersArray
             self.contactsTable.reloadData()
         })
-
-        
-//        
-//        users.queryOrderedByChild("email").observeEventType(.ChildAdded, withBlock: { snapshot in
-//            for item in snapshot.children{
-//                let contact = item as! FDataSnapshot
-//                let email = contact.value as? String
-//                t_list.append(email!)
-//            }
-//            
-//            self.user_email_list = t_list
-//            self.tableView.reloadData()
-//
-//            
-//        })
-        
         
     }
     
     
     func addThisUser(sender: UIButton){
-        print(sender.tag)
-//        print(user_email_array[sender.tag])
+        let thisUsersUID = usersArray[sender.tag].uid
         sender.setTitle("Added", forState: .Normal)
         sender.backgroundColor = UIColor.greenColor()
+        addToContactListInFirebase(thisUsersUID)
     }
-//
-//    func addUserToMyContactList(){
-//        
-//    }
+
+    func addToContactListInFirebase(uidOfNewContact: String){
+        let uid = FirebaseHelper.readUidFromNSUserDefaults()
+        let contacts = FirebaseHelper.myRootRef.childByAppendingPath("contacts").childByAppendingPath(uid)
+        let new_contact = [uidOfNewContact: "true"]
+        contacts.updateChildValues(new_contact)
+    }
+    
     
 
     
