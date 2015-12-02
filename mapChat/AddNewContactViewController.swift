@@ -23,6 +23,8 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     var usersArray = [User]()
+    var existingContactsArray = [String]()
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return usersArray.count
@@ -32,58 +34,80 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
         let cell = tableView.dequeueReusableCellWithIdentifier("NewContactListItem", forIndexPath: indexPath) as! NewContactTableViewCell
         
         let index = indexPath.row
+
         // Configure the cell...
         cell.txtUserEmail.text = self.usersArray[index].email
         cell.btnAddContact.tag = index
         cell.btnAddContact.addTarget(self, action: "addThisUser:", forControlEvents: .TouchUpInside)
-        
         return cell
         
     }
     
-    override func viewDidLoad() {
-        print("view loaded")
-        //        getAllUsersFromFirebase()
-    }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
-        
-        var t_usersArray = [User]()
-        
-//        users.queryOrderedByChild("uid").observeEventType(.ChildAdded, withBlock: { snapshot in
-//            for item in snapshot.children{
-//                let user = item as! FDataSnapshot
-//                let email = user.value
-//                let key = user.key
-//                
-//            }
-//            
-//            self.user_email_list = t_list
-//            self.tableView.reloadData()
-//        })
+    override func viewDidLoad() {
+        //Get contacts that alredy been added from firebase:
+        var t_existing_contacts = [String]()
+        let uid = FirebaseHelper.readUidFromNSUserDefaults()
+        let existing_contacts = FirebaseHelper.myRootRef.childByAppendingPath("contacts").childByAppendingPath(uid)
+        existing_contacts.queryOrderedByKey().observeEventType(.ChildAdded, withBlock: { snapshot in
+            if let user_uid = snapshot.key {
+                t_existing_contacts.append(user_uid)
+            }
+            self.existingContactsArray = t_existing_contacts
 
+        })
+        
+
+        
+        //GetAllUsersFromFirebase()
+        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
+        var t_usersArray = [User]()
         users.queryOrderedByChild("email").observeEventType(.ChildAdded, withBlock: { snapshot in
             
             if let email = snapshot.value["email"] as? String {
                 if let uid = snapshot.value["uid"] as? String {
-                    t_usersArray.append(User(uid: uid, email: email))
+                    if !(self.existingContactsArray.contains(uid)){
+                        t_usersArray.append(User(uid: uid, email: email))
+                    }
+                    
                 }
             }
             self.usersArray = t_usersArray
             self.contactsTable.reloadData()
         })
+    }
+    
+//    override func viewWillAppear(animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        for (index, user) in usersArray.enumerate(){
+//            
+//            if existingContactsArray.contains(user.uid){
+//                usersArray.removeAtIndex(index)
+//            }
+//        }
+//        
+//        self.contactsTable.reloadData()
+//    }
+
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
+        //Remove existing contacts from users list
+        
+        //Get all users from firebse:
     }
     
     
     func addThisUser(sender: UIButton){
         let thisUsersUID = usersArray[sender.tag].uid
-        sender.setTitle("Added", forState: .Normal)
-        sender.backgroundColor = UIColor.greenColor()
+        sender.setTitle("Remove", forState: .Normal)
+        sender.backgroundColor = UIColor.redColor()
         addToContactListInFirebase(thisUsersUID)
     }
+    
+    
 
     func addToContactListInFirebase(uidOfNewContact: String){
         let uid = FirebaseHelper.readUidFromNSUserDefaults()
@@ -91,7 +115,6 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
         let new_contact = [uidOfNewContact: "true"]
         contacts.updateChildValues(new_contact)
     }
-    
     
 
     

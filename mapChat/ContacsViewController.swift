@@ -29,8 +29,7 @@ class ContacsViewController: UITableViewController {
         
     }
     
-    override func viewDidLoad() {
-        print("view loaded")
+    override func viewDidLoad() {        
 //        getAllUsersFromFirebase()
     }
     
