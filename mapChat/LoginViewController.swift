@@ -59,8 +59,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
                     let email = FirebaseHelper.readLoginEmailFromNSUserDefaults()
                     FirebaseHelper.saveUserInfoInFirebase(uid, email: email)
             }
-        }
-        
+        }                
     }
     
     
