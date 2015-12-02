@@ -102,7 +102,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1122" y="-266.99999999999994"/>
+            <point key="canvasLocation" x="1122" y="-266.99999999999989"/>
         </scene>
         <!--Map-->
         <scene sceneID="wg7-f3-ORb">
@@ -153,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1694" y="595.99999999999989"/>
+            <point key="canvasLocation" x="1694" y="595.99999999999977"/>
         </scene>
         <!--Item-->
         <scene sceneID="1YM-Fg-qna">
@@ -175,7 +175,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Nb-Sj-Wdm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1102" y="595.99999999999989"/>
+            <point key="canvasLocation" x="1102" y="595.99999999999977"/>
         </scene>
         <!--Account-->
         <scene sceneID="ONX-zA-te3">
@@ -316,7 +316,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lI0-Vm-nbO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1102" y="1934.9999999999998"/>
+            <point key="canvasLocation" x="1102" y="1934.9999999999995"/>
         </scene>
         <!--Contacts-->
         <scene sceneID="Hgv-Qy-iVl">
@@ -357,56 +357,63 @@
                     <navigationItem key="navigationItem" title="Contacts" id="WYh-jU-WpG">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="RvR-Le-Mhz">
                             <connections>
-                                <segue destination="wNm-yO-SZV" kind="push" id="2Iq-JF-iqj"/>
+                                <segue destination="wNm-yO-SZV" kind="push" id="9yJ-ma-TCG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="njJ-kW-tgZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1611" y="2629.9999999999995"/>
+            <point key="canvasLocation" x="1611" y="2629.9999999999991"/>
         </scene>
         <!--Add New Contact View Controller-->
         <scene sceneID="2VV-xG-rAm">
             <objects>
                 <tableViewController id="wNm-yO-SZV" customClass="AddNewContactViewController" customModule="mapChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ujo-dA-uoI">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="cdd-If-hqK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactListItem" id="Z2K-7I-jNL">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewContactListItem" id="BsH-FH-4zl" customClass="NewContactTableViewCell" customModule="mapChat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z2K-7I-jNL" id="W7U-7g-VBG">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BsH-FH-4zl" id="NRW-9W-401">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIo-0C-CsZ">
-                                            <rect key="frame" x="29" y="11" width="216" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMP-hb-hMZ">
+                                            <rect key="frame" x="15" y="11" width="224" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" tag="1002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MiV-Z2-Nq8">
-                                            <rect key="frame" x="253" y="7" width="59" height="30"/>
-                                            <color key="backgroundColor" red="0.32094412960000002" green="0.65676761110000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <state key="normal" title="add"/>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTl-Gi-8WV">
+                                            <rect key="frame" x="247" y="7" width="65" height="30"/>
+                                            <color key="backgroundColor" red="0.37504337240000002" green="0.74569822210000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <state key="normal" title="Add"/>
                                         </button>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="btnAddContact" destination="DTl-Gi-8WV" id="lDQ-Fy-HTo"/>
+                                    <outlet property="txtUserEmail" destination="dMP-hb-hMZ" id="NdD-32-zgg"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="wNm-yO-SZV" id="xeq-5N-xGG"/>
-                            <outlet property="delegate" destination="wNm-yO-SZV" id="nwc-Mg-IGa"/>
+                            <outlet property="dataSource" destination="wNm-yO-SZV" id="bVH-kT-RWW"/>
+                            <outlet property="delegate" destination="wNm-yO-SZV" id="Ann-0D-aWz"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="DNd-TD-tkT"/>
+                    <connections>
+                        <outlet property="contactsTable" destination="cdd-If-hqK" id="Ym2-OA-y2c"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0sg-1l-oWR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2011" y="2633"/>
+            <point key="canvasLocation" x="2011" y="2632"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="bvw-lu-WqU">
@@ -447,7 +454,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xyw-zI-oGl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1102" y="2629.9999999999995"/>
+            <point key="canvasLocation" x="1102" y="2629.9999999999991"/>
         </scene>
     </scenes>
     <resources>

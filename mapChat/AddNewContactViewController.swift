@@ -9,8 +9,10 @@
 import UIKit
 import Firebase
 
-class AddNewContactViewController: UITableViewController {
+class AddNewContactViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet var contactsTable: UITableView!
+    
     //    var user_email_array = [[String:String]]()
     //    var user_uid_array = [String]()
     //    var email_uid_pairs = [String: String]()
@@ -22,22 +24,18 @@ class AddNewContactViewController: UITableViewController {
     
     var usersArray = [User]()
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return usersArray.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ContactListItem", forIndexPath: indexPath)
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("NewContactListItem", forIndexPath: indexPath) as! NewContactTableViewCell
         
         let index = indexPath.row
         // Configure the cell...
-        let label = cell.viewWithTag(1001) as! UILabel
-        label.text = self.usersArray[index].email
-        
-        
-//        let button = cell.viewWithTag(1002) as! UIButton
-//        button.tag = index
-//        button.addTarget(self, action: "addThisUser:", forControlEvents: .TouchUpInside)
+        cell.txtUserEmail.text = self.usersArray[index].email
+        cell.btnAddContact.tag = index
+        cell.btnAddContact.addTarget(self, action: "addThisUser:", forControlEvents: .TouchUpInside)
         
         return cell
         
@@ -74,7 +72,7 @@ class AddNewContactViewController: UITableViewController {
                 }
             }
             self.usersArray = t_usersArray
-            self.tableView.reloadData()
+            self.contactsTable.reloadData()
         })
 
         
@@ -96,12 +94,13 @@ class AddNewContactViewController: UITableViewController {
     }
     
     
-//    func addThisUser(sender: UIButton){
-//        print(sender.tag)
+    func addThisUser(sender: UIButton){
+        print(sender.tag)
 //        print(user_email_array[sender.tag])
-//        sender.setTitle("sent", forState: .Normal)
-//    }
-//    
+        sender.setTitle("Added", forState: .Normal)
+        sender.backgroundColor = UIColor.greenColor()
+    }
+//
 //    func addUserToMyContactList(){
 //        
 //    }
