@@ -23,7 +23,6 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     var usersArray = [User]()
-    var existingContactsArray = [String]()
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,75 +44,61 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
     
     
     override func viewDidLoad() {
-        //Get contacts that alredy been added from firebase:
-        var t_existing_contacts = [String]()
-        let uid = FirebaseHelper.readUidFromNSUserDefaults()
-        let existing_contacts = FirebaseHelper.myRootRef.childByAppendingPath("contacts").childByAppendingPath(uid)
-        existing_contacts.queryOrderedByKey().observeEventType(.ChildAdded, withBlock: { snapshot in
-            if let user_uid = snapshot.key {
-                t_existing_contacts.append(user_uid)
-            }
-            self.existingContactsArray = t_existing_contacts
-
-        })
         
-
-        
-        //GetAllUsersFromFirebase()
+        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
         let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
-        var t_usersArray = [User]()
-        users.queryOrderedByChild("email").observeEventType(.ChildAdded, withBlock: { snapshot in
-            
-            if let email = snapshot.value["email"] as? String {
-                if let uid = snapshot.value["uid"] as? String {
-                    if !(self.existingContactsArray.contains(uid)){
-                        t_usersArray.append(User(uid: uid, email: email))
-                    }
-                    
-                }
-            }
-            self.usersArray = t_usersArray
-            self.contactsTable.reloadData()
-        })
-    }
-    
-//    override func viewWillAppear(animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        for (index, user) in usersArray.enumerate(){
-//            
-//            if existingContactsArray.contains(user.uid){
-//                usersArray.removeAtIndex(index)
-//            }
-//        }
-//        
-//        self.contactsTable.reloadData()
-//    }
 
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+
+        let existing_contacts = FirebaseHelper.myRootRef.childByAppendingPath("contacts").childByAppendingPath(myUid)
         
-        //Remove existing contacts from users list
         
-        //Get all users from firebse:
+        existing_contacts.observeEventType(.Value, withBlock: { existing_contacts_snapshot in
+            print("a got called!")
+            var t_usersArray = [User]()
+            users.queryOrderedByChild("uid").observeEventType(.ChildAdded, withBlock: { all_users_snapshot in
+                print("b got called!")
+                if let email = all_users_snapshot.value["email"] as? String {
+                    if let uid = all_users_snapshot.value["uid"] as? String {
+                        if(uid != myUid){
+                            if existing_contacts_snapshot.exists(){
+                                let value = existing_contacts_snapshot.value[uid]
+                                if (value === nil) || (value as! String == "false"){
+                                    t_usersArray.append(User(uid: uid, email: email))
+                                }
+                            }else{
+                                t_usersArray.append(User(uid: uid, email: email))
+                            }
+                            
+                            
+                        }
+                    }
+                }
+                print(t_usersArray)
+                self.usersArray = t_usersArray
+                self.contactsTable.reloadData()
+                })
+
+        })
+        
     }
     
     
     func addThisUser(sender: UIButton){
         let thisUsersUID = usersArray[sender.tag].uid
-        sender.setTitle("Remove", forState: .Normal)
-        sender.backgroundColor = UIColor.redColor()
-        addToContactListInFirebase(thisUsersUID)
+//        sender.setTitle("Remove", forState: .Normal)
+//        sender.backgroundColor = UIColor.redColor()
+        addToContactListInFirebase(thisUsersUID, indexInTable: sender.tag)
+        self.contactsTable.reloadData()
     }
     
     
 
-    func addToContactListInFirebase(uidOfNewContact: String){
+    func addToContactListInFirebase(uidOfNewContact: String, indexInTable: Int){
         let uid = FirebaseHelper.readUidFromNSUserDefaults()
         let contacts = FirebaseHelper.myRootRef.childByAppendingPath("contacts").childByAppendingPath(uid)
         let new_contact = [uidOfNewContact: "true"]
         contacts.updateChildValues(new_contact)
+//        usersArray.removeAtIndex(indexInTable)
     }
     
 
