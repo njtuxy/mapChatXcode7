@@ -16,12 +16,19 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBOutlet weak var allContactsTable: UITableView!
     
-    struct User {
-        var uid: String!
-        var email: String!
+    struct Contact {
+
+        let email: String!
+        let uid: String!
+        
+        init(uid: String, email: String){
+            self.email = email
+            self.uid = uid
+        }
     }
     
-    var contactsArray = [User]()
+    
+    var contactsArray = [Contact]()
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -34,8 +41,8 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
         let index = indexPath.row
         // Configure the cell...
         cell.txtUserEmail.text = self.contactsArray[index].email
-        cell.btnRemoveContact.tag = index
-        cell.btnRemoveContact.addTarget(self, action: "removeThisUser:", forControlEvents: .TouchUpInside)
+        //        cell.btnRemoveContact.tag = index
+        //        cell.btnRemoveContact.addTarget(self, action: "removeThisUser:", forControlEvents: .TouchUpInside)
         return cell
         
     }
@@ -44,49 +51,46 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         
         let myUid = FirebaseHelper.readUidFromNSUserDefaults()
-        let existing_contacts = FirebaseHelper.myRootRef.childByAppendingPath("contacts").childByAppendingPath(myUid)
+        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
+        let myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
         
-        var t_contactsArray = [User]()
+        var t_contactsArray = [Contact]()
         var t_email = String()
-        
-        existing_contacts.observeEventType(.ChildChanged, withBlock: { existing_contacts_snapshot in
-            print("a got called")
-            if existing_contacts_snapshot.exists(){
-                if let status = existing_contacts_snapshot.value as? String{
-                    if let uid = existing_contacts_snapshot.key{
-                        if status == "true"{
-                            let user = FirebaseHelper.myRootRef.childByAppendingPath("users").childByAppendingPath(uid)
-                            user.observeEventType(.Value, withBlock: { existing_contacts_snapshot in
-                                print("b got called")
-                                t_email = existing_contacts_snapshot.value["email"] as! String
-                                t_contactsArray.append(User(uid: uid, email: t_email))
-                                self.contactsArray = t_contactsArray
-                                self.allContactsTable.reloadData()
-                            })
-                        }
+        myContacts.observeSingleEventOfType(.Value, withBlock: { my_contacts_snapshot in
+            if my_contacts_snapshot.exists(){
+                for item in my_contacts_snapshot.children{
+                    if let uidOfThisContact = item.key {
+                        let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
+                        pathOfThisContact.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
+                            t_email = thisContactSnapShot.value as! String
+                            t_contactsArray.append(Contact(uid: String(uidOfThisContact), email: t_email))
+                            self.contactsArray = t_contactsArray
+                            self.allContactsTable.reloadData()
+                        })
                     }
+                    
                 }
             }
         })
     }
     
     
-    func removeThisUser(sender: UIButton){
-        let thisUsersUID = contactsArray[sender.tag].uid
-        //        sender.setTitle("Remove", forState: .Normal)
-        //        sender.backgroundColor = UIColor.redColor()
-        removeContactFromFirebase(thisUsersUID, indexInTable: sender.tag)
-        self.allContactsTable.reloadData()
-    }
-    
-    
-    
-    func removeContactFromFirebase(uidOfNewContact: String, indexInTable: Int){
-        let uid = FirebaseHelper.readUidFromNSUserDefaults()
-        let contacts = FirebaseHelper.myRootRef.childByAppendingPath("contacts").childByAppendingPath(uid)
-        let old_contact = [uidOfNewContact: "false"]
-        contacts.updateChildValues(old_contact)
-        //        usersArray.removeAtIndex(indexInTable)
-    }
+//    func removeThisUser(sender: UIButton){
+//        let thisUsersUID = contactsArray[sender.tag].uid
+//        //        sender.setTitle("Remove", forState: .Normal)
+//        //        sender.backgroundColor = UIColor.redColor()
+//        removeContactFromFirebase(thisUsersUID, indexInTable: sender.tag)
+//        self.allContactsTable.reloadData()
+//    }
+//    
+//    
+//    
+//    func removeContactFromFirebase(uidOfNewContact: String, indexInTable: Int){
+//        let uid = FirebaseHelper.readUidFromNSUserDefaults()
+//        let contacts = FirebaseHelper.myRootRef.childByAppendingPath("contacts").childByAppendingPath(uid)
+//        let old_contact = [uidOfNewContact: "false"]
+//        contacts.updateChildValues(old_contact)
+//        //        usersArray.removeAtIndex(indexInTable)
+//    }
     
 }
