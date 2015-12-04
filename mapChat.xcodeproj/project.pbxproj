@@ -13,6 +13,7 @@
 		DA23267A1C0D0E8D00094165 /* ContacsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2326791C0D0E8D00094165 /* ContacsViewController.swift */; };
 		DA23267C1C0E2EFA00094165 /* AddNewContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23267B1C0E2EFA00094165 /* AddNewContactViewController.swift */; };
 		DA23267E1C0ECB9200094165 /* NewContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23267D1C0ECB9200094165 /* NewContactTableViewCell.swift */; };
+		DA2326801C1008A400094165 /* ContactsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23267F1C1008A400094165 /* ContactsViewCell.swift */; };
 		DA2E0F1D1C0831A900C508E0 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2E0F1C1C0831A900C508E0 /* FirebaseHelper.swift */; };
 		DA2E0F1F1C09382900C508E0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2E0F1E1C09382900C508E0 /* LoginViewController.swift */; };
 		DA7AC64E1C0982D5001B9D39 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7AC64D1C0982D5001B9D39 /* SwiftNotice.swift */; };
@@ -40,6 +41,7 @@
 		DA2326791C0D0E8D00094165 /* ContacsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContacsViewController.swift; sourceTree = "<group>"; };
 		DA23267B1C0E2EFA00094165 /* AddNewContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewContactViewController.swift; sourceTree = "<group>"; };
 		DA23267D1C0ECB9200094165 /* NewContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewContactTableViewCell.swift; sourceTree = "<group>"; };
+		DA23267F1C1008A400094165 /* ContactsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewCell.swift; sourceTree = "<group>"; };
 		DA2E0F1C1C0831A900C508E0 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		DA2E0F1E1C09382900C508E0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DA7AC64D1C0982D5001B9D39 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				DA2E0F1E1C09382900C508E0 /* LoginViewController.swift */,
 				DA2326731C0CFB0600094165 /* MessageViewController.swift */,
 				DA2326791C0D0E8D00094165 /* ContacsViewController.swift */,
+				DA23267F1C1008A400094165 /* ContactsViewCell.swift */,
 				DA23267B1C0E2EFA00094165 /* AddNewContactViewController.swift */,
 				DA23267D1C0ECB9200094165 /* NewContactTableViewCell.swift */,
 			);
@@ -308,6 +311,7 @@
 				DAAB806F1C04DAC9003065F7 /* SideMenuTableViewController.swift in Sources */,
 				DA23267C1C0E2EFA00094165 /* AddNewContactViewController.swift in Sources */,
 				DA2E0F1F1C09382900C508E0 /* LoginViewController.swift in Sources */,
+				DA2326801C1008A400094165 /* ContactsViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
