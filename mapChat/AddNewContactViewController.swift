@@ -41,7 +41,6 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
         // Configure the cell...
         cell.txtUserEmail.text = self.strangerList[index].email
         cell.btnAddContact.tag = index
-        cell.btnAddContact.setTitle(String(index), forState: .Normal)
         cell.btnAddContact.addTarget(self, action: "addThisUser:", forControlEvents: .TouchUpInside)
         return cell
         
@@ -55,8 +54,12 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
 
         var t_strangers_list = [User]()
         
+
+        //Add observer to the users list, order by UID, and listen to ChildAdded Event
         users.queryOrderedByChild("uid").observeEventType(.ChildAdded, withBlock: { usersSnapShot in
 
+            print("a called once")
+            
             if let uidOfStranger = usersSnapShot.value["uid"] as? String {
                 
                 //Make sure it is not myself
@@ -65,11 +68,10 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
                     //Check this stranger's children
                     let contactsOfStranger = users.childByAppendingPath(uidOfStranger).childByAppendingPath("contacts").childByAppendingPath(myUid)
                     
-                    //Check wheather this node exisits
+                    //Check whether the contacts node exisits
                     contactsOfStranger.observeEventType(.Value, withBlock: { contactsSnapShot in
                         
-                        //If not exists, it means it is not my contact, then show it on screen. 
-                        
+                        //If not exists, it means it is not my contact, then show it on the stangers screen
                         if !contactsSnapShot.exists() {
                             let user_item = User(snapShot: usersSnapShot)
                             t_strangers_list.append(user_item)
@@ -82,7 +84,8 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
                 }
             }
         })
-            
+        
+        
 //        let existing_contacts = FirebaseHelper.myRootRef.childByAppendingPath("users").childByAppendingPath(myUid).childByAppendingPath("contacts")
 //
 ////        print(existing_contacts)
@@ -145,9 +148,9 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
     
     func addThisUser(sender: UIButton){
         let thisUsersUID = strangerList[sender.tag].uid
-        sender.setTitle("Remove", forState: .Normal)
-        sender.backgroundColor = UIColor.redColor()
         addToContactListInFirebase(thisUsersUID, indexInTable: sender.tag)
+        sender.setTitle("Added", forState: .Normal)
+        sender.backgroundColor = UIColor.greenColor()
         self.contactsTable.reloadData()
     }
     
@@ -155,18 +158,14 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
 
     func addToContactListInFirebase(uidOfStranger: String, indexInTable: Int){
         let myUid = FirebaseHelper.readUidFromNSUserDefaults()
-//        let email_of_new_contact = strangerList[indexInTable].email
+        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
         //Save the stranger's UID to current user's node
-        let contactListOfCurrentUser = FirebaseHelper.myRootRef.childByAppendingPath("users").childByAppendingPath(myUid).childByAppendingPath("contacts").childByAppendingPath(uidOfStranger)
+        let contactListOfCurrentUser = users.childByAppendingPath(myUid).childByAppendingPath("contacts").childByAppendingPath(uidOfStranger)
         contactListOfCurrentUser.setValue(true)
+        
         //Save current user's UID to stranger's node.
-        let contactListOfStanger = FirebaseHelper.myRootRef.childByAppendingPath("users").childByAppendingPath(uidOfStranger).childByAppendingPath("contacts").childByAppendingPath(myUid)
+        let contactListOfStanger = users.childByAppendingPath(uidOfStranger).childByAppendingPath("contacts").childByAppendingPath(myUid)
         contactListOfStanger.setValue(true)
-//        usersArray.removeAtIndex(indexInTable)
     }
-    
-    //        let existing_contacts = FirebaseHelper.myRootRef.childByAppendingPath("contacts").childByAppendingPath(myUid)
-//            existing_contacts.observeEventType(.Value, withBlock: { existing_contacts_snapshot in })
-
     
 }
