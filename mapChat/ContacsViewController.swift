@@ -41,8 +41,8 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
         let index = indexPath.row
         // Configure the cell...
         cell.txtUserEmail.text = self.contactsArray[index].email
-        //        cell.btnRemoveContact.tag = index
-        //        cell.btnRemoveContact.addTarget(self, action: "removeThisUser:", forControlEvents: .TouchUpInside)
+        cell.btnRemoveContact.tag = index
+        cell.btnRemoveContact.addTarget(self, action: "removeThisContact:", forControlEvents: .TouchUpInside)
         return cell
         
     }
@@ -54,43 +54,58 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
         let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
         let myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
         
-        var t_contactsArray = [Contact]()
-        var t_email = String()
-        myContacts.observeSingleEventOfType(.Value, withBlock: { my_contacts_snapshot in
+        
+        //
+        myContacts.observeEventType(.Value, withBlock: { my_contacts_snapshot in
+            var t_contactsArray = [Contact]()
+            var t_email = String()
+            print("a got called")
             if my_contacts_snapshot.exists(){
+                print("b got called")
                 for item in my_contacts_snapshot.children{
-                    if let uidOfThisContact = item.key {
+                    if let uidOfThisContact = item.key! {
                         let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
                         pathOfThisContact.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
                             t_email = thisContactSnapShot.value as! String
-                            t_contactsArray.append(Contact(uid: String(uidOfThisContact), email: t_email))
+                            t_contactsArray.append(Contact(uid: uidOfThisContact , email: t_email))
                             self.contactsArray = t_contactsArray
                             self.allContactsTable.reloadData()
                         })
                     }
-                    
                 }
+            }else{
+                print("c got called")
+                self.contactsArray = []
+                self.allContactsTable.reloadData()
             }
         })
     }
     
     
-//    func removeThisUser(sender: UIButton){
-//        let thisUsersUID = contactsArray[sender.tag].uid
-//        //        sender.setTitle("Remove", forState: .Normal)
-//        //        sender.backgroundColor = UIColor.redColor()
-//        removeContactFromFirebase(thisUsersUID, indexInTable: sender.tag)
+    func removeThisContact(sender: UIButton){
+        let thisContactUID = contactsArray[sender.tag].uid
+        //        sender.setTitle("Remove", forState: .Normal)
+        //        sender.backgroundColor = UIColor.redColor()
+        removeContact(thisContactUID, indexInTable: sender.tag)
 //        self.allContactsTable.reloadData()
-//    }
+    }
+//
 //    
 //    
-//    
-//    func removeContactFromFirebase(uidOfNewContact: String, indexInTable: Int){
-//        let uid = FirebaseHelper.readUidFromNSUserDefaults()
-//        let contacts = FirebaseHelper.myRootRef.childByAppendingPath("contacts").childByAppendingPath(uid)
-//        let old_contact = [uidOfNewContact: "false"]
-//        contacts.updateChildValues(old_contact)
-//        //        usersArray.removeAtIndex(indexInTable)
-//    }
+    func removeContact(thisContactUID: String, indexInTable: Int){
+        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
+        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
+        
+        
+        //Remove from my contact list
+        let thisContact = users.childByAppendingPath(myUid).childByAppendingPath("contacts").childByAppendingPath(thisContactUID)
+        
+        thisContact.removeValue()
+        
+        //Also from me this users's contact
+        let me = users.childByAppendingPath(thisContactUID).childByAppendingPath("contacts").childByAppendingPath(myUid)
+        me.removeValue()
+        
+    }
     
 }

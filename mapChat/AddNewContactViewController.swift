@@ -57,8 +57,6 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
 
         //Add observer to the users list, order by UID, and listen to ChildAdded Event
         users.queryOrderedByChild("uid").observeEventType(.ChildAdded, withBlock: { usersSnapShot in
-
-            print("a called once")
             
             if let uidOfStranger = usersSnapShot.value["uid"] as? String {
                 
@@ -160,9 +158,11 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
         let myUid = FirebaseHelper.readUidFromNSUserDefaults()
         let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
         //Save the stranger's UID to current user's node
+        
         let contactListOfCurrentUser = users.childByAppendingPath(myUid).childByAppendingPath("contacts").childByAppendingPath(uidOfStranger)
         contactListOfCurrentUser.setValue(true)
         
+
         //Save current user's UID to stranger's node.
         let contactListOfStanger = users.childByAppendingPath(uidOfStranger).childByAppendingPath("contacts").childByAppendingPath(myUid)
         contactListOfStanger.setValue(true)
