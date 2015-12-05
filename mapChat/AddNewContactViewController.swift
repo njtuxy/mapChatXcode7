@@ -36,6 +36,8 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("NewContactListItem", forIndexPath: indexPath) as! NewContactTableViewCell
         
+        cell.selectionStyle = .None
+        
         let index = indexPath.row
 
         // Configure the cell...

@@ -37,6 +37,7 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("contactsCell", forIndexPath: indexPath) as! ContactsViewCell
+        cell.selectionStyle = .None
         
         let index = indexPath.row
         // Configure the cell...
