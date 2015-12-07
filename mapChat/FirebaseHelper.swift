@@ -8,9 +8,13 @@
 
 import Foundation
 import Firebase
+import GeoFire
 
 struct FirebaseHelper {
     static let myRootRef = Firebase(url:"https://qd.firebaseio.com")
+    static let geoLocation = myRootRef.childByAppendingPath("locations")
+    static let geoFire = GeoFire(firebaseRef: geoLocation)
+    
 //    static var user_email_list = [String]()
     
     static func userAlreadyLoggedIn()-> Bool{

@@ -11,75 +11,40 @@ import Firebase
 
 class MessageViewController: UIViewController{
     
-    @IBOutlet weak var txtMessage: UITextField!
+    var ref: Firebase!
+    var handle: FirebaseHandle!
     
-    @IBAction func sendMessage(sender: UIButton) {
-        
-        let message = txtMessage.text!
-        
-        if message == ""{
-            showNoticeTextWithDelay("Message is empty!", delay: 1)
-            return
-        }
-        
-        let uid = FirebaseHelper.readUidFromNSUserDefaults()
-        
-        print(uid)
-        
-        let userInfo = FirebaseHelper.myRootRef.childByAppendingPath("usersInfo").childByAppendingPath(uid)
-        
-        print(userInfo)
-        
-        var users = ["alanisawesome": "xyz", "gracehop": "11100"]
-        
-        userInfo.setValue(users)
-        
+    @IBOutlet weak var lat: UILabel!
+    
+    @IBOutlet weak var lng: UILabel!
+    
+    
+    @IBAction func stopListening(sender: AnyObject) {
+        ref.removeObserverWithHandle(handle)
     }
     
-
-    
-    //Notice popup helper:
-    
-    func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
+    @IBAction func startListening(sender: AnyObject) {
+        monitorUserLocaiton("simplelogin:1")
     }
     
-    func showNoticeTextWithDelay(text:String, delay:Double){
-        self.noticeOnlyText(text)
-        self.delay(delay){
-            self.clearAllNotice()
-        }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        lat.text = "i am lat"
+        lng.text = "i am lng"
+//        monitorUserLocaiton("simplelogin:1")        
     }
     
-//    func saveAuthDataIntoNSUserDefaults(authData: FAuthData){
-//        //Save authData with NSUserDefaults
-//        let email = authData.providerData["email"]
-//        let uid = authData.uid
-//        let defaults = NSUserDefaults.standardUserDefaults()
-//        defaults.setObject(email, forKey: "firebase_email")
-//        defaults.setObject(uid, forKey: "firebase_uid")
-//    }
-//    
-//    func removeAuthDataFromNSUserDefaults(){
-//        let defaults = NSUserDefaults.standardUserDefaults()
-//        defaults.removeObjectForKey("firebase_email")
-//        defaults.removeObjectForKey("firebase_uid")
-//    }
-//    
-//    func readLoginEmailFromNSUserDefaults() -> String{
-//        let defaults = NSUserDefaults.standardUserDefaults()
-//        let email = defaults.objectForKey("firebase_email")
-//        return email as! String
-//    }
-//    
-//    func readUidFromNSUserDefaults() -> String{
-//        let defaults = NSUserDefaults.standardUserDefaults()
-//        let uid = defaults.objectForKey("firebase_uid")
-//        return uid as! String
-//    }
     
     
     
-    
+    func monitorUserLocaiton(itsUID: String){
+        
+        ref = FirebaseHelper.myRootRef.childByAppendingPath("locations").childByAppendingPath(itsUID)
+        
+        handle = ref.observeEventType(.Value, withBlock: { SnapShot in
+            print("New value got!")
+            print(SnapShot.value["l"])
+        })
+    }
 }

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'C07CA1A893FCA242FA53BCD0'
-               BlueprintName = 'Pods-mapChat'
+               BlueprintIdentifier = 'DCB5D523B5666198AE234256'
+               BlueprintName = 'GeoFire'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Pods_mapChat.framework'>
+               BuildableName = 'GeoFire.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
