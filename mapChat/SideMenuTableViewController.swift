@@ -12,24 +12,25 @@ import Firebase
 class SideMenuTableViewController: UITableViewController {
 
     var selectedMenuItem : Int = 0
-    var myRootRef = Firebase(url:"https://qd.firebaseio.com")
+    
+    struct Contact {
+        
+        let email: String!
+        let uid: String!
+        
+        init(uid: String, email: String){
+            self.email = email
+            self.uid = uid
+        }
+    }
     
     
+    var contactsArray = [Contact]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
-        // Customize apperance of table view
-        tableView.contentInset = UIEdgeInsetsMake(64.0, 0, 0, 0) //
-        tableView.separatorStyle = .None
-//        tableView.backgroundColor = UIColor.clearColor()
-        tableView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
-        tableView.scrollsToTop = false
-        
-        // Preserve selection between presentations
-        self.clearsSelectionOnViewWillAppear = false
-        
-        tableView.selectRowAtIndexPath(NSIndexPath(forRow: selectedMenuItem, inSection: 0), animated: false, scrollPosition: .Middle)
     }
     
     override func didReceiveMemoryWarning() {

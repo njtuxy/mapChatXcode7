@@ -57,6 +57,19 @@ struct FirebaseHelper {
         defaults.setObject(uid, forKey: "firebase_uid")
     }
     
+//    static func saveConctactsArrayIntoNSUserDefaults(contacts: [Contact]){
+//        let defaults = NSUserDefaults.standardUserDefaults()
+//        var array: [Contact] = [Contact]()
+//        array = contacts
+//        var array1: [NSString] = [NSString]()
+//        array1.append("value 1")
+//        defaults.setObject(array, forKey: "contacts_array")
+//        print(contacts.count)
+//    }
+    
+    
+//    static func saveContactsIntoNSUserContacts(contact
+    
     static func removeAuthDataFromNSUserDefaults(){
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.removeObjectForKey("firebase_email")

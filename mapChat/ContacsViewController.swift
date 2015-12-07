@@ -16,17 +16,7 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBOutlet weak var allContactsTable: UITableView!
     
-    struct Contact {
 
-        let email: String!
-        let uid: String!
-        
-        init(uid: String, email: String){
-            self.email = email
-            self.uid = uid
-        }
-    }
-    
     
     var contactsArray = [Contact]()
     
@@ -60,9 +50,7 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
         myContacts.observeEventType(.Value, withBlock: { my_contacts_snapshot in
             var t_contactsArray = [Contact]()
             var t_email = String()
-            print("a got called")
             if my_contacts_snapshot.exists(){
-                print("b got called")
                 for item in my_contacts_snapshot.children{
                     if let uidOfThisContact = item.key! {
                         let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
@@ -75,13 +63,18 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
                     }
                 }
             }else{
-                print("c got called")
                 self.contactsArray = []
                 self.allContactsTable.reloadData()
             }
         })
     }
     
+//    override func viewDidDisappear(animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        Contacts.contacts = contactsArray
+//        print(Contacts.contacts)
+////        FirebaseHelper.saveConctactsArrayIntoNSUserDefaults(contactsArray)
+//    }
     
     func removeThisContact(sender: UIButton){
         let thisContactUID = contactsArray[sender.tag].uid
