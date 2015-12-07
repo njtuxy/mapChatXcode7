@@ -34,6 +34,7 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("NewContactListItem", forIndexPath: indexPath) as! NewContactTableViewCell
         
         cell.selectionStyle = .None
@@ -83,66 +84,7 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
                     })
                 }
             }
-        })
-        
-        
-//        let existing_contacts = FirebaseHelper.myRootRef.childByAppendingPath("users").childByAppendingPath(myUid).childByAppendingPath("contacts")
-//
-////        print(existing_contacts)
-//        
-//        existing_contacts.observeEventType(.Value, withBlock: { existing_contacts_snapshot in
-//
-//            var t_strangers_list = [User]()
-////            print("o got called")
-//            if(existing_contacts_snapshot.exists()){
-////                print("a got called")
-//            }
-//            else
-//            {
-//                users.queryOrderedByChild("uid").observeEventType(.Value, withBlock: { all_users_snapshot in
-//                    for item in all_users_snapshot.children{
-//                        let user_item = User(snapShot: item as! FDataSnapshot)
-//                        t_strangers_list.append(user_item)
-//                    }
-//                    
-//                    self.strangerList = t_strangers_list
-//                    self.contactsTable.reloadData()
-//
-//                })
-//            }
-//            
-//        })
-//        
-        
-//            var t_usersArray = [User]()
-        
-//            users.queryOrderedByChild("uid").observeEventType(.ChildAdded, withBlock: { all_users_snapshot in
-//                if let email = all_users_snapshot.value["email"] as? String {
-//                    if let uid = all_users_snapshot.value["uid"] as? String {
-//                        if(uid != myUid){
-//                            if existing_contacts_snapshot.exists(){
-//                                if let value = existing_contacts_snapshot.value[uid] as? Dictionary<String,String>{
-//                                    if let email = value["email"]{
-//                                        print(email)
-//                                    }
-//                                }
-////                                print(value as?  Dictionary<String, String>)
-////                                if (value === nil) || (value as! String == "false"){
-////                                    t_usersArray.append(User(uid: uid, email: email))
-////                                }
-//                            }else{
-//                                t_usersArray.append(User(uid: uid, email: email))
-//                            }
-//                            
-//                            
-//                        }
-//                    }
-//                }
-//                self.usersArray = t_usersArray
-//                self.contactsTable.reloadData()
-//
-//        })
-        
+        })        
     }
     
     

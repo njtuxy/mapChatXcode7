@@ -126,9 +126,16 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     func updateLocationLabels(location:CLLocation){
             latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
             longtitudeLabel.text = String(format: "%8f", location.coordinate.longitude)
+        //Save location to Firebase
+        
             tagButton.hidden = false
             messageLabel.text = ""
     }
+    
+    func saveCurrentLocationToFirebase(lat: String, lng: String){
+        FirebaseHelper.myRootRef.childByAppendingPath("")
+    }
+    
     
     func showErrorMessage(error:NSError){
         let statusMessage: String
