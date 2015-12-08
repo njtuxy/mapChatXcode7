@@ -34,7 +34,7 @@ class Annotation : NSObject, MKAnnotation{
     }
 }
 
-class MapViewController: UIViewController, MKMapViewDelegate, ENSideMenuDelegate{
+class MapViewController: UIViewController, MKMapViewDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
     var managedObjectContext: NSManagedObjectContext!
@@ -53,11 +53,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, ENSideMenuDelegate
         mapView.addAnnotations(annotations)
     }
     
+
+    
+    @IBOutlet weak var sideMenuButton: UIBarButtonItem!
+    
+    
     override func viewDidLoad() {
         //Setting the map view delegate
-        mapView.delegate = self
-        //Setting the sideMenu delegate
-        self.sideMenuController()?.sideMenu?.delegate = self
+        mapView.delegate = self        
+        if self.revealViewController() != nil{
+            sideMenuButton.target = self.revealViewController()
+            sideMenuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
     }
     
     //Here is all the magic happens:
@@ -122,42 +130,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, ENSideMenuDelegate
             
     }
 
-    //SideMenu Bar Button
-    @IBAction func toggleSideMenu(sender: AnyObject) {
-        toggleSideMenuView()
-    }
-
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidAppear(animated)
-        print("map view is diappering!!")
-        FirebaseRefernces.sideMenuRef1.removeAllObservers()
-        FirebaseRefernces.sideMenuRef2.removeAllObservers()
-    }
     
-    //SideMenu Functions
-    func sideMenuWillOpen() {
-        print("sideMenuWillOpen")
-    }
-    
-    func sideMenuWillClose() {
-        print("sideMenuWillClose")
-    }
-    
-    func sideMenuShouldOpenSideMenu() -> Bool {
-        print("sideMenuShouldOpenSideMenu")
-        return true
-    }
-    
-    func sideMenuDidClose() {
-        print("sideMenuDidClose")
-    }
-    
-    func sideMenuDidOpen() {
-        print("sideMenuDidOpen")
-    }
-    
-    
-
+//    override func viewDidDisappear(animated: Bool) {
+//        super.viewDidAppear(animated)
+//        print("map view is diappering!!")
+//        FirebaseRefernces.sideMenuRef1.removeAllObservers()
+//        FirebaseRefernces.sideMenuRef2.removeAllObservers()
+//    }
     
 }
 

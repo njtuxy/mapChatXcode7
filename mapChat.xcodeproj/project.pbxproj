@@ -17,6 +17,7 @@
 		DA2E0F1D1C0831A900C508E0 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2E0F1C1C0831A900C508E0 /* FirebaseHelper.swift */; };
 		DA2E0F1F1C09382900C508E0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2E0F1E1C09382900C508E0 /* LoginViewController.swift */; };
 		DA7AC64E1C0982D5001B9D39 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7AC64D1C0982D5001B9D39 /* SwiftNotice.swift */; };
+		DA84C2291C1774090097F1F7 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA84C2281C1774090097F1F7 /* SWRevealViewController.m */; };
 		DA86D2F71C01A0BC001C088B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA86D2F61C01A0BC001C088B /* MapKit.framework */; };
 		DAA89DAC1BFE8D3A005FB53E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA89DAB1BFE8D3A005FB53E /* AppDelegate.swift */; };
 		DAA89DAE1BFE8D3A005FB53E /* CurrentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA89DAD1BFE8D3A005FB53E /* CurrentLocationViewController.swift */; };
@@ -44,6 +45,9 @@
 		DA2E0F1C1C0831A900C508E0 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		DA2E0F1E1C09382900C508E0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DA7AC64D1C0982D5001B9D39 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
+		DA84C2261C1774080097F1F7 /* mapChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mapChat-Bridging-Header.h"; sourceTree = "<group>"; };
+		DA84C2271C1774090097F1F7 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		DA84C2281C1774090097F1F7 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		DA86D2F61C01A0BC001C088B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		DAA89DA81BFE8D3A005FB53E /* mapChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mapChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAA89DAB1BFE8D3A005FB53E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,13 +118,25 @@
 			name = helpers;
 			sourceTree = "<group>";
 		};
-		DA2E0F1B1C0665A000C508E0 /* sideMenuControllers */ = {
+		DA2E0F1B1C0665A000C508E0 /* remove_later_sideMenuControllers */ = {
 			isa = PBXGroup;
 			children = (
+				DAAB80661C0444BC003065F7 /* ENSideMenu.swift */,
+				DAAB80671C0444BC003065F7 /* ENSideMenuNavigationController.swift */,
 				DAAB806A1C04457B003065F7 /* NavigationController.swift */,
 				DAAB806E1C04DAC9003065F7 /* SideMenuTableViewController.swift */,
 			);
-			name = sideMenuControllers;
+			name = remove_later_sideMenuControllers;
+			sourceTree = "<group>";
+		};
+		DA84C2251C1773E70097F1F7 /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DA84C2271C1774090097F1F7 /* SWRevealViewController.h */,
+				DA84C2281C1774090097F1F7 /* SWRevealViewController.m */,
+				DA84C2261C1774080097F1F7 /* mapChat-Bridging-Header.h */,
+			);
+			name = SWRevealViewController;
 			sourceTree = "<group>";
 		};
 		DAA89D9F1BFE8D3A005FB53E = {
@@ -148,7 +164,7 @@
 				DA2326711C0CFA5F00094165 /* viewControllers */,
 				DAAB80651C0444A4003065F7 /* lib */,
 				DAA89DAB1BFE8D3A005FB53E /* AppDelegate.swift */,
-				DA2E0F1B1C0665A000C508E0 /* sideMenuControllers */,
+				DA2E0F1B1C0665A000C508E0 /* remove_later_sideMenuControllers */,
 				DA2326721C0CFA7300094165 /* helpers */,
 				DAA89DB11BFE8D3A005FB53E /* Main.storyboard */,
 				DAA89DB41BFE8D3A005FB53E /* Assets.xcassets */,
@@ -162,9 +178,8 @@
 		DAAB80651C0444A4003065F7 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				DA84C2251C1773E70097F1F7 /* SWRevealViewController */,
 				DA7AC64D1C0982D5001B9D39 /* SwiftNotice.swift */,
-				DAAB80661C0444BC003065F7 /* ENSideMenu.swift */,
-				DAAB80671C0444BC003065F7 /* ENSideMenuNavigationController.swift */,
 			);
 			name = lib;
 			sourceTree = "<group>";
@@ -296,6 +311,7 @@
 				DAE51E611C16473700641F65 /* Contact.swift in Sources */,
 				DA2326761C0CFD8100094165 /* PopupNoticeHelper.swift in Sources */,
 				DA23267E1C0ECB9200094165 /* NewContactTableViewCell.swift in Sources */,
+				DA84C2291C1774090097F1F7 /* SWRevealViewController.m in Sources */,
 				DAAB806B1C04457B003065F7 /* NavigationController.swift in Sources */,
 				DAA89DB01BFE8D3A005FB53E /* MapViewController.swift in Sources */,
 				DA7AC64E1C0982D5001B9D39 /* SwiftNotice.swift in Sources */,
@@ -419,10 +435,13 @@
 			baseConfigurationReference = 3E49209181A6F21AF106E505 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = mapChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanxia.mapchat.mapChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "mapChat/mapChat-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -431,11 +450,13 @@
 			baseConfigurationReference = 6DAABE2438ECEBA08E9F4922 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = mapChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanxia.mapchat.mapChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "mapChat/mapChat-Bridging-Header.h";
 			};
 			name = Release;
 		};
