@@ -12,21 +12,40 @@ import Firebase
 class SideMenuTableViewController: UITableViewController {
 
     var selectedMenuItem : Int = 0
+    var handle: FirebaseHandle!
+    var ref: Firebase!
+    var ref1: Firebase!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        // Customize apperance of table view
+        tableView.contentInset = UIEdgeInsetsMake(64.0, 0, 0, 0) //
+        tableView.separatorStyle = .None
+        tableView.backgroundColor = UIColor.clearColor()
+        tableView.scrollsToTop = false
+        
+        // Preserve selection between presentations
+        self.clearsSelectionOnViewWillAppear = false
+        
+//        tableView.selectRowAtIndexPath(NSIndexPath(forRow: selectedMenuItem, inSection: 0), animated: false, scrollPosition: .Middle)
+        
+    }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         let myUid = FirebaseHelper.readUidFromNSUserDefaults()
         let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
-        let myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
-        myContacts.observeEventType(.Value, withBlock: { my_contacts_snapshot in
+        FirebaseRefernces.sideMenuRef1 = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
+        handle = FirebaseRefernces.sideMenuRef1.observeEventType(.Value, withBlock: { my_contacts_snapshot in
             var t_contactsArray = [Contact]()
             var t_email = String()
             if my_contacts_snapshot.exists(){
                 for item in my_contacts_snapshot.children{
                     if let uidOfThisContact = item.key! {
-                        let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
-                        pathOfThisContact.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
+                        FirebaseRefernces.sideMenuRef2 = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
+                        FirebaseRefernces.sideMenuRef2.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
                             t_email = thisContactSnapShot.value as! String
                             t_contactsArray.append(Contact(uid: uidOfThisContact , email: t_email))
                             Contacts.contacts = t_contactsArray
@@ -47,25 +66,22 @@ class SideMenuTableViewController: UITableViewController {
     
     func foo(){
         tableView.reloadData()
-        print("i am loggig from here")
-        print(Contacts.contacts)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+        
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // Return the number of sections.
-        return Contacts.contacts.count
+        return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
-        return 2
+        return Contacts.contacts.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -82,7 +98,6 @@ class SideMenuTableViewController: UITableViewController {
             cell!.selectedBackgroundView = selectedBackgroundView
         }
         
-//        cell!.textLabel?.text = "ViewController #\(indexPath.row+1)"
         cell!.textLabel?.text = Contacts.contacts[indexPath.row].email
         
         return cell!

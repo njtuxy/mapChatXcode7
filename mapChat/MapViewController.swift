@@ -127,6 +127,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, ENSideMenuDelegate
         toggleSideMenuView()
     }
 
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidAppear(animated)
+        print("map view is diappering!!")
+        FirebaseRefernces.sideMenuRef1.removeAllObservers()
+        FirebaseRefernces.sideMenuRef2.removeAllObservers()
+    }
     
     //SideMenu Functions
     func sideMenuWillOpen() {

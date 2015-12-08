@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 struct Contact {
     
@@ -21,4 +22,9 @@ struct Contact {
 
 struct Contacts {
     static var contacts = [Contact]()
+}
+
+struct FirebaseRefernces{
+    static var sideMenuRef1:Firebase!
+    static var sideMenuRef2:Firebase!
 }
