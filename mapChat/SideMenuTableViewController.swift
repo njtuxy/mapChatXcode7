@@ -13,24 +13,42 @@ class SideMenuTableViewController: UITableViewController {
 
     var selectedMenuItem : Int = 0
     
-    struct Contact {
-        
-        let email: String!
-        let uid: String!
-        
-        init(uid: String, email: String){
-            self.email = email
-            self.uid = uid
-        }
-    }
-    
-    
-    var contactsArray = [Contact]()
-    
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
+        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
+        let myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
+        myContacts.observeEventType(.Value, withBlock: { my_contacts_snapshot in
+            var t_contactsArray = [Contact]()
+            var t_email = String()
+            if my_contacts_snapshot.exists(){
+                for item in my_contacts_snapshot.children{
+                    if let uidOfThisContact = item.key! {
+                        let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
+                        pathOfThisContact.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
+                            t_email = thisContactSnapShot.value as! String
+                            t_contactsArray.append(Contact(uid: uidOfThisContact , email: t_email))
+                            Contacts.contacts = t_contactsArray
+                            let menu = self.sideMenuController()?.sideMenu?.menuViewController as! SideMenuTableViewController
+                            menu.foo()
+                        })
+                    }
+                }
+            }
+                
+            else{
+//                self.contactsArray = []
+//                self.allContactsTable.reloadData()
+            }
+        })
+        
+    }
+    
+    func foo(){
+        tableView.reloadData()
+        print("i am loggig from here")
+        print(Contacts.contacts)
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,7 +60,7 @@ class SideMenuTableViewController: UITableViewController {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Return the number of sections.
-        return 1
+        return Contacts.contacts.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,7 +83,7 @@ class SideMenuTableViewController: UITableViewController {
         }
         
 //        cell!.textLabel?.text = "ViewController #\(indexPath.row+1)"
-        cell!.textLabel?.text = "Yan Xia"
+        cell!.textLabel?.text = Contacts.contacts[indexPath.row].email
         
         return cell!
     }

@@ -62,7 +62,9 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
                         })
                     }
                 }
-            }else{
+            }
+            
+            else{
                 self.contactsArray = []
                 self.allContactsTable.reloadData()
             }
