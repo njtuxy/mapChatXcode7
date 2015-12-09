@@ -33,6 +33,9 @@ class SideMenuTableViewController: UITableViewController {
         
     }
     override func viewDidAppear(animated: Bool) {
+        
+        print("side menu table view appers")
+        
         super.viewDidAppear(animated)
         
         let myUid = FirebaseHelper.readUidFromNSUserDefaults()
@@ -49,8 +52,6 @@ class SideMenuTableViewController: UITableViewController {
                             t_email = thisContactSnapShot.value as! String
                             t_contactsArray.append(Contact(uid: uidOfThisContact , email: t_email))
                             Contacts.contacts = t_contactsArray
-                            let menu = self.sideMenuController()?.sideMenu?.menuViewController as! SideMenuTableViewController
-                            menu.foo()
                         })
                     }
                 }

@@ -18,6 +18,8 @@
 		DA2E0F1F1C09382900C508E0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2E0F1E1C09382900C508E0 /* LoginViewController.swift */; };
 		DA7AC64E1C0982D5001B9D39 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7AC64D1C0982D5001B9D39 /* SwiftNotice.swift */; };
 		DA84C2291C1774090097F1F7 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA84C2281C1774090097F1F7 /* SWRevealViewController.m */; };
+		DA84C22B1C1791830097F1F7 /* LeftSideContactsMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84C22A1C1791830097F1F7 /* LeftSideContactsMenuController.swift */; };
+		DA84C22D1C1791C50097F1F7 /* LeftSideMenuContactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84C22C1C1791C50097F1F7 /* LeftSideMenuContactsCell.swift */; };
 		DA86D2F71C01A0BC001C088B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA86D2F61C01A0BC001C088B /* MapKit.framework */; };
 		DAA89DAC1BFE8D3A005FB53E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA89DAB1BFE8D3A005FB53E /* AppDelegate.swift */; };
 		DAA89DAE1BFE8D3A005FB53E /* CurrentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA89DAD1BFE8D3A005FB53E /* CurrentLocationViewController.swift */; };
@@ -25,10 +27,6 @@
 		DAA89DB31BFE8D3A005FB53E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA89DB11BFE8D3A005FB53E /* Main.storyboard */; };
 		DAA89DB51BFE8D3A005FB53E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAA89DB41BFE8D3A005FB53E /* Assets.xcassets */; };
 		DAA89DB81BFE8D3A005FB53E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA89DB61BFE8D3A005FB53E /* LaunchScreen.storyboard */; };
-		DAAB80681C0444BC003065F7 /* ENSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB80661C0444BC003065F7 /* ENSideMenu.swift */; };
-		DAAB80691C0444BC003065F7 /* ENSideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB80671C0444BC003065F7 /* ENSideMenuNavigationController.swift */; };
-		DAAB806B1C04457B003065F7 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB806A1C04457B003065F7 /* NavigationController.swift */; };
-		DAAB806F1C04DAC9003065F7 /* SideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB806E1C04DAC9003065F7 /* SideMenuTableViewController.swift */; };
 		DAE51E611C16473700641F65 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE51E601C16473700641F65 /* Contact.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +46,8 @@
 		DA84C2261C1774080097F1F7 /* mapChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mapChat-Bridging-Header.h"; sourceTree = "<group>"; };
 		DA84C2271C1774090097F1F7 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		DA84C2281C1774090097F1F7 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		DA84C22A1C1791830097F1F7 /* LeftSideContactsMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSideContactsMenuController.swift; sourceTree = "<group>"; };
+		DA84C22C1C1791C50097F1F7 /* LeftSideMenuContactsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSideMenuContactsCell.swift; sourceTree = "<group>"; };
 		DA86D2F61C01A0BC001C088B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		DAA89DA81BFE8D3A005FB53E /* mapChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mapChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAA89DAB1BFE8D3A005FB53E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,10 +57,6 @@
 		DAA89DB41BFE8D3A005FB53E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DAA89DB71BFE8D3A005FB53E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DAA89DB91BFE8D3A005FB53E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DAAB80661C0444BC003065F7 /* ENSideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENSideMenu.swift; sourceTree = "<group>"; };
-		DAAB80671C0444BC003065F7 /* ENSideMenuNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENSideMenuNavigationController.swift; sourceTree = "<group>"; };
-		DAAB806A1C04457B003065F7 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
-		DAAB806E1C04DAC9003065F7 /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewController.swift; sourceTree = "<group>"; };
 		DAE51E601C16473700641F65 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +101,8 @@
 				DA23267F1C1008A400094165 /* ContactsViewCell.swift */,
 				DA23267B1C0E2EFA00094165 /* AddNewContactViewController.swift */,
 				DA23267D1C0ECB9200094165 /* NewContactTableViewCell.swift */,
+				DA84C22A1C1791830097F1F7 /* LeftSideContactsMenuController.swift */,
+				DA84C22C1C1791C50097F1F7 /* LeftSideMenuContactsCell.swift */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -116,17 +114,6 @@
 				DA2326751C0CFD8100094165 /* PopupNoticeHelper.swift */,
 			);
 			name = helpers;
-			sourceTree = "<group>";
-		};
-		DA2E0F1B1C0665A000C508E0 /* remove_later_sideMenuControllers */ = {
-			isa = PBXGroup;
-			children = (
-				DAAB80661C0444BC003065F7 /* ENSideMenu.swift */,
-				DAAB80671C0444BC003065F7 /* ENSideMenuNavigationController.swift */,
-				DAAB806A1C04457B003065F7 /* NavigationController.swift */,
-				DAAB806E1C04DAC9003065F7 /* SideMenuTableViewController.swift */,
-			);
-			name = remove_later_sideMenuControllers;
 			sourceTree = "<group>";
 		};
 		DA84C2251C1773E70097F1F7 /* SWRevealViewController */ = {
@@ -164,7 +151,6 @@
 				DA2326711C0CFA5F00094165 /* viewControllers */,
 				DAAB80651C0444A4003065F7 /* lib */,
 				DAA89DAB1BFE8D3A005FB53E /* AppDelegate.swift */,
-				DA2E0F1B1C0665A000C508E0 /* remove_later_sideMenuControllers */,
 				DA2326721C0CFA7300094165 /* helpers */,
 				DAA89DB11BFE8D3A005FB53E /* Main.storyboard */,
 				DAA89DB41BFE8D3A005FB53E /* Assets.xcassets */,
@@ -306,21 +292,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAAB80681C0444BC003065F7 /* ENSideMenu.swift in Sources */,
 				DA2326741C0CFB0600094165 /* MessageViewController.swift in Sources */,
 				DAE51E611C16473700641F65 /* Contact.swift in Sources */,
 				DA2326761C0CFD8100094165 /* PopupNoticeHelper.swift in Sources */,
 				DA23267E1C0ECB9200094165 /* NewContactTableViewCell.swift in Sources */,
 				DA84C2291C1774090097F1F7 /* SWRevealViewController.m in Sources */,
-				DAAB806B1C04457B003065F7 /* NavigationController.swift in Sources */,
+				DA84C22B1C1791830097F1F7 /* LeftSideContactsMenuController.swift in Sources */,
 				DAA89DB01BFE8D3A005FB53E /* MapViewController.swift in Sources */,
+				DA84C22D1C1791C50097F1F7 /* LeftSideMenuContactsCell.swift in Sources */,
 				DA7AC64E1C0982D5001B9D39 /* SwiftNotice.swift in Sources */,
 				DAA89DAC1BFE8D3A005FB53E /* AppDelegate.swift in Sources */,
 				DA23267A1C0D0E8D00094165 /* ContacsViewController.swift in Sources */,
 				DA2E0F1D1C0831A900C508E0 /* FirebaseHelper.swift in Sources */,
-				DAAB80691C0444BC003065F7 /* ENSideMenuNavigationController.swift in Sources */,
 				DAA89DAE1BFE8D3A005FB53E /* CurrentLocationViewController.swift in Sources */,
-				DAAB806F1C04DAC9003065F7 /* SideMenuTableViewController.swift in Sources */,
 				DA23267C1C0E2EFA00094165 /* AddNewContactViewController.swift in Sources */,
 				DA2E0F1F1C09382900C508E0 /* LoginViewController.swift in Sources */,
 				DA2326801C1008A400094165 /* ContactsViewCell.swift in Sources */,

@@ -28,3 +28,19 @@ struct FirebaseRefernces{
     static var sideMenuRef1:Firebase!
     static var sideMenuRef2:Firebase!
 }
+
+struct SideMenuContact{
+    let email: String!
+    let uid: String!
+    var selected: Bool!
+    
+    init(uid: String, email: String, selected: Bool){
+        self.uid = uid
+        self.email = email
+        self.selected = selected
+    }
+}
+
+struct SideMenuContacts{
+    static var contacts = [SideMenuContact]()
+}
