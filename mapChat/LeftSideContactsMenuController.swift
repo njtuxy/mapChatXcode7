@@ -35,12 +35,16 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         let current_status = SideMenuContacts.contacts[indexPath.row].selected
+        
+        setContactSelectedStatus(SideMenuContacts.contacts[indexPath.row].uid, status: !current_status)
+        
         SideMenuContacts.contacts[indexPath.row].selected = !current_status
+        
         if(current_status == true){
             cell?.backgroundColor = UIColor.greenColor()
         }else{
             cell?.backgroundColor = .None
-        }        
+        }
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -80,5 +84,24 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
             }
         })
     }
+    
+    
+    func setContactSelectedStatus(uidOfContact: String, status: Bool){
+        
+        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
+        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
+        
+        //Save the stranger's UID to current user's node
+        
+        let contactListOfCurrentUser = users.childByAppendingPath(myUid).childByAppendingPath("contacts").childByAppendingPath(uidOfContact)
+        
+        contactListOfCurrentUser.setValue(status)        
+        
+        //Save current user's UID to stranger's node.
+        let contactListOfStanger = users.childByAppendingPath(uidOfContact).childByAppendingPath("contacts").childByAppendingPath(myUid)
+        contactListOfStanger.setValue(status)
+    }
+
+    
     
 }

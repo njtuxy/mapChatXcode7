@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 import Firebase
+import GeoFire
 
 extension UIColor{
     final func toString() -> String{
@@ -34,9 +35,44 @@ class Annotation : NSObject, MKAnnotation{
     }
 }
 
+struct Annotations{
+    static var annotations =  [Annotation]()
+}
+
+
+
 class MapViewController: UIViewController, MKMapViewDelegate{
     
+    @IBAction func addNewLocation(sender: AnyObject) {
+        let color = UIColor(red: 0.4, green: 0.8, blue: 0.6, alpha: 1.0)
+        let location = CLLocationCoordinate2D(latitude: 37.782736, longitude:-122.400984)
+        
+        //Add observer to contacts list,  if checked status is true, then find its current location and add it to Annotations array
+        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
+        let myContacts = FirebaseHelper.myRootRef.childByAppendingPath("users").childByAppendingPath(myUid).childByAppendingPath("contacts")
+
+        myContacts.observeEventType(.ChildChanged, withBlock: { my_contacts_snapshot in
+            if let contacts_uid = my_contacts_snapshot.key{
+                FirebaseHelper.geoFire.getLocationForKey(contacts_uid, withCallback: { (location, error) in
+                    if(location != nil){
+                        let t_location = CLLocationCoordinate2D(latitude:location.coordinate.latitude, longitude:location.coordinate.longitude)
+                        Annotations.annotations.append(Annotation(coordinate: t_location, title: String(contacts_uid), subtitle: "this is the user"))
+                    }
+                    self.mapView.removeAnnotations(Annotations.annotations)
+                    self.mapView.addAnnotations(Annotations.annotations)
+                    
+                })
+            }
+        })
+        
+        
+        
+//        Annotations.annotations.append(Annotation(coordinate: location, title: "A little Park", subtitle: "What ever that is here"))
+        
+    }
+    
     @IBOutlet weak var mapView: MKMapView!
+    
     var managedObjectContext: NSManagedObjectContext!
     
     let color = UIColor(red: 0.4, green: 0.8, blue: 0.6, alpha: 1.0)
@@ -44,7 +80,8 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     
     //Create an annotation array:
     lazy var annotations: [MKAnnotation] = {
-        return [Annotation(coordinate: self.location, title: "A little Park", subtitle: "What ever that is here")]
+//        return [Annotation(coordinate: self.location, title: "A little Park", subtitle: "What ever that is here")]
+        return []
     }()
     
     override func viewDidAppear(animated: Bool) {
@@ -102,8 +139,6 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     
     
     @IBAction func showUser() {
-
-        
         let currentLocation = mapView.userLocation.coordinate
         let region = MKCoordinateRegionMakeWithDistance(currentLocation, 1000, 1000)
         mapView.setRegion(mapView.regionThatFits(region), animated: true)

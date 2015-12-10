@@ -104,12 +104,12 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
         //Save the stranger's UID to current user's node
         
         let contactListOfCurrentUser = users.childByAppendingPath(myUid).childByAppendingPath("contacts").childByAppendingPath(uidOfStranger)
-        contactListOfCurrentUser.setValue(true)
+        contactListOfCurrentUser.setValue(false)
         
 
         //Save current user's UID to stranger's node.
         let contactListOfStanger = users.childByAppendingPath(uidOfStranger).childByAppendingPath("contacts").childByAppendingPath(myUid)
-        contactListOfStanger.setValue(true)
+        contactListOfStanger.setValue(false)
     }
     
 }

@@ -122,6 +122,13 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KdV-mm-ZUr">
                                 <rect key="frame" x="0.0" y="476" width="320" height="44"/>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oGx-MJ-hzd">
+                                <rect key="frame" x="62" y="395" width="196" height="30"/>
+                                <state key="normal" title="Add New Location"/>
+                                <connections>
+                                    <action selector="addNewLocation:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="smb-rU-hir"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
