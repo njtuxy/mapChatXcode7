@@ -16,7 +16,7 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     @IBOutlet weak var leftSideMenuTable: UITableView!
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SideMenuContacts.contacts.count
+        return Contacts.contacts.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -26,26 +26,26 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         let index = indexPath.row
         // Configure the cell...
         
-        cell.userLabel.text = SideMenuContacts.contacts[index].email
+        cell.userLabel.text = Contacts.contacts[index].email
 
         return cell
         
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        let current_status = SideMenuContacts.contacts[indexPath.row].selected
-        
-        setContactSelectedStatus(SideMenuContacts.contacts[indexPath.row].uid, status: !current_status)
-        
-        SideMenuContacts.contacts[indexPath.row].selected = !current_status
-        
-        if(current_status == true){
-            cell?.backgroundColor = UIColor.greenColor()
-        }else{
-            cell?.backgroundColor = .None
-        }
-    }
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let cell = tableView.cellForRowAtIndexPath(indexPath)
+//        let current_status = SideMenuContacts.contacts[indexPath.row].selected
+//        
+//        setContactSelectedStatus(SideMenuContacts.contacts[indexPath.row].uid, status: !current_status)
+//        
+//        SideMenuContacts.contacts[indexPath.row].selected = !current_status
+//        
+//        if(current_status == true){
+//            cell?.backgroundColor = UIColor.greenColor()
+//        }else{
+//            cell?.backgroundColor = .None
+//        }
+//    }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
@@ -54,6 +54,15 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     
     override func viewDidLoad() {
         
+        //Set a observer to the contacts list, once the contacts list get loaddd, reload the tableView.
+
+        Status.contactsLoaded.observeNew{ value in
+            print("contacts loadded, going to refresh the sideMenu table view")
+            self.leftSideMenuTable.reloadData()
+        }
+
+        
+/*
         let myUid = FirebaseHelper.readUidFromNSUserDefaults()
         let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
         let myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
@@ -83,6 +92,8 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
                 self.leftSideMenuTable.reloadData()
             }
         })
+
+*/
     }
     
     

@@ -4,6 +4,7 @@
 use_frameworks!
 pod 'Firebase', '>= 2.4.3'
 pod 'GeoFire', '>= 1.1'
+pod 'Bond', '~> 4.0'
 
 target 'mapChat' do
 

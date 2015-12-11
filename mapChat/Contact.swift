@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import Bond
 
 struct Contact {
     
@@ -23,6 +24,7 @@ struct Contact {
 struct Contacts {
     static var contacts = [Contact]()
 }
+
 
 struct FirebaseRefernces{
     static var sideMenuRef1:Firebase!
@@ -43,4 +45,12 @@ struct SideMenuContact{
 
 struct SideMenuContacts{
     static var contacts = [SideMenuContact]()
+}
+
+struct testBond {
+    static var captain = Observable("Jim")
+}
+
+struct Status {
+    static var contactsLoaded = Observable(false)
 }

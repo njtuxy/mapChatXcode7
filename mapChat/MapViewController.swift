@@ -11,6 +11,7 @@ import MapKit
 import CoreData
 import Firebase
 import GeoFire
+import Bond
 
 extension UIColor{
     final func toString() -> String{
@@ -44,6 +45,10 @@ struct Annotations{
 class MapViewController: UIViewController, MKMapViewDelegate{
     
     @IBAction func addNewLocation(sender: AnyObject) {
+                
+        Contacts.contacts.append(Contact(uid: "mamama", email: "abc@gmail.com"))
+        Status.contactsLoaded.next(true)
+        
         let color = UIColor(red: 0.4, green: 0.8, blue: 0.6, alpha: 1.0)
         let location = CLLocationCoordinate2D(latitude: 37.782736, longitude:-122.400984)
         
@@ -84,10 +89,12 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         return []
     }()
     
+    
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         mapView.removeAnnotations(annotations)
-        mapView.addAnnotations(annotations)
+        mapView.addAnnotations(annotations)        
     }
     
 

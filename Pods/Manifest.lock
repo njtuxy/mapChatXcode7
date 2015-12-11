@@ -1,13 +1,16 @@
 PODS:
+  - Bond (4.3.0)
   - Firebase (2.4.3)
   - GeoFire (1.1.2):
     - Firebase (~> 2.2)
 
 DEPENDENCIES:
+  - Bond (~> 4.0)
   - Firebase (>= 2.4.3)
   - GeoFire (>= 1.1)
 
 SPEC CHECKSUMS:
+  Bond: ebe2364b18130690083cbceff036420b21494ae4
   Firebase: 48179995b561e2262c5d4060ecdffca45fbbff8b
   GeoFire: 03db4e390a4cf3ff97422f19eb71ab1aa7d947dd
 

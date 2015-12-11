@@ -24,6 +24,8 @@ class MessageViewController: UIViewController{
     }
     
     @IBAction func startListening(sender: AnyObject) {
+        testBond.captain.next("spax")
+        
         monitorUserLocaiton("simplelogin:1")
     }
     
@@ -43,8 +45,8 @@ class MessageViewController: UIViewController{
         ref = FirebaseHelper.myRootRef.childByAppendingPath("locations").childByAppendingPath(itsUID)
         
         handle = ref.observeEventType(.Value, withBlock: { SnapShot in
-            print("New value got!")
-            print(SnapShot.value["l"])
+//            print("New value got!")
+//            print(SnapShot.value["l"])
         })
     }
 }
