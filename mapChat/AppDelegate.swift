@@ -19,8 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         super.init()
         Firebase.defaultConfig().persistenceEnabled = true
         
-
-        
         //Load all the contacts and send a singal to the observers to get the latest contacts list
         
         let myUid = FirebaseHelper.readUidFromNSUserDefaults()
@@ -32,7 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             var t_contactsArray = [Contact]()
             var t_email = String()
+            
+            print("------logging a-------")
+            print(my_contacts_snapshot.exists())
+            print("------logging b-------")
+            
             if my_contacts_snapshot.exists(){
+                
                 for item in my_contacts_snapshot.children{
                     if let uidOfThisContact = item.key! {
                         let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
@@ -48,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             else{
                 Contacts.contacts = []
+                Status.contactsLoaded.next(true)
             }
         })
 
