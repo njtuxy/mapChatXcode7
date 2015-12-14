@@ -45,10 +45,7 @@ struct Annotations{
 class MapViewController: UIViewController, MKMapViewDelegate{
     
     @IBAction func addNewLocation(sender: AnyObject) {
-                
-        Contacts.contacts.append(Contact(uid: "mamama", email: "abc@gmail.com"))
-        Status.contactsLoaded.next(true)
-        
+                        
         let color = UIColor(red: 0.4, green: 0.8, blue: 0.6, alpha: 1.0)
         let location = CLLocationCoordinate2D(latitude: 37.782736, longitude:-122.400984)
         

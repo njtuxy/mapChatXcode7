@@ -26,27 +26,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
         
         myContacts.observeEventType(.Value, withBlock: { my_contacts_snapshot in
+
             print("contacts loadded now")
-            
             var t_contactsArray = [Contact]()
             var t_email = String()
-            
-            print("------logging a-------")
-            print(my_contacts_snapshot.exists())
-            print("------logging b-------")
-            
+                        
             if my_contacts_snapshot.exists(){
                 
                 for item in my_contacts_snapshot.children{
-                    if let uidOfThisContact = item.key! {
-                        let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
-                        pathOfThisContact.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
-                            t_email = thisContactSnapShot.value as! String
-                            t_contactsArray.append(Contact(uid: uidOfThisContact , email: t_email))
-                            Contacts.contacts = t_contactsArray
-                            Status.contactsLoaded.next(true)
-                        })
-                    }
+
+                    let t_item = item as! FDataSnapshot
+                    
+                    let uidOfThisContact = t_item.key
+                    let selectedStatusOfThisContact = t_item.value as! Bool
+
+                    let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
+                    pathOfThisContact.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
+                        t_email = thisContactSnapShot.value as! String
+                        t_contactsArray.append(Contact(uid: uidOfThisContact , email: t_email, selected: selectedStatusOfThisContact))
+                        Contacts.contacts = t_contactsArray
+                        Status.contactsLoaded.next(true)
+                    })
+
+                    
+//                    if let uidOfThisContact = item.key! {
+//                        let valueOfThisContacts = item as! FDataSnapshot
+//                        print(valueOfThisContacts.value)
+                    
                 }
             }
                 

@@ -14,11 +14,14 @@ struct Contact {
     
     let email: String!
     let uid: String!
+    var selected: Bool!
     
-    init(uid: String, email: String){
+    init(uid: String, email: String, selected: Bool){
         self.email = email
         self.uid = uid
+        self.selected = selected
     }
+    
 }
 
 struct Contacts {

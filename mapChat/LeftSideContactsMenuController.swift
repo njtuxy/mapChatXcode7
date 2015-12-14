@@ -24,28 +24,40 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         cell.selectionStyle = .None
         
         let index = indexPath.row
+
         // Configure the cell...
         
+        
         cell.userLabel.text = Contacts.contacts[index].email
+        
+        print("-------------------")
+        print("setting cell background color")
+        print("-------------------")
+        
+        
+        
+        //Set cell background color based on the contact's select status
+        
+        let current_status = Contacts.contacts[indexPath.row].selected
+        
+        if(current_status == true){
+            cell.backgroundColor = UIColor.greenColor()
+        }else{
+            cell.backgroundColor = .None
+        }
 
         return cell
         
     }
     
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let cell = tableView.cellForRowAtIndexPath(indexPath)
-//        let current_status = SideMenuContacts.contacts[indexPath.row].selected
-//        
-//        setContactSelectedStatus(SideMenuContacts.contacts[indexPath.row].uid, status: !current_status)
-//        
-//        SideMenuContacts.contacts[indexPath.row].selected = !current_status
-//        
-//        if(current_status == true){
-//            cell?.backgroundColor = UIColor.greenColor()
-//        }else{
-//            cell?.backgroundColor = .None
-//        }
-//    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        
+        let current_status = Contacts.contacts[indexPath.row].selected
+        
+        setContactSelectedStatus(Contacts.contacts[indexPath.row].uid, status: !current_status)
+        
+    }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
@@ -92,7 +104,6 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
                 self.leftSideMenuTable.reloadData()
             }
         })
-
 */
     }
     
