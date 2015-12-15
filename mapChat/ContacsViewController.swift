@@ -39,6 +39,12 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.allContactsTable.reloadData()
+
+//
+//        if(LoginStatus.loggedin == false){
+//            self.navigationItem.rightBarButtonItem = nil
+//        }
+        
     }
     
     override func viewDidLoad() {
@@ -47,6 +53,7 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
             print("contacts loadded, going to refresh the sideMenu table view")
             self.allContactsTable.reloadData()
         }
+
         
     }
     

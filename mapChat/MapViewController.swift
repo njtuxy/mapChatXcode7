@@ -44,6 +44,38 @@ struct Annotations{
 
 class MapViewController: UIViewController, MKMapViewDelegate{
     
+    override func viewDidLoad() {
+        
+        
+        //Show login view if user hasn't loggedin:
+        
+        if(!FirebaseHelper.userAlreadyLoggedIn()){
+            let myStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = myStoryBoard.instantiateViewControllerWithIdentifier("loginView") as! LoginViewController
+            self.presentViewController(vc, animated: true, completion: nil)
+        }else{
+            FirebaseHelper.addContactsObserver()
+        }
+        
+        
+        //Setting the map view delegate
+        mapView.delegate = self
+        if self.revealViewController() != nil{
+            sideMenuButton.target = self.revealViewController()
+            sideMenuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        mapView.removeAnnotations(annotations)
+        mapView.addAnnotations(annotations)
+    }
+    
+
+    
     @IBAction func addNewLocation(sender: AnyObject) {
                         
         let color = UIColor(red: 0.4, green: 0.8, blue: 0.6, alpha: 1.0)
@@ -87,27 +119,9 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     }()
     
     
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        mapView.removeAnnotations(annotations)
-        mapView.addAnnotations(annotations)        
-    }
-    
-
-    
     @IBOutlet weak var sideMenuButton: UIBarButtonItem!
     
     
-    override func viewDidLoad() {
-        //Setting the map view delegate
-        mapView.delegate = self        
-        if self.revealViewController() != nil{
-            sideMenuButton.target = self.revealViewController()
-            sideMenuButton.action = "revealToggle:"
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
-    }
     
     //Here is all the magic happens:
     //IMPORTANT: need to se canShowCallout = true, the default is hidden!

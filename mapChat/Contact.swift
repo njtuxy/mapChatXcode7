@@ -10,6 +10,8 @@ import Foundation
 import Firebase
 import Bond
 
+
+
 struct Contact {
     
     let email: String!
@@ -56,4 +58,11 @@ struct testBond {
 
 struct Status {
     static var contactsLoaded = Observable(false)
+    static var loggedInStatus = Observable(false)
 }
+
+struct LoginStatus{
+    static var loggedin = false
+}
+
+

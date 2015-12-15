@@ -28,6 +28,7 @@
 		DAA89DB51BFE8D3A005FB53E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAA89DB41BFE8D3A005FB53E /* Assets.xcassets */; };
 		DAA89DB81BFE8D3A005FB53E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA89DB61BFE8D3A005FB53E /* LaunchScreen.storyboard */; };
 		DAE51E611C16473700641F65 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE51E601C16473700641F65 /* Contact.swift */; };
+		DAF135BC1C1F8F6000B8E15E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF135BB1C1F8F6000B8E15E /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		DAA89DB71BFE8D3A005FB53E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DAA89DB91BFE8D3A005FB53E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAE51E601C16473700641F65 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		DAF135BB1C1F8F6000B8E15E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				DA23267D1C0ECB9200094165 /* NewContactTableViewCell.swift */,
 				DA84C22A1C1791830097F1F7 /* LeftSideContactsMenuController.swift */,
 				DA84C22C1C1791C50097F1F7 /* LeftSideMenuContactsCell.swift */,
+				DAF135BB1C1F8F6000B8E15E /* SettingsViewController.swift */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				DAA89DAC1BFE8D3A005FB53E /* AppDelegate.swift in Sources */,
 				DA23267A1C0D0E8D00094165 /* ContacsViewController.swift in Sources */,
 				DA2E0F1D1C0831A900C508E0 /* FirebaseHelper.swift in Sources */,
+				DAF135BC1C1F8F6000B8E15E /* SettingsViewController.swift in Sources */,
 				DAA89DAE1BFE8D3A005FB53E /* CurrentLocationViewController.swift in Sources */,
 				DA23267C1C0E2EFA00094165 /* AddNewContactViewController.swift in Sources */,
 				DA2E0F1F1C09382900C508E0 /* LoginViewController.swift in Sources */,

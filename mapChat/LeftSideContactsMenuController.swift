@@ -27,14 +27,7 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
 
         // Configure the cell...
         
-        
         cell.userLabel.text = Contacts.contacts[index].email
-        
-        print("-------------------")
-        print("setting cell background color")
-        print("-------------------")
-        
-        
         
         //Set cell background color based on the contact's select status
         
@@ -50,78 +43,68 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
     }
     
+    
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         
         let current_status = Contacts.contacts[indexPath.row].selected
+
+        print("log 1")
+        print(Contacts.contacts[indexPath.row])
         
-        setContactSelectedStatus(Contacts.contacts[indexPath.row].uid, status: !current_status)
+        setContactSelectedStatus(Contacts.contacts[indexPath.row].uid, status: !current_status, localIndex: indexPath.row)
+        
+        print("log 2")
+        print(Contacts.contacts[indexPath.row])
+        
+        let new_status = Contacts.contacts[indexPath.row].selected
+        
+        if new_status == false{
+           cell?.backgroundColor = .None
+        }else{
+            cell?.backgroundColor = UIColor.greenColor()
+        }
+        
         
     }
     
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        print("side menu is going hide")
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        print(Contacts.contacts)
+        self.leftSideMenuTable.reloadData()
+
     }
     
     override func viewDidLoad() {
         
         //Set a observer to the contacts list, once the contacts list get loaddd, reload the tableView.
 
+        //--Todo: Don't refresh table view every time when change the contacts
+        
         Status.contactsLoaded.observeNew{ value in
-            print("contacts loadded, going to refresh the sideMenu table view")
-            self.leftSideMenuTable.reloadData()
+
         }
 
-        
-/*
-        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
-        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
-        let myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
-        
-        
-        //
-        myContacts.observeEventType(.Value, withBlock: { my_contacts_snapshot in
-            var t_contactsArray = [SideMenuContact]()
-            var t_email = String()
-            if my_contacts_snapshot.exists(){
-                for item in my_contacts_snapshot.children{
-                    if let uidOfThisContact = item.key! {
-                        let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
-                        pathOfThisContact.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
-                            t_email = thisContactSnapShot.value as! String
-                            t_contactsArray.append(SideMenuContact(uid: uidOfThisContact , email: t_email, selected: false))
-                            SideMenuContacts.contacts = t_contactsArray
-//                            Contacts.contacts = t_contactsArray
-                            self.leftSideMenuTable.reloadData()
-                        })
-                    }
-                }
-            }
-                
-            else{
-                Contacts.contacts = []
-                self.leftSideMenuTable.reloadData()
-            }
-        })
-*/
     }
     
     
-    func setContactSelectedStatus(uidOfContact: String, status: Bool){
+    func setContactSelectedStatus(uidOfContact: String, status: Bool, localIndex: Int){
         
         let myUid = FirebaseHelper.readUidFromNSUserDefaults()
         let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
         
         //Save the stranger's UID to current user's node
-        
         let contactListOfCurrentUser = users.childByAppendingPath(myUid).childByAppendingPath("contacts").childByAppendingPath(uidOfContact)
-        
         contactListOfCurrentUser.setValue(status)        
         
         //Save current user's UID to stranger's node.
         let contactListOfStanger = users.childByAppendingPath(uidOfContact).childByAppendingPath("contacts").childByAppendingPath(myUid)
         contactListOfStanger.setValue(status)
+        
+        //Also update locat Contacts value:
+        Contacts.contacts[localIndex].selected = status
     }
 
     
