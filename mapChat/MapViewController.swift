@@ -62,6 +62,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         mapView.delegate = self
         if self.revealViewController() != nil{
             sideMenuButton.target = self.revealViewController()
+            self.revealViewController().rearViewRevealWidth = 200
             sideMenuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }

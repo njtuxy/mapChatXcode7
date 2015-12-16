@@ -29,6 +29,8 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
         cell.userLabel.text = Contacts.contacts[index].email
         
+        cell.userLabel.textColor = UIColor.whiteColor()
+        
         //Set cell background color based on the contact's select status
         
         let current_status = Contacts.contacts[indexPath.row].selected
@@ -36,9 +38,10 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         if(current_status == true){
             cell.backgroundColor = UIColor.greenColor()
         }else{
-            cell.backgroundColor = .None
+            cell.backgroundColor = UIColor.clearColor()
         }
-
+        
+        
         return cell
         
     }
@@ -55,6 +58,7 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
         let new_status = Contacts.contacts[indexPath.row].selected
         
+        
         if new_status == false{
            cell?.backgroundColor = .None
         }else{
@@ -64,22 +68,21 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
     }
     
+//    override func prepareForInterfaceBuilder() {
+//        self.leftSideMenuTable.backgroundColor = UIColor.grayColor()
+//    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.leftSideMenuTable.reloadData()
-
+        print("side Menu loadded")
+        
+        print(Contacts.contacts)
+        
     }
     
     override func viewDidLoad() {
-        
-        //Set a observer to the contacts list, once the contacts list get loaddd, reload the tableView.
-
-        //--Todo: Don't refresh table view every time when change the contacts
-        
-        Status.contactsLoaded.observeNew{ value in
-
-        }
-
+//        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "sideMenu-background.jpg")!)
     }
     
     
