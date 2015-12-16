@@ -14,6 +14,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FontAwesome.swift-FontAwesome.swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FontAwesome.swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>GeoFire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,12 +42,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>04C645A002EA76E2D88F5302E32AC1F4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>41CE0E548650F701461EAB35CAFC17B9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>44A0E96BB268D98A4CD0704DEA38E383</key>
+		<key>4C59564BBE4E42E978937BE71BB06DE9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6D9EDCF48A5AA1A0B1FB393CB904CF6F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>744D8936F538391EE0E1CD29AC2DAC87</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -48,11 +73,6 @@
 			<true/>
 		</dict>
 		<key>B7AC9326D819482593FE118E915409D7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E6858F1C817E2570706E40C83A96C70E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

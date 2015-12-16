@@ -43,7 +43,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         //Check current auth status:
         if FirebaseHelper.userAlreadyLoggedIn(){
             currentLoginStatus.text = "already logged in"
-            loadContacts()
+            FirebaseHelper.addContactsObserver()
         }else{
             currentLoginStatus.text = "not logged in"
             //LoginStatus.loggedin = false
@@ -196,42 +196,42 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         return uid as! String
     }
     
-    func loadContacts(){
-        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
-        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
-        let myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
-        
-        myContacts.observeEventType(.Value, withBlock: { my_contacts_snapshot in
-            
-            print("contacts loadded now")
-            var t_contactsArray = [Contact]()
-            var t_email = String()
-            
-            if my_contacts_snapshot.exists(){
-                
-                for item in my_contacts_snapshot.children{
-                    
-                    let t_item = item as! FDataSnapshot
-                    
-                    let uidOfThisContact = t_item.key
-                    let selectedStatusOfThisContact = t_item.value as! Bool
-                    
-                    let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
-                    pathOfThisContact.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
-                        t_email = thisContactSnapShot.value as! String
-                        t_contactsArray.append(Contact(uid: uidOfThisContact , email: t_email, selected: selectedStatusOfThisContact))
-                        Contacts.contacts = t_contactsArray
-                        Status.contactsLoaded.next(true)
-                    })
-                }
-            }
-                
-            else{
-                Contacts.contacts = []
-                Status.contactsLoaded.next(true)
-            }
-        })
-    }
+//    func loadContacts(){
+//        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
+//        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
+//        let myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
+//        
+//        myContacts.observeEventType(.Value, withBlock: { my_contacts_snapshot in
+//            
+//            print("contacts loadded now")
+//            var t_contactsArray = [Contact]()
+//            var t_email = String()
+//            
+//            if my_contacts_snapshot.exists(){
+//                
+//                for item in my_contacts_snapshot.children{
+//                    
+//                    let t_item = item as! FDataSnapshot
+//                    
+//                    let uidOfThisContact = t_item.key
+//                    let selectedStatusOfThisContact = t_item.value as! Bool
+//                    
+//                    let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
+//                    pathOfThisContact.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
+//                        t_email = thisContactSnapShot.value as! String
+//                        t_contactsArray.append(Contact(uid: uidOfThisContact , email: t_email, selected: selectedStatusOfThisContact))
+//                        Contacts.contacts = t_contactsArray
+//                        Status.contactsLoaded.next(true)
+//                    })
+//                }
+//            }
+//                
+//            else{
+//                Contacts.contacts = []
+//                Status.contactsLoaded.next(true)
+//            }
+//        })
+//    }
 
 
 }

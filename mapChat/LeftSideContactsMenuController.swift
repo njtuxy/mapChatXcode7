@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FontAwesome_swift
 
 
 class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -20,6 +21,8 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("LeftSideMenuCell", forIndexPath: indexPath) as! LeftSideMenuContactsCell
         cell.selectionStyle = .None
         
@@ -28,16 +31,25 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         // Configure the cell...
         
         cell.userLabel.text = Contacts.contacts[index].email
-        
         cell.userLabel.textColor = UIColor.whiteColor()
+        
+        cell.userIcon.font = UIFont.fontAwesomeOfSize(10)
+        cell.userIcon.textColor = UIColor.orangeColor()
+
+//        cell.backgroundColor = UIColor.clearColor()
         
         //Set cell background color based on the contact's select status
         
         let current_status = Contacts.contacts[indexPath.row].selected
         
+        print(current_status)
+        
         if(current_status == true){
-            cell.backgroundColor = UIColor.greenColor()
+            cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.Circle)
+//            cell.backgroundColor = UIColor.greenColor()
+            
         }else{
+            cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.CircleThin)
             cell.backgroundColor = UIColor.clearColor()
         }
         
@@ -50,7 +62,9 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        print("click here")
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! LeftSideMenuContactsCell
         
         let current_status = Contacts.contacts[indexPath.row].selected
 
@@ -58,27 +72,24 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
         let new_status = Contacts.contacts[indexPath.row].selected
         
+        print(new_status)
         
         if new_status == false{
-           cell?.backgroundColor = .None
+            print("updated 1")
+            cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.CircleThin)
         }else{
-            cell?.backgroundColor = UIColor.greenColor()
+            print("updated 2")
+            cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.Circle)
         }
         
         
     }
-    
-//    override func prepareForInterfaceBuilder() {
-//        self.leftSideMenuTable.backgroundColor = UIColor.grayColor()
-//    }
+
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.leftSideMenuTable.reloadData()
         print("side Menu loadded")
-        
-        print(Contacts.contacts)
-        
     }
     
     override func viewDidLoad() {

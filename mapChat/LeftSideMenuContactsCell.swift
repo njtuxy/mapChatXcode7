@@ -13,6 +13,8 @@ class LeftSideMenuContactsCell: UITableViewCell {
 
     @IBOutlet weak var userLabel: UILabel!
     
+    @IBOutlet weak var userIcon: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
