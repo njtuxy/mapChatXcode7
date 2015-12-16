@@ -51,13 +51,7 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
         let current_status = Contacts.contacts[indexPath.row].selected
 
-        print("log 1")
-        print(Contacts.contacts[indexPath.row])
-        
         setContactSelectedStatus(Contacts.contacts[indexPath.row].uid, status: !current_status, localIndex: indexPath.row)
-        
-        print("log 2")
-        print(Contacts.contacts[indexPath.row])
         
         let new_status = Contacts.contacts[indexPath.row].selected
         
@@ -72,7 +66,6 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        print(Contacts.contacts)
         self.leftSideMenuTable.reloadData()
 
     }

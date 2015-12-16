@@ -24,7 +24,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Longtitude:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1u-qp-KQd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Longtitude:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1u-qp-KQd">
                                 <rect key="frame" x="20" y="90" width="87" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -36,7 +36,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Longtitude goes here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AnQ-vR-uGQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Longtitude goes here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AnQ-vR-uGQ">
                                 <rect key="frame" x="139" y="90" width="163" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -48,7 +48,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="(Address goes here)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwB-Ui-T59">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Address goes here)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwB-Ui-T59">
                                 <rect key="frame" x="20" y="148" width="155" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -90,7 +90,7 @@
                             <constraint firstItem="ePf-SC-hH0" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="4" id="wJd-Zo-uz6"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Tag" image="super" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Tag" image="locate" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="LongtitudeLabel" destination="AnQ-vR-uGQ" id="siO-Bi-tjR"/>
                         <outlet property="addressLabel" destination="jwB-Ui-T59" id="I4A-QY-qmh"/>
@@ -136,8 +136,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="Map-25" id="cPa-gy-q4n"/>
                     <navigationItem key="navigationItem" id="VJ6-Dv-vQz">
-                        <barButtonItem key="leftBarButtonItem" image="Contacts-Filled-25" id="x79-zD-T42"/>
-                        <barButtonItem key="rightBarButtonItem" image="Locate-25" id="y3R-F9-eRs">
+                        <barButtonItem key="leftBarButtonItem" image="contacts" id="x79-zD-T42"/>
+                        <barButtonItem key="rightBarButtonItem" image="locate" id="y3R-F9-eRs">
                             <connections>
                                 <action selector="showUser" destination="8rJ-Kc-sve" id="gVE-kd-n9G"/>
                             </connections>
@@ -165,7 +165,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.98431372549999996" green="0.74901960779999999" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="Map-25" id="xmF-jB-Mm8"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" id="xmF-jB-Mm8"/>
                     <connections>
                         <segue destination="GXN-X8-7Uc" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="GAs-7K-gDp"/>
                         <segue destination="sJa-iB-m77" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="1zb-Rd-jBD"/>
@@ -302,14 +302,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEm-Tl-ccm">
-                                        <rect key="frame" x="86" y="337" width="69" height="30"/>
-                                        <color key="backgroundColor" red="0.55686274509803924" green="0.80000000000000004" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Log Out"/>
-                                        <connections>
-                                            <action selector="logOut:" destination="7Pa-VC-lSY" eventType="touchUpInside" id="h5H-hC-LV3"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYC-Gy-LJb">
                                         <rect key="frame" x="50" y="195" width="141" height="65"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="24"/>
@@ -407,7 +399,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Message" image="Chat-25" id="Syo-9y-apV"/>
+                    <tabBarItem key="tabBarItem" title="Message" image="chatbubble-outline" id="Syo-9y-apV"/>
                     <connections>
                         <outlet property="lat" destination="DSH-RE-Rwd" id="wEw-wN-Yb1"/>
                         <outlet property="lng" destination="ABY-Aq-yoL" id="6RU-3P-JL2"/>
@@ -472,7 +464,7 @@
                                 <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BsH-FH-4zl" id="NRW-9W-401">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMP-hb-hMZ">
@@ -517,9 +509,12 @@
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="YeB-kw-JTr">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="selectedImageTintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.99215686274509807" green="0.41960784313725491" blue="0.023529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="ikD-3c-OmL" kind="relationship" relationship="viewControllers" id="zZd-jW-NUv"/>
@@ -537,7 +532,7 @@
         <scene sceneID="f8k-eD-FG6">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="X2q-9N-cG8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Contacts" image="Contacts-25" id="g6b-cU-xJQ"/>
+                    <tabBarItem key="tabBarItem" title="Contacts" image="contacts" id="g6b-cU-xJQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PyI-Jk-E83">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -578,11 +573,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WK-tr-gcG">
-                                                    <rect key="frame" x="8" y="8" width="304" height="30"/>
-                                                    <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <state key="normal" title="Logout">
-                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WK-tr-gcG">
+                                                    <rect key="frame" x="115" y="11" width="91" height="22"/>
+                                                    <state key="normal" title="Log out">
+                                                        <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="logoutButton:" destination="Z6k-Rv-va6" eventType="touchUpInside" id="fqh-Wd-jO9"/>
@@ -590,6 +584,7 @@
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="crs-E7-5Mk">
                                         <rect key="frame" x="0.0" y="152" width="320" height="44"/>
@@ -633,7 +628,7 @@
                                         <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PTC-B8-qc3" id="TXD-p8-PSf">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jIK-Vp-jrG">
@@ -684,7 +679,7 @@
         <scene sceneID="Mac-oa-BeJ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="seX-3Z-E9f" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="Settings-25" id="HmI-aH-rOB"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="HmI-aH-rOB"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fp3-2C-4WK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -701,12 +696,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Chat-25" width="25" height="25"/>
-        <image name="Contacts-25" width="25" height="25"/>
-        <image name="Contacts-Filled-25" width="25" height="25"/>
-        <image name="Locate-25" width="25" height="25"/>
         <image name="Map-25" width="25" height="25"/>
         <image name="Settings-25" width="25" height="25"/>
-        <image name="super" width="50" height="50"/>
+        <image name="chatbubble-outline" width="25" height="25"/>
+        <image name="contacts" width="25" height="25"/>
+        <image name="locate" width="25" height="25"/>
+        <image name="map" width="25" height="25"/>
+        <image name="settings" width="25" height="25"/>
     </resources>
 </document>
