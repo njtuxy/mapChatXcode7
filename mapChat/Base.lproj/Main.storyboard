@@ -531,7 +531,8 @@
         <!--Tab Bar Controller-->
         <scene sceneID="bvw-lu-WqU">
             <objects>
-                <tabBarController storyboardIdentifier="tabsView" automaticallyAdjustsScrollViewInsets="NO" id="4lZ-Pz-Y7V" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8u0-0d-qT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tabBarController storyboardIdentifier="tabsView" id="4lZ-Pz-Y7V" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="YeB-kw-JTr">
                         <autoresizingMask key="autoresizingMask"/>
@@ -549,21 +550,28 @@
                         <segue destination="seX-3Z-E9f" kind="relationship" relationship="viewControllers" id="bgj-Ps-Dk0"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8u0-0d-qT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-73" y="1251"/>
         </scene>
         <!--Contacts-->
         <scene sceneID="f8k-eD-FG6">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="X2q-9N-cG8" sceneMemberID="viewController">
+                <navigationController id="X2q-9N-cG8" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Contacts" image="contacts" id="g6b-cU-xJQ"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PyI-Jk-E83">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="sideMenu-black" id="PyI-Jk-E83">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="BH5-XL-Dec">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="UjY-Mj-FjB" kind="relationship" relationship="rootViewController" id="bM1-vF-7SI"/>
                     </connections>
@@ -645,30 +653,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ztM-Fv-aCd">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="556"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sideMenu-black" translatesAutoresizingMaskIntoConstraints="NO" id="upR-1m-ppM">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ztM-Fv-aCd">
+                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactsCell" id="PTC-B8-qc3" customClass="ContactsViewCell" customModule="mapChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PTC-B8-qc3" id="TXD-p8-PSf">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jIK-Vp-jrG">
-                                                    <rect key="frame" x="13" y="11" width="230" height="21"/>
+                                                    <rect key="frame" x="26" y="11" width="185" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWC-WS-znI">
-                                                    <rect key="frame" x="251" y="7" width="61" height="30"/>
-                                                    <color key="backgroundColor" red="1" green="0.2470276545" blue="0.55070451249999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <rect key="frame" x="290" y="11" width="22" height="22"/>
                                                     <state key="normal" title="Remove"/>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="btnRemoveContact" destination="FWC-WS-znI" id="YNY-bO-bsX"/>
                                             <outlet property="txtUserEmail" destination="jIK-Vp-jrG" id="7K8-4E-wGM"/>

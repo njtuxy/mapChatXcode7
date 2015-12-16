@@ -30,8 +30,12 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
         let index = indexPath.row
         // Configure the cell...
         cell.txtUserEmail.text = Contacts.contacts[index].email
+        cell.txtUserEmail.textColor = UIColor.whiteColor()
         cell.btnRemoveContact.tag = index
         cell.btnRemoveContact.addTarget(self, action: "removeThisContact:", forControlEvents: .TouchUpInside)
+        cell.btnRemoveContact.titleLabel?.font = UIFont.fontAwesomeOfSize(20)
+        cell.btnRemoveContact.setTitle(String.fontAwesomeIconWithName(.MinusCircle), forState: .Normal)
+        cell.btnRemoveContact.setTitleColor(UIColor.orangeColor(), forState: .Normal)
         return cell
         
     }
@@ -49,11 +53,19 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         
+        //Make a transparent navigation bar:        
+        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        self.navigationController!.navigationBar.shadowImage = UIImage()
+        self.navigationController!.navigationBar.translucent = true
+
+        
+        //Add contacts observer
         Status.contactsLoaded.observeNew{ value in
             print("contacts loadded, going to refresh the sideMenu table view")
             self.allContactsTable.reloadData()
         }
 
+        
         
     }
     
