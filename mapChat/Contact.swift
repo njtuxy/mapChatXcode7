@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 import Bond
-
+import MapKit
 
 
 struct Contact {
@@ -52,6 +52,26 @@ struct SideMenuContacts{
     static var contacts = [SideMenuContact]()
 }
 
+
+class Annotation : NSObject, MKAnnotation{
+    var uid: String
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    var subtitle: String?
+    init(uid: String, coordinate: CLLocationCoordinate2D, title: String, subtitle: String){
+        self.uid = uid
+        self.coordinate = coordinate
+        self.title = title
+        self.subtitle = subtitle
+    }
+}
+
+struct Annotations{
+    static var annotations =  [Annotation]()
+    static var annotationsDict = [String: Annotation]()
+}
+
+
 struct testBond {
     static var captain = Observable("Jim")
 }
@@ -59,10 +79,27 @@ struct testBond {
 struct Status {
     static var contactsLoaded = Observable(false)
     static var loggedInStatus = Observable(false)
+    static var annotationUpdated = Observable(false)
 }
 
 struct LoginStatus{
     static var loggedin = false
 }
 
+struct LocationObserver {
+    var ref: Firebase!
+    var handle: FirebaseHandle!
+    
+    init(uid:String){
+        ref = FirebaseHelper.myRootRef.childByAppendingPath("locations").childByAppendingPath(uid)
+        handle = ref.observeEventType(.Value, withBlock: { SnapShot in
+            print("listening to user" + uid)
+        })
+    }
+}
+
+struct LocationObservers {
+//    static var observers = [LocationObserver]()
+    static var observersDict = [String: LocationObserver]()
+}
 

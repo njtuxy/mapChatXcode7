@@ -24,28 +24,19 @@ extension UIColor{
     }
 }
 
-//Annotation Struct
-class Annotation : NSObject, MKAnnotation{
-    var coordinate: CLLocationCoordinate2D
-    var title: String?
-    var subtitle: String?
-    init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String){
-        self.coordinate = coordinate
-        self.title = title
-        self.subtitle = subtitle
-    }
-}
-
-struct Annotations{
-    static var annotations =  [Annotation]()
-}
-
 
 
 class MapViewController: UIViewController, MKMapViewDelegate{
     
     override func viewDidLoad() {
         
+        
+        //Close the sidemenu when touch the map
+        if self.revealViewController() != nil {
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
+        }
+
         
         //Show login view if user hasn't loggedin:
         
@@ -62,10 +53,27 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         mapView.delegate = self
         if self.revealViewController() != nil{
             sideMenuButton.target = self.revealViewController()
-            self.revealViewController().rearViewRevealWidth = 200
+            self.revealViewController().rearViewRevealWidth = 150
             sideMenuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+        
+        //Add annotations observer:
+        
+//        Status.annotationUpdated.observeNew{ value in
+//            print("map view found the annotations change!")
+//            
+//            //Reload the annotations
+//            
+//            for (key, value) in Annotations.annotationsDict {
+//                print("\(key): \(value)")
+//                self.mapView.removeAnnotation(value)
+//                self.mapView.addAnnotation(value)
+//            }
+//            
+//            //Locate the map to the user location
+//        }
+
     }
     
     
@@ -78,7 +86,9 @@ class MapViewController: UIViewController, MKMapViewDelegate{
 
     
     @IBAction func addNewLocation(sender: AnyObject) {
-                        
+
+        /*
+
         let color = UIColor(red: 0.4, green: 0.8, blue: 0.6, alpha: 1.0)
         let location = CLLocationCoordinate2D(latitude: 37.782736, longitude:-122.400984)
         
@@ -99,6 +109,8 @@ class MapViewController: UIViewController, MKMapViewDelegate{
                 })
             }
         })
+
+        */
         
         
         
@@ -158,6 +170,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     
     
     @IBAction func showUser() {
+        
         let currentLocation = mapView.userLocation.coordinate
         let region = MKCoordinateRegionMakeWithDistance(currentLocation, 1000, 1000)
         mapView.setRegion(mapView.regionThatFits(region), animated: true)

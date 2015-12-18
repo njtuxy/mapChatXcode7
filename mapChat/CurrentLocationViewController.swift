@@ -9,6 +9,8 @@
 import UIKit
 
 import CoreLocation
+import MapKit
+import GeoFire
 
 
 
@@ -34,8 +36,6 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     @IBOutlet weak var addressLabel: UILabel!
     
-    @IBOutlet weak var tagButton: UIButton!
-
     @IBAction func getLocation(sender: AnyObject) {
     
 
@@ -57,6 +57,12 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         startLocationManager()
     }
     
+    @IBAction func stopSharing(sender: UIButton) {
+        if CLLocationManager.locationServicesEnabled(){
+            locationManager.stopUpdatingLocation()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         showTopMessage("Tap 'Get My Location' to Start")
@@ -77,11 +83,9 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     
     func startLocationManager(){
         if CLLocationManager.locationServicesEnabled(){
-            showTopMessage("Searching...")
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
-            print("We havebeen here")
         }else{
             showLocationServicesDeniedAlert()
         }
@@ -130,13 +134,14 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
         //Save location to Firebase
         
         saveCurrentLocationToFirebase(location.coordinate.latitude, lng: location.coordinate.longitude, forKey: myUid)
-            tagButton.hidden = false
             messageLabel.text = ""
     }
     
     func saveCurrentLocationToFirebase(lat: Double, lng: Double, forKey: String){
         FirebaseHelper.geoFire.setLocation(CLLocation(latitude: lat, longitude: lng), forKey: forKey)
     }
+    
+    
     
     
     func showErrorMessage(error:NSError){
@@ -152,6 +157,25 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     func showTopMessage(message: String){
         messageLabel.text = message
     }
+    
+    @IBAction func queryOthers(sender: UIButton) {
+        FirebaseHelper.addLocationFirbaseObserverFor("simplelogin:1")
+        
+    }
+    
+    func findOthers(){
+        
+        print("start to query!")
+        
+        let center = CLLocation(latitude: 37.782278, longitude: -122.400629)
+        let circleQuery = FirebaseHelper.geoFire.queryAtLocation(center, withRadius: 24)
+        
+        let queryHandle = circleQuery.observeEventType(GFEventTypeKeyEntered, withBlock: { (key: String!, location: CLLocation!) in
+            print("Key '\(key)' entered the search area and is at location '\(location)'")
+        })
+    }
+    
+    
     
         
 }

@@ -61,7 +61,6 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         //Add contacts observer
         Status.contactsLoaded.observeNew{ value in
-            print("contacts loadded, going to refresh the sideMenu table view")
             self.allContactsTable.reloadData()
         }
 

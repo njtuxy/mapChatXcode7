@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FontAwesome_swift
+import MapKit
 
 
 class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -35,24 +36,19 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
         cell.userIcon.font = UIFont.fontAwesomeOfSize(10)
         cell.userIcon.textColor = UIColor.orangeColor()
-
-//        cell.backgroundColor = UIColor.clearColor()
         
         //Set cell background color based on the contact's select status
         
         let current_status = Contacts.contacts[indexPath.row].selected
         
-        print(current_status)
-        
         if(current_status == true){
             cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.Circle)
-//            cell.backgroundColor = UIColor.greenColor()
+            addAnnotations(Contacts.contacts[indexPath.row].uid)
             
         }else{
             cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.CircleThin)
             cell.backgroundColor = UIColor.clearColor()
         }
-        
         
         return cell
         
@@ -62,7 +58,6 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        print("click here")
         
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! LeftSideMenuContactsCell
         
@@ -72,13 +67,10 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
         let new_status = Contacts.contacts[indexPath.row].selected
         
-        print(new_status)
         
         if new_status == false{
-            print("updated 1")
             cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.CircleThin)
         }else{
-            print("updated 2")
             cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.Circle)
         }
         
@@ -89,7 +81,6 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.leftSideMenuTable.reloadData()
-        print("side Menu loadded")
     }
     
     override func viewDidLoad() {
@@ -102,6 +93,8 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         let myUid = FirebaseHelper.readUidFromNSUserDefaults()
         let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
         
+        //Save status to Firebase:
+        
         //Save the stranger's UID to current user's node
         let contactListOfCurrentUser = users.childByAppendingPath(myUid).childByAppendingPath("contacts").childByAppendingPath(uidOfContact)
         contactListOfCurrentUser.setValue(status)        
@@ -110,10 +103,60 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         let contactListOfStanger = users.childByAppendingPath(uidOfContact).childByAppendingPath("contacts").childByAppendingPath(myUid)
         contactListOfStanger.setValue(status)
         
-        //Also update locat Contacts value:
+        
+        //Update local value:
+        
         Contacts.contacts[localIndex].selected = status
+        
+        //Update the Annotation array
+        //If status == false, then remove the value from key
+        //If status == true, then add value for the key
+        
+        if(status == true){
+//            removeAnnotation(uidOfContact)
+            addObservers(uidOfContact)
+        }else{
+            
+            // Add firebase observer to this contact's location
+//            addAnnotations(uidOfContact)
+            removeObservers(uidOfContact)
+        }
     }
 
+    func addAnnotations(uidOfContact:String){
+        FirebaseHelper.geoFire.getLocationForKey(uidOfContact, withCallback: { (location, error) in
+            if(location != nil){
+                let t_location = CLLocationCoordinate2D(latitude:location.coordinate.latitude, longitude:location.coordinate.longitude)
+                
+                Annotations.annotations.append(Annotation(uid: uidOfContact, coordinate: t_location, title: String(uidOfContact), subtitle: "this is the user"))
+                
+                Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: String(uidOfContact), subtitle: "this is the user")
+            }
+
+            Status.annotationUpdated.next(true)
+            
+//            print(Annotations.annotationsDict.count)
+//            print(Annotations.annotationsDict[uidOfContact]!.uid)
+//            print(Annotations.annotationsDict[uidOfContact]!.coordinate)
+
+        })
+    }
+
+    func removeAnnotation(uidOfContact:String){
+        Annotations.annotationsDict.removeValueForKey(uidOfContact)
+        Status.annotationUpdated.next(false)
+    }
+    
+    func addObservers(uidOfContact:String){
+        print("ob added!")
+        LocationObservers.observersDict[uidOfContact] = LocationObserver(uid: uidOfContact)
+    }
+    
+    func removeObservers(uidOfContact:String){
+        print("ob removed")
+        LocationObservers.observersDict[uidOfContact]?.ref.removeObserverWithHandle((LocationObservers.observersDict[uidOfContact]?.handle)!)
+    }
+    
     
     
 }

@@ -138,4 +138,18 @@ struct FirebaseHelper {
 
     }
     
+    
+    static func addLocationFirbaseObserverFor(uid:String){
+
+        var ref: Firebase!
+        var handle: FirebaseHandle!
+        
+        ref = FirebaseHelper.myRootRef.childByAppendingPath("locations").childByAppendingPath(uid)
+        
+        handle = ref.observeEventType(.Value, withBlock: { SnapShot in
+            
+        })
+
+    }
+    
 }
