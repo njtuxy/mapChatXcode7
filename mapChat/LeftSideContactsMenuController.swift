@@ -13,18 +13,20 @@ import MapKit
 
 
 class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
     
     @IBOutlet weak var leftSideMenuTable: UITableView!
+    
+    private var tableFirstTimeAppears = true
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Contacts.contacts.count
     }
     
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("LeftSideMenuCell", forIndexPath: indexPath) as! LeftSideMenuContactsCell
+        
         cell.selectionStyle = .None
         
         let index = indexPath.row
@@ -43,11 +45,12 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
         if(current_status == true){
             cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.Circle)
-            addAnnotations(Contacts.contacts[indexPath.row].uid)
+            addObservers(Contacts.contacts[indexPath.row].uid)
             
         }else{
             cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.CircleThin)
             cell.backgroundColor = UIColor.clearColor()
+            removeObservers(Contacts.contacts[indexPath.row].uid)
         }
         
         return cell
@@ -58,7 +61,6 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! LeftSideMenuContactsCell
         
         let current_status = Contacts.contacts[indexPath.row].selected
@@ -66,7 +68,6 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         setContactSelectedStatus(Contacts.contacts[indexPath.row].uid, status: !current_status, localIndex: indexPath.row)
         
         let new_status = Contacts.contacts[indexPath.row].selected
-        
         
         if new_status == false{
             cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.CircleThin)
@@ -80,6 +81,14 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+//        if(tableFirstTimeAppears == true){
+//            //Do something only for the first time when table view loads
+//            tableFirstTimeAppears = false
+//        }else{
+//            self.leftSideMenuTable.reloadData()
+//        }
+        
         self.leftSideMenuTable.reloadData()
     }
     
@@ -126,6 +135,7 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     func addAnnotations(uidOfContact:String){
         FirebaseHelper.geoFire.getLocationForKey(uidOfContact, withCallback: { (location, error) in
             if(location != nil){
+                
                 let t_location = CLLocationCoordinate2D(latitude:location.coordinate.latitude, longitude:location.coordinate.longitude)
                 
                 Annotations.annotations.append(Annotation(uid: uidOfContact, coordinate: t_location, title: String(uidOfContact), subtitle: "this is the user"))
@@ -135,9 +145,6 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
 
             Status.annotationUpdated.next(true)
             
-//            print(Annotations.annotationsDict.count)
-//            print(Annotations.annotationsDict[uidOfContact]!.uid)
-//            print(Annotations.annotationsDict[uidOfContact]!.coordinate)
 
         })
     }
@@ -148,13 +155,19 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     }
     
     func addObservers(uidOfContact:String){
-        print("ob added!")
-        LocationObservers.observersDict[uidOfContact] = LocationObserver(uid: uidOfContact)
+        if(LocationObservers.observersDict[uidOfContact] == nil){
+            print("Added location observer for " + uidOfContact)
+            LocationObservers.observersDict[uidOfContact] = LocationObserver(uid: uidOfContact)
+        }
+
     }
     
     func removeObservers(uidOfContact:String){
-        print("ob removed")
-        LocationObservers.observersDict[uidOfContact]?.ref.removeObserverWithHandle((LocationObservers.observersDict[uidOfContact]?.handle)!)
+        if(LocationObservers.observersDict[uidOfContact] != nil){
+            print("Removed location observer of " + uidOfContact)
+            LocationObservers.observersDict[uidOfContact]?.ref.removeObserverWithHandle((LocationObservers.observersDict[uidOfContact]?.handle)!)
+            LocationObservers.observersDict[uidOfContact] = nil
+        }
     }
     
     

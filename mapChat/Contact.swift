@@ -92,7 +92,7 @@ struct LocationObserver {
     
     init(uid:String){
         ref = FirebaseHelper.myRootRef.childByAppendingPath("locations").childByAppendingPath(uid)
-        handle = ref.observeEventType(.Value, withBlock: { SnapShot in
+        handle = ref.observeEventType(.ChildChanged, withBlock: { SnapShot in
             print("listening to user" + uid)
         })
     }
@@ -102,4 +102,6 @@ struct LocationObservers {
 //    static var observers = [LocationObserver]()
     static var observersDict = [String: LocationObserver]()
 }
+
+
 
