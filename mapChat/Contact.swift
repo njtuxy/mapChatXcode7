@@ -153,6 +153,7 @@ struct LocationObservers {
 
 func addAnnotationFromObserver(uidOfContact:String, email: String, lat: Double, lng: Double){
     
+    print("++++++ add annotation event ++++++++")
     //Save the Annotation unique ID in separate index table
     
     //Check if the annotation already been saved before
