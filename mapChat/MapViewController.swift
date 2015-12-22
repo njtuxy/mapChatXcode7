@@ -12,6 +12,7 @@ import CoreData
 import Firebase
 import GeoFire
 import Bond
+import Foundation
 
 extension UIColor{
     final func toString() -> String{
@@ -27,6 +28,40 @@ extension UIColor{
 
 
 class MapViewController: UIViewController, MKMapViewDelegate{
+    
+    var timer: dispatch_source_t!
+    
+    
+    
+    func startTimer() {
+        print("starting the timer!")
+        let queue = dispatch_queue_create("com.domain.app.timer", nil)
+        timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
+        dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC, 1 * NSEC_PER_SEC) // every 60 seconds, with leeway of 1 second
+        dispatch_source_set_event_handler(timer) {
+            // do whatever you want here
+            print(LocationObservers.observersDict["b6b732fb-c8cf-4138-a920-7b3b87ea3db6"])
+        }
+        dispatch_resume(timer)
+    }
+    
+    func stopTimer() {
+        print("Stopping the timer!")
+        dispatch_source_cancel(timer)
+        timer = nil
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        startTimer()
+        
+        mapView.removeAnnotations(annotations)
+        mapView.addAnnotations(annotations)
+        
+        
+    }
     
     override func viewDidLoad() {
         
@@ -77,11 +112,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     }
     
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        mapView.removeAnnotations(annotations)
-        mapView.addAnnotations(annotations)
-    }
+
     
 
     
@@ -198,12 +229,10 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     }
 
     
-//    override func viewDidDisappear(animated: Bool) {
-//        super.viewDidAppear(animated)
-//        print("map view is diappering!!")
-//        FirebaseRefernces.sideMenuRef1.removeAllObservers()
-//        FirebaseRefernces.sideMenuRef2.removeAllObservers()
-//    }
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidAppear(animated)
+        stopTimer()
+    }
     
 }
 

@@ -89,17 +89,54 @@ struct LoginStatus{
 struct LocationObserver {
     var ref: Firebase!
     var handle: FirebaseHandle!
+    var lat: Double!
+    var lng: Double!
+    
     
     init(uid:String){
+        
         ref = FirebaseHelper.myRootRef.childByAppendingPath("locations").childByAppendingPath(uid)
-        handle = ref.observeEventType(.ChildChanged, withBlock: { SnapShot in
+        handle = ref.observeEventType(.Value, withBlock: { SnapShot in
+
             print("listening to user" + uid)
+            
+            //FIX IT? IT MIGHT NOT A GOOD SOLUTION, THINKING ABOUT SUBSCRIPT
+            
+            //PERFORMACE ISSUE HERE?
+            
+            for item in SnapShot.children{
+                
+                let t_item = item as! FDataSnapshot
+                
+                if(t_item.key == "l"){
+
+                    for item1 in t_item.children{
+                        
+                        let t_item1 = item1 as! FDataSnapshot
+                        
+                        if(t_item1.key == "0"){
+                            if(LocationObservers.observersDict[uid] != nil){
+                                LocationObservers.observersDict[uid]?.lat = t_item1.value as! Double
+                            }
+                        }
+                        
+                        if(t_item1.key == "1"){
+                            if(LocationObservers.observersDict[uid] != nil){
+                                LocationObservers.observersDict[uid]?.lng = t_item1.value as! Double
+                            }
+                        }
+
+                    }
+                }
+
+                
+                
+            }
         })
     }
 }
 
 struct LocationObservers {
-//    static var observers = [LocationObserver]()
     static var observersDict = [String: LocationObserver]()
 }
 
