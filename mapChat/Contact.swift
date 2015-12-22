@@ -80,6 +80,7 @@ struct Status {
     static var contactsLoaded = Observable(false)
     static var loggedInStatus = Observable(false)
     static var annotationUpdated = Observable(false)
+    
 }
 
 struct LoginStatus{
@@ -91,14 +92,18 @@ struct LocationObserver {
     var handle: FirebaseHandle!
     var lat: Double!
     var lng: Double!
+    var email: String!
     
     
-    init(uid:String){
+    init(uid:String, email:String){
+        
+        self.email = email
         
         ref = FirebaseHelper.myRootRef.childByAppendingPath("locations").childByAppendingPath(uid)
         handle = ref.observeEventType(.Value, withBlock: { SnapShot in
 
             print("listening to user" + uid)
+            
             
             //FIX IT? IT MIGHT NOT A GOOD SOLUTION, THINKING ABOUT SUBSCRIPT
             
@@ -110,28 +115,34 @@ struct LocationObserver {
                 
                 if(t_item.key == "l"){
 
+                    var lat: Double!
+                    var lng: Double!
+
                     for item1 in t_item.children{
                         
                         let t_item1 = item1 as! FDataSnapshot
                         
                         if(t_item1.key == "0"){
                             if(LocationObservers.observersDict[uid] != nil){
-                                LocationObservers.observersDict[uid]?.lat = t_item1.value as! Double
+                                lat = t_item1.value as! Double
+//                                LocationObservers.observersDict[uid]?.lat = t_item1.value as! Double
                             }
                         }
                         
                         if(t_item1.key == "1"){
                             if(LocationObservers.observersDict[uid] != nil){
-                                LocationObservers.observersDict[uid]?.lng = t_item1.value as! Double
+                                lng = t_item1.value as! Double
+//                                LocationObservers.observersDict[uid]?.lng = t_item1.value as! Double
                             }
                         }
-
                     }
+                    
+                    addAnnotationFromObserver(uid, email:email, lat: lat, lng: lng)
+                    
                 }
-
-                
                 
             }
+            
         })
     }
 }
@@ -140,5 +151,46 @@ struct LocationObservers {
     static var observersDict = [String: LocationObserver]()
 }
 
+func addAnnotationFromObserver(uidOfContact:String, email: String, lat: Double, lng: Double){
+    
+    //Save the Annotation unique ID in separate index table
+    
+    //Check if the annotation already been saved before
+    //If No, append the value to existing array, also update the index table - mapview.addAnnotation
+    
+    //If yes, update the existing annotation record, with the new location. - mapView.removeAnnotation and addAnnotation
+    
+    let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
+    
+    Annotations.annotations.append(Annotation(uid: uidOfContact, coordinate: t_location, title: email, subtitle: "this is the user"))
+    
+    Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: String(uidOfContact), subtitle: "this is the user")
+    
+    print("Going to update the annotations array - add event")
+    Status.annotationUpdated.next(true)
 
+
+}
+
+/*
+func addAnnotations(uidOfContact:String){
+    
+    FirebaseHelper.geoFire.getLocationForKey(uidOfContact, withCallback: { (location, error) in
+
+        if(location != nil){
+            let t_location = CLLocationCoordinate2D(latitude:location.coordinate.latitude, longitude:location.coordinate.longitude)
+            
+            Annotations.annotations.append(Annotation(uid: uidOfContact, coordinate: t_location, title: String(uidOfContact), subtitle: "this is the user"))
+            
+            Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: String(uidOfContact), subtitle: "this is the user")
+        }
+    })
+}
+
+func removeAnnotation(uidOfContact:String){
+    print("Going to update the annotations array - remove event")
+    Annotations.annotationsDict.removeValueForKey(uidOfContact)
+    Status.annotationUpdated.next(false)
+}
+*/
 

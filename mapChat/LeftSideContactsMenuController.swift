@@ -45,7 +45,7 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
         if(current_status == true){
             cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.Circle)
-            addObservers(Contacts.contacts[indexPath.row].uid)
+            addObservers(Contacts.contacts[indexPath.row].uid, email: Contacts.contacts[indexPath.row].email)
             
         }else{
             cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.CircleThin)
@@ -123,7 +123,8 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
         if(status == true){
 //            removeAnnotation(uidOfContact)
-            addObservers(uidOfContact)
+            addObservers(uidOfContact, email:  Contacts.contacts[localIndex].email)
+            
         }else{
             
             // Add firebase observer to this contact's location
@@ -132,32 +133,12 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         }
     }
 
-    func addAnnotations(uidOfContact:String){
-        FirebaseHelper.geoFire.getLocationForKey(uidOfContact, withCallback: { (location, error) in
-            if(location != nil){
-                
-                let t_location = CLLocationCoordinate2D(latitude:location.coordinate.latitude, longitude:location.coordinate.longitude)
-                
-                Annotations.annotations.append(Annotation(uid: uidOfContact, coordinate: t_location, title: String(uidOfContact), subtitle: "this is the user"))
-                
-                Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: String(uidOfContact), subtitle: "this is the user")
-            }
 
-            Status.annotationUpdated.next(true)
-            
-
-        })
-    }
-
-    func removeAnnotation(uidOfContact:String){
-        Annotations.annotationsDict.removeValueForKey(uidOfContact)
-        Status.annotationUpdated.next(false)
-    }
     
-    func addObservers(uidOfContact:String){
+    func addObservers(uidOfContact:String, email: String){
         if(LocationObservers.observersDict[uidOfContact] == nil){
             print("Added location observer for " + uidOfContact)
-            LocationObservers.observersDict[uidOfContact] = LocationObserver(uid: uidOfContact)
+            LocationObservers.observersDict[uidOfContact] = LocationObserver(uid: uidOfContact, email: email)
         }
 
     }
