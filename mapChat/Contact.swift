@@ -162,15 +162,18 @@ func addAnnotationFromObserver(uidOfContact:String, email: String, lat: Double, 
     
     let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
     
-    Annotations.annotations.append(Annotation(uid: uidOfContact, coordinate: t_location, title: email, subtitle: "this is the user"))
+    Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: email, subtitle: "this is the user")
     
-    Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: String(uidOfContact), subtitle: "this is the user")
+//    Annotations.annotations.append(Annotation(uid: uidOfContact, coordinate: t_location, title: email, subtitle: "this is the user"))
+    
+//    Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: String(uidOfContact), subtitle: "this is the user")
     
     print("Going to update the annotations array - add event")
     Status.annotationUpdated.next(true)
 
 
 }
+
 
 /*
 func addAnnotations(uidOfContact:String){

@@ -148,6 +148,10 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
             print("Removed location observer of " + uidOfContact)
             LocationObservers.observersDict[uidOfContact]?.ref.removeObserverWithHandle((LocationObservers.observersDict[uidOfContact]?.handle)!)
             LocationObservers.observersDict[uidOfContact] = nil
+            
+            //Also need to remove the annotations from Annotations array and send the observer event
+            Annotations.annotationsDict.removeValueForKey(uidOfContact)
+            Status.annotationUpdated.next(true)
         }
     }
     

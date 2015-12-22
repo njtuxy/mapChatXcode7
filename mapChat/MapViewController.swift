@@ -38,10 +38,6 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC, 1 * NSEC_PER_SEC) // every 60 seconds, with leeway of 1 second
         dispatch_source_set_event_handler(timer) {
             // do whatever you want here
-//            print(LocationObservers.observersDict["b6b732fb-c8cf-4138-a920-7b3b87ea3db6"])
-//            print(Annotations.annotationsDict["b6b732fb-c8cf-4138-a920-7b3b87ea3db6"])
-//            print("loadded user annotations:")
-//            print(Annotations.annotations)
         }
         dispatch_resume(timer)
     }
@@ -58,16 +54,19 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         super.viewDidAppear(animated)
         
         Status.annotationUpdated.observeNew{ value in
-            print("new value found on Annotations array: ")
-            print(Annotations.annotations)
-            self.mapView.removeAnnotations(Annotations.annotations)
-            self.mapView.addAnnotations(Annotations.annotations)
+            print("new update found on Annotations array: ")
+            print(Annotations.annotationsDict)
+            let annotations = Array(Annotations.annotationsDict.values)
+            print("Here is the array!")
+            print(annotations)
+            let allAnnotations = self.mapView.annotations
+            self.mapView.removeAnnotations(allAnnotations)
+            self.mapView.addAnnotations(annotations)
         }
         
     }
     
     override func viewDidLoad() {
-        
         
         //Close the sidemenu when touch the map
         if self.revealViewController() != nil {
