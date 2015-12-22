@@ -58,6 +58,7 @@ class Annotation : NSObject, MKAnnotation{
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
+    
     init(uid: String, coordinate: CLLocationCoordinate2D, title: String, subtitle: String){
         self.uid = uid
         self.coordinate = coordinate
@@ -71,10 +72,6 @@ struct Annotations{
     static var annotationsDict = [String: Annotation]()
 }
 
-
-struct testBond {
-    static var captain = Observable("Jim")
-}
 
 struct Status {
     static var contactsLoaded = Observable(false)
@@ -153,26 +150,18 @@ struct LocationObservers {
 
 func addAnnotationFromObserver(uidOfContact:String, email: String, lat: Double, lng: Double){
     
-    print("++++++ add annotation event ++++++++")
-    //Save the Annotation unique ID in separate index table
-    
-    //Check if the annotation already been saved before
-    //If No, append the value to existing array, also update the index table - mapview.addAnnotation
-    
-    //If yes, update the existing annotation record, with the new location. - mapView.removeAnnotation and addAnnotation
     
     let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
     
     Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: email, subtitle: "this is the user")
     
-//    Annotations.annotations.append(Annotation(uid: uidOfContact, coordinate: t_location, title: email, subtitle: "this is the user"))
-    
-//    Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: String(uidOfContact), subtitle: "this is the user")
-    
     print("Going to update the annotations array - add event")
+    
     Status.annotationUpdated.next(true)
+}
 
-
+struct CurrentLocatedContact {
+    static var location = CLLocationCoordinate2D()
 }
 
 

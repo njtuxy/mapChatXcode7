@@ -29,6 +29,8 @@ extension UIColor{
 
 class MapViewController: UIViewController, MKMapViewDelegate{
     
+    
+    /*
     var timer: dispatch_source_t!
     
     func startTimer() {
@@ -48,17 +50,25 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         timer = nil
     }
     
+    //Create an annotation array:
+    lazy var annotations: [MKAnnotation] = {
+    //        return [Annotation(coordinate: self.location, title: "A little Park", subtitle: "What ever that is here")]
+    return []
+    }()
+
+    */
+    
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
+    @IBOutlet weak var sideMenuButton: UIBarButtonItem!
     
     override func viewDidAppear(animated: Bool) {
         
         super.viewDidAppear(animated)
         
         Status.annotationUpdated.observeNew{ value in
-            print("new update found on Annotations array: ")
-            print(Annotations.annotationsDict)
             let annotations = Array(Annotations.annotationsDict.values)
-            print("Here is the array!")
-            print(annotations)
             let allAnnotations = self.mapView.annotations
             self.mapView.removeAnnotations(allAnnotations)
             self.mapView.addAnnotations(annotations)
@@ -73,7 +83,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
         }
-
+        
         
         //Show login view if user hasn't loggedin:
         
@@ -90,116 +100,50 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         mapView.delegate = self
         if self.revealViewController() != nil{
             sideMenuButton.target = self.revealViewController()
-            self.revealViewController().rearViewRevealWidth = 150
+            self.revealViewController().rearViewRevealWidth = 200
             sideMenuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-        
-        //Add annotations observer:
-        
-//        Status.annotationUpdated.observeNew{ value in
-//            print("map view found the annotations change!")
-//            
-//            //Reload the annotations
-//            
-//            for (key, value) in Annotations.annotationsDict {
-//                print("\(key): \(value)")
-//                self.mapView.removeAnnotation(value)
-//                self.mapView.addAnnotation(value)
-//            }
-//            
-//            //Locate the map to the user location
-//        }
-
     }
     
-    
-
-    
-
-    
-    @IBAction func addNewLocation(sender: AnyObject) {
-
-        /*
-
-        let color = UIColor(red: 0.4, green: 0.8, blue: 0.6, alpha: 1.0)
-        let location = CLLocationCoordinate2D(latitude: 37.782736, longitude:-122.400984)
-        
-        //Add observer to contacts list,  if checked status is true, then find its current location and add it to Annotations array
-        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
-        let myContacts = FirebaseHelper.myRootRef.childByAppendingPath("users").childByAppendingPath(myUid).childByAppendingPath("contacts")
-
-        myContacts.observeEventType(.ChildChanged, withBlock: { my_contacts_snapshot in
-            if let contacts_uid = my_contacts_snapshot.key{
-                FirebaseHelper.geoFire.getLocationForKey(contacts_uid, withCallback: { (location, error) in
-                    if(location != nil){
-                        let t_location = CLLocationCoordinate2D(latitude:location.coordinate.latitude, longitude:location.coordinate.longitude)
-                        Annotations.annotations.append(Annotation(coordinate: t_location, title: String(contacts_uid), subtitle: "this is the user"))
-                    }
-                    self.mapView.removeAnnotations(Annotations.annotations)
-                    self.mapView.addAnnotations(Annotations.annotations)
-                    
-                })
-            }
-        })
-
-        */
-        
-        
-        
-//        Annotations.annotations.append(Annotation(coordinate: location, title: "A little Park", subtitle: "What ever that is here"))
-        
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
     }
+
     
-    @IBOutlet weak var mapView: MKMapView!
-    
-    var managedObjectContext: NSManagedObjectContext!
-    
-    let color = UIColor(red: 0.4, green: 0.8, blue: 0.6, alpha: 1.0)
-    let location = CLLocationCoordinate2D(latitude: 37.782736, longitude:-122.400983)
-    
-    //Create an annotation array:
-    lazy var annotations: [MKAnnotation] = {
-//        return [Annotation(coordinate: self.location, title: "A little Park", subtitle: "What ever that is here")]
-        return []
-    }()
-    
-    
-    @IBOutlet weak var sideMenuButton: UIBarButtonItem!
-    
-    
+
     
     //Here is all the magic happens:
     //IMPORTANT: need to se canShowCallout = true, the default is hidden!
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-
-        
-        let view: MKAnnotationView
-        let reusedId = "myPin"
-        
-        if let v = mapView.dequeueReusableAnnotationViewWithIdentifier(reusedId){
-            view = v
-        }else{
-            view = MKAnnotationView(annotation: annotation, reuseIdentifier: reusedId)
-        }
-        
-        //view.pinTintColor = color
-        
-        view.canShowCallout = true
-        
-        if let detailImage = UIImage(named: "red"){
-            view.detailCalloutAccessoryView = UIImageView(image: detailImage)
-        }
-        
-        if let extIcon = UIImage(named: "super"){
-            view.image = extIcon
-        }else{
-            print("didn't find the image")
-        }
-        
-        
-        return view
-    }
+//    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+//
+//        
+//        let view: MKAnnotationView
+//        let reusedId = "myPin"
+//        
+//        if let v = mapView.dequeueReusableAnnotationViewWithIdentifier(reusedId){
+//            view = v
+//        }else{
+//            view = MKAnnotationView(annotation: annotation, reuseIdentifier: reusedId)
+//        }
+//        
+//        //view.pinTintColor = color
+//        
+//        view.canShowCallout = true
+//        
+//        if let detailImage = UIImage(named: "red"){
+//            view.detailCalloutAccessoryView = UIImageView(image: detailImage)
+//        }
+//        
+//        if let extIcon = UIImage(named: "super"){
+//            view.image = extIcon
+//        }else{
+//            print("didn't find the image")
+//        }
+//        
+//        
+//        return view
+//    }
     
     
     @IBAction func showUser() {
@@ -225,17 +169,6 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         
 
     }
-    
-    @IBAction func showLocations() {
-            
-    }
-
-    
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-//        stopTimer()
-    }
-    
 }
 
 //extension MapViewController: MKMapViewDelegate { }

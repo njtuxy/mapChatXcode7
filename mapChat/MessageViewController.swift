@@ -24,7 +24,6 @@ class MessageViewController: UIViewController{
     }
     
     @IBAction func startListening(sender: AnyObject) {
-        testBond.captain.next("spax")
         
         monitorUserLocaiton("simplelogin:1")
     }

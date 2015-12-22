@@ -45,11 +45,13 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
         if(current_status == true){
             cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.Circle)
+            enableCellLocatorButton(cell, index: index)
             addObservers(Contacts.contacts[indexPath.row].uid, email: Contacts.contacts[indexPath.row].email)
             
         }else{
             cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.CircleThin)
-            cell.backgroundColor = UIColor.clearColor()
+            //cell.backgroundColor = UIColor.clearColor()
+            disableCellLocatorButton(cell)
             removeObservers(Contacts.contacts[indexPath.row].uid)
         }
         
@@ -57,7 +59,32 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
     }
     
+    func enableCellLocatorButton(cell: LeftSideMenuContactsCell, index: Int){
+        cell.locator.tag = index
+        cell.locator.addTarget(self, action: "locateThisContact:", forControlEvents: .TouchUpInside)
+        cell.locator.titleLabel?.font = UIFont.fontAwesomeOfSize(21)
+        cell.locator.setTitle(String.fontAwesomeIconWithName(.MapMarker), forState: .Normal)
+        cell.locator.setTitleColor(UIColor.orangeColor(), forState: .Normal)
+    }
     
+    func disableCellLocatorButton(cell: LeftSideMenuContactsCell){
+        cell.locator.titleLabel?.font = UIFont.fontAwesomeOfSize(21)
+        cell.locator.removeTarget(self, action: "locateThisContact:", forControlEvents: .TouchUpInside)
+        cell.locator.setTitle(String.fontAwesomeIconWithName(.MapMarker), forState: .Normal)
+        cell.locator.setTitleColor(UIColor.grayColor(), forState: .Normal)
+    }
+    
+    func locateThisContact(sender: UIButton){
+        let thisContactUID = Contacts.contacts[sender.tag].uid
+        //sender.setTitle("Remove", forState: .Normal)
+        sender.setTitleColor(UIColor.greenColor(), forState: .Normal)
+        print(Annotations.annotationsDict[thisContactUID]?.coordinate)
+        
+        CurrentLocatedContact.location = (Annotations.annotationsDict[thisContactUID]?.coordinate)!
+        print(CurrentLocatedContact.location)
+        //sender.backgroundColor = UIColor.greenColor()
+    }
+        
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -71,7 +98,11 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
         if new_status == false{
             cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.CircleThin)
-        }else{
+            disableCellLocatorButton(cell)
+            
+        }else
+        {
+            enableCellLocatorButton(cell, index:indexPath.row)
             cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.Circle)
         }
         
@@ -137,7 +168,6 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     
     func addObservers(uidOfContact:String, email: String){
         if(LocationObservers.observersDict[uidOfContact] == nil){
-            print("Added location observer for " + uidOfContact)
             LocationObservers.observersDict[uidOfContact] = LocationObserver(uid: uidOfContact, email: email)
         }
 
@@ -145,7 +175,6 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     
     func removeObservers(uidOfContact:String){
         if(LocationObservers.observersDict[uidOfContact] != nil){
-            print("Removed location observer of " + uidOfContact)
             LocationObservers.observersDict[uidOfContact]?.ref.removeObserverWithHandle((LocationObservers.observersDict[uidOfContact]?.handle)!)
             LocationObservers.observersDict[uidOfContact] = nil
             

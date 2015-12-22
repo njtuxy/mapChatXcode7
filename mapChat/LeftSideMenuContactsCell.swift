@@ -15,6 +15,9 @@ class LeftSideMenuContactsCell: UITableViewCell {
     
     @IBOutlet weak var userIcon: UILabel!
     
+ 
+    @IBOutlet weak var locator: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
