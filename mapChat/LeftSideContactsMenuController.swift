@@ -17,6 +17,7 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     @IBOutlet weak var leftSideMenuTable: UITableView!
     
     private var tableFirstTimeAppears = true
+    private var selectedLocatorIndex:Int?
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Contacts.contacts.count
@@ -64,7 +65,22 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         cell.locator.addTarget(self, action: "locateThisContact:", forControlEvents: .TouchUpInside)
         cell.locator.titleLabel?.font = UIFont.fontAwesomeOfSize(21)
         cell.locator.setTitle(String.fontAwesomeIconWithName(.MapMarker), forState: .Normal)
-        cell.locator.setTitleColor(UIColor.orangeColor(), forState: .Normal)
+        
+        //Set the locator radio button color
+        if let tselectedLocatorIndex = selectedLocatorIndex {
+            if tselectedLocatorIndex == index{
+                cell.locator.setTitleColor(UIColor.greenColor(), forState: .Normal)
+            }
+            else{
+                cell.locator.setTitleColor(UIColor.orangeColor(), forState: .Normal)
+            }
+        }
+        else{
+            cell.locator.setTitleColor(UIColor.orangeColor(), forState: .Normal)
+        }
+
+        
+
     }
     
     func disableCellLocatorButton(cell: LeftSideMenuContactsCell){
@@ -74,14 +90,22 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         cell.locator.setTitleColor(UIColor.grayColor(), forState: .Normal)
     }
     
-    func locateThisContact(sender: UIButton){
-        let thisContactUID = Contacts.contacts[sender.tag].uid
-        //sender.setTitle("Remove", forState: .Normal)
-        sender.setTitleColor(UIColor.greenColor(), forState: .Normal)
-        print(Annotations.annotationsDict[thisContactUID]?.coordinate)
+     func locateThisContact(sender: UIButton){
+        //set this value for the locator radio button
+        selectedLocatorIndex = sender.tag
         
+//        print(sender.tag)
+        let thisContactUID = Contacts.contacts[sender.tag].uid
+//        sender.setTitle("Remove", forState: .Normal)
+//        sender.setTitleColor(UIColor.greenColor(), forState: .Normal)
+//        print(Annotations.annotationsDict[thisContactUID]?.coordinate)
         CurrentLocatedContact.location = (Annotations.annotationsDict[thisContactUID]?.coordinate)!
+        Status.locateContact.next(true)
+        
         print(CurrentLocatedContact.location)
+        
+        self.leftSideMenuTable.reloadData()
+        
         //sender.backgroundColor = UIColor.greenColor()
     }
         
@@ -99,6 +123,9 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         if new_status == false{
             cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.CircleThin)
             disableCellLocatorButton(cell)
+
+            //Reset the selectedLocatorIndex, so when the cell got selected again, it won't carry on the button heighted color
+            resetSelectedLocatorIndex(indexPath.row)
             
         }else
         {
@@ -109,6 +136,13 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
     }
 
+    func resetSelectedLocatorIndex(index:Int) {
+        if let tselectedLocatorIndex = selectedLocatorIndex {
+            if tselectedLocatorIndex == index{
+                selectedLocatorIndex = nil
+            }
+        }
+    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

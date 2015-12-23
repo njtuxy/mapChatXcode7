@@ -74,6 +74,10 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             self.mapView.addAnnotations(annotations)
         }
         
+        Status.locateContact.observe{ value in
+            let corr = CurrentLocatedContact.location
+            self.locateThisContact(corr)
+        }
     }
     
     override func viewDidLoad() {
@@ -145,9 +149,15 @@ class MapViewController: UIViewController, MKMapViewDelegate{
 //        return view
 //    }
     
+    func locateThisContact(coordinate: CLLocationCoordinate2D){
+        print("locate this contact ")
+        let currentLocation = coordinate
+        let region = MKCoordinateRegionMakeWithDistance(currentLocation, 1000, 1000)
+        mapView.setRegion(mapView.regionThatFits(region), animated: true)
+        mapView.mapType = .Standard
+    }
     
     @IBAction func showUser() {
-        
         let currentLocation = mapView.userLocation.coordinate
         let region = MKCoordinateRegionMakeWithDistance(currentLocation, 1000, 1000)
         mapView.setRegion(mapView.regionThatFits(region), animated: true)

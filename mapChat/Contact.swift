@@ -77,7 +77,7 @@ struct Status {
     static var contactsLoaded = Observable(false)
     static var loggedInStatus = Observable(false)
     static var annotationUpdated = Observable(false)
-    
+    static var locateContact = Observable(false)
 }
 
 struct LoginStatus{
