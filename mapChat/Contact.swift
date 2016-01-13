@@ -11,7 +11,6 @@ import Firebase
 import Bond
 import MapKit
 
-
 struct Contact {
     
     let email: String!
@@ -78,10 +77,25 @@ struct Status {
     static var loggedInStatus = Observable(false)
     static var annotationUpdated = Observable(false)
     static var locateContact = Observable(false)
+    static var trackingMyCurrentLocation = Observable(false)
 }
+
 
 struct LoginStatus{
     static var loggedin = false
+}
+
+struct CurrentTracking{
+    static var dispose: DisposableType?
+    
+//    static var dispose: DisposableType? {
+//        set {
+//        
+//        }
+//        get {
+//            return newValue
+//        }
+//    }
 }
 
 struct LocationObserver {
@@ -95,6 +109,8 @@ struct LocationObserver {
     init(uid:String, email:String){
         
         self.email = email
+        
+        print("adding a firebase ob for this user: " + email)
         
         ref = FirebaseHelper.myRootRef.childByAppendingPath("locations").childByAppendingPath(uid)
         handle = ref.observeEventType(.Value, withBlock: { SnapShot in
@@ -150,6 +166,7 @@ struct LocationObservers {
 
 func addAnnotationFromObserver(uidOfContact:String, email: String, lat: Double, lng: Double){
     
+    print("adding a local ob for this user: " + email)
     
     let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
     

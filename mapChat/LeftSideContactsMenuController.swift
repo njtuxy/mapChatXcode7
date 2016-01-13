@@ -32,41 +32,79 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         
         let index = indexPath.row
 
-        // Configure the cell...
-        
         cell.userLabel.text = Contacts.contacts[index].email
         cell.userLabel.textColor = UIColor.whiteColor()
         
+        //Must set userInteractionEnabled to true so the gestures can work
+        cell.userLabel.userInteractionEnabled = true
+
+        //Add Gestures to the UILabel
+        let doubleTap = UITapGestureRecognizer()
+        doubleTap.numberOfTapsRequired = 2
+        doubleTap.addTarget(self, action: "centerMapOnThisContact:")
+        cell.userLabel.addGestureRecognizer(doubleTap)
+        
         cell.userIcon.font = UIFont.fontAwesomeOfSize(10)
-        cell.userIcon.textColor = UIColor.orangeColor()
+        cell.userIcon.textColor = UIColor.orangeColor()        
         
         //Set cell background color based on the contact's select status
         
         let current_status = Contacts.contacts[indexPath.row].selected
         
+        print(Contacts.contacts)
+        
         if(current_status == true){
-            cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.Circle)
-            enableCellLocatorButton(cell, index: index)
+//            cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.Circle)
+//            enableCellLocatorButton(cell, index : index)
             addObservers(Contacts.contacts[indexPath.row].uid, email: Contacts.contacts[indexPath.row].email)
             
         }else{
-            cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.CircleThin)
+//            cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.CircleThin)
+
             //cell.backgroundColor = UIColor.clearColor()
-            disableCellLocatorButton(cell)
-            removeObservers(Contacts.contacts[indexPath.row].uid)
+//            disableCellLocatorButton(cell)
+//            removeObservers(Contacts.contacts[indexPath.row].uid)
         }
         
         return cell
         
     }
     
+    
+    func centerMapOnThisContact(sender: UITapGestureRecognizer){
+        
+        //Get the indexPath based on the tap locaiton:
+        let tapLocation = sender.locationInView(self.leftSideMenuTable)
+        let indexPath : NSIndexPath = self.leftSideMenuTable.indexPathForRowAtPoint(tapLocation)!
+        let index = indexPath.row
+        let thisContactUID = Contacts.contacts[index].uid
+
+        let current_status = Contacts.contacts[indexPath.row].selected
+        setContactSelectedStatus(Contacts.contacts[indexPath.row].uid, status: !current_status, localIndex: indexPath.row)
+        
+        print(Contacts.contacts[index])
+        
+        //        sender.setTitle("Remove", forState: .Normal)
+        //        sender.setTitleColor(UIColor.greenColor(), forState: .Normal)
+        //        print(Annotations.annotationsDict[thisContactUID]?.coordinate)
+        
+        print(Annotations.annotationsDict)
+//        CurrentLocatedContact.location = (Annotations.annotationsDict[thisContactUID]?.coordinate)!
+//        Status.locateContact.next(true)
+
+//        print(CurrentLocatedContact.location)
+
+    }
+
+    
     func enableCellLocatorButton(cell: LeftSideMenuContactsCell, index: Int){
         cell.locator.tag = index
-        cell.locator.addTarget(self, action: "locateThisContact:", forControlEvents: .TouchUpInside)
-        cell.locator.titleLabel?.font = UIFont.fontAwesomeOfSize(21)
-        cell.locator.setTitle(String.fontAwesomeIconWithName(.MapMarker), forState: .Normal)
+        cell.locator.addTarget(self, action: "showThisContactOnMap", forControlEvents: .TouchUpInside)
+        cell.locator.titleLabel?.font = UIFont.fontAwesomeOfSize(20)
+        cell.locator.setTitle(String.fontAwesomeIconWithName(.Eye), forState: .Normal)
         
         //Set the locator radio button color
+        
         if let tselectedLocatorIndex = selectedLocatorIndex {
             if tselectedLocatorIndex == index{
                 cell.locator.setTitleColor(UIColor.greenColor(), forState: .Normal)
@@ -84,13 +122,14 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     }
     
     func disableCellLocatorButton(cell: LeftSideMenuContactsCell){
-        cell.locator.titleLabel?.font = UIFont.fontAwesomeOfSize(21)
+        cell.locator.titleLabel?.font = UIFont.fontAwesomeOfSize(20)
         cell.locator.removeTarget(self, action: "locateThisContact:", forControlEvents: .TouchUpInside)
-        cell.locator.setTitle(String.fontAwesomeIconWithName(.MapMarker), forState: .Normal)
+        cell.locator.setTitle(String.fontAwesomeIconWithName(.Eye), forState: .Normal)
         cell.locator.setTitleColor(UIColor.grayColor(), forState: .Normal)
     }
     
-     func locateThisContact(sender: UIButton){
+    
+    func locateThisContact(sender: UIButton){
         //set this value for the locator radio button
         selectedLocatorIndex = sender.tag
         
@@ -110,31 +149,31 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     }
         
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! LeftSideMenuContactsCell
-        
-        let current_status = Contacts.contacts[indexPath.row].selected
-
-        setContactSelectedStatus(Contacts.contacts[indexPath.row].uid, status: !current_status, localIndex: indexPath.row)
-        
-        let new_status = Contacts.contacts[indexPath.row].selected
-        
-        if new_status == false{
-            cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.CircleThin)
-            disableCellLocatorButton(cell)
-
-            //Reset the selectedLocatorIndex, so when the cell got selected again, it won't carry on the button heighted color
-            resetSelectedLocatorIndex(indexPath.row)
-            
-        }else
-        {
-            enableCellLocatorButton(cell, index:indexPath.row)
-            cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.Circle)
-        }
-        
-        
-    }
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        
+//        let cell = tableView.cellForRowAtIndexPath(indexPath) as! LeftSideMenuContactsCell
+//        
+//        let current_status = Contacts.contacts[indexPath.row].selected
+//
+//        setContactSelectedStatus(Contacts.contacts[indexPath.row].uid, status: !current_status, localIndex: indexPath.row)
+//        
+//        let new_status = Contacts.contacts[indexPath.row].selected
+//        
+//        if new_status == false{
+//            cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.CircleThin)
+//            disableCellLocatorButton(cell)
+//
+//            //Reset the selectedLocatorIndex, so when the cell got selected again, it won't carry on the button heighted color
+//            resetSelectedLocatorIndex(indexPath.row)
+//            
+//        }else
+//        {
+//            enableCellLocatorButton(cell, index:indexPath.row)
+//            cell.userIcon.text = String.fontAwesomeIconWithName(FontAwesome.Circle)
+//        }
+//        
+//        
+//    }
 
     func resetSelectedLocatorIndex(index:Int) {
         if let tselectedLocatorIndex = selectedLocatorIndex {
@@ -198,7 +237,6 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         }
     }
 
-
     
     func addObservers(uidOfContact:String, email: String){
         if(LocationObservers.observersDict[uidOfContact] == nil){
@@ -208,6 +246,8 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     }
     
     func removeObservers(uidOfContact:String){
+        print("removeing firebase ob for this user: " + uidOfContact)
+        
         if(LocationObservers.observersDict[uidOfContact] != nil){
             LocationObservers.observersDict[uidOfContact]?.ref.removeObserverWithHandle((LocationObservers.observersDict[uidOfContact]?.handle)!)
             LocationObservers.observersDict[uidOfContact] = nil
@@ -217,6 +257,7 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
             Status.annotationUpdated.next(true)
         }
     }
+    
     
     
     

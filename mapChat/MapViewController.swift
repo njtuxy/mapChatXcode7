@@ -13,6 +13,8 @@ import Firebase
 import GeoFire
 import Bond
 import Foundation
+import FontAwesome_swift
+
 
 extension UIColor{
     final func toString() -> String{
@@ -29,7 +31,9 @@ extension UIColor{
 
 class MapViewController: UIViewController, MKMapViewDelegate{
     
-    
+    var currentLocationCoordinate: CLLocationCoordinate2D?
+    var currentlyTracking = false;
+//    var dispose: DisposableType?
     /*
     var timer: dispatch_source_t!
     
@@ -67,6 +71,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         
         super.viewDidAppear(animated)
         
+        //Reload all annotations:
         Status.annotationUpdated.observeNew{ value in
             let annotations = Array(Annotations.annotationsDict.values)
             let allAnnotations = self.mapView.annotations
@@ -74,13 +79,20 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             self.mapView.addAnnotations(annotations)
         }
         
-        Status.locateContact.observe{ value in
-            let corr = CurrentLocatedContact.location
-            self.locateThisContact(corr)
-        }
+        
+//        Status.locateContact.observe{ value in
+//            print("========== fond a new locate contact request ===========")
+//            CurrentTracking.dispose?.dispose()
+//            let corr = CurrentLocatedContact.location
+//            self.locateThisContact(corr)
+//        }
+        
     }
     
     override func viewDidLoad() {
+        
+//        mapView.userTrackingMode = .Follow
+        
         
         //Close the sidemenu when touch the map
         if self.revealViewController() != nil {
@@ -100,7 +112,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         }
         
         
-        //Setting the map view delegate
+        //Setting the map view delegate, with sideMenu width:
         mapView.delegate = self
         if self.revealViewController() != nil{
             sideMenuButton.target = self.revealViewController()
@@ -108,6 +120,16 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             sideMenuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+        
+        //Set the bar button image:
+//        let attributes = [NSFontAttributeName: UIFont.fontAwesomeOfSize(20)] as Dictionary!
+//        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(attributes, forState: .Normal)
+//        self.navigationItem.rightBarButtonItem?.title = String.fontAwesomeIconWithName(.Github)
+        
+//        var image = UIImage(named: "locate")
+        let image = UIImage.fontAwesomeIconWithName(.SquareO, textColor: UIColor.blackColor(), size: CGSizeMake(25, 25))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Plain, target: self, action: "locateAndTrack")
+
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -149,17 +171,22 @@ class MapViewController: UIViewController, MKMapViewDelegate{
 //        return view
 //    }
     
-    func locateThisContact(coordinate: CLLocationCoordinate2D){
-        print("locate this contact ")
-        let currentLocation = coordinate
-        let region = MKCoordinateRegionMakeWithDistance(currentLocation, 1000, 1000)
-        mapView.setRegion(mapView.regionThatFits(region), animated: true)
-        mapView.mapType = .Standard
-    }
+//    func locateThisContact(coordinate: CLLocationCoordinate2D){
+//        let dis = Status.trackingMyCurrentLocation.observe{ value in
+//            print("track the change again")
+//            if let currentLocation = self.currentLocationCoordinate{
+//                let region = MKCoordinateRegion(center: currentLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+//                self.mapView.setRegion(self.mapView.regionThatFits(region), animated: true)
+//                self.mapView.mapType = .Standard
+//            }
+//        }
+//    }
+    
     
     @IBAction func showUser() {
         let currentLocation = mapView.userLocation.coordinate
         let region = MKCoordinateRegionMakeWithDistance(currentLocation, 1000, 1000)
+//        let region = MKCoordinateRegion(center: currentLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         mapView.setRegion(mapView.regionThatFits(region), animated: true)
         mapView.mapType = .Standard
         
@@ -176,7 +203,65 @@ class MapViewController: UIViewController, MKMapViewDelegate{
 //        mapCamera.heading = 45
 //        
 //        self.mapView.camera = mapCamera
+    }
+
+//    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+//        var center = mapView.userLocation.coordinate
+//        print("here is the new center:")
+//        print(center)
+//    }
+    
+//    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+//        self.currentLocationCoordinate = userLocation.coordinate
+//        print("update user location")
+//        Status.trackingMyCurrentLocation.next(true)
+//    }
+    
+    
+    
+    func centerMapToCoordinate(coordinate: CLLocationCoordinate2D){
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, 2000, 2000)
+        mapView.setRegion(mapView.regionThatFits(region), animated: true)
+        mapView.mapType = .Standard
+    }
+    
+    
+    //This is the bar button on the top right side of the mapView, to locate and track the user's current location:
+    func locateAndTrack() {
         
+        //use one observer to track the
+        
+        if !currentlyTracking {
+            currentlyTracking = true
+            
+            let image = UIImage.fontAwesomeIconWithName(.Square, textColor: UIColor.blackColor(), size: CGSizeMake(25, 25))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Plain, target: self, action: "locateAndTrack")
+            
+            //Always center map to current coordinate
+            let dis = Status.trackingMyCurrentLocation.observe{ value in
+                print("track the change again")
+                if let currentLocation = self.currentLocationCoordinate{
+                    let region = MKCoordinateRegion(center: currentLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                    self.mapView.setRegion(self.mapView.regionThatFits(region), animated: true)
+                    self.mapView.mapType = .Standard
+                }
+            }
+            
+            CurrentTracking.dispose = dis
+            
+        }
+        else{
+            currentlyTracking = false
+        
+            CurrentTracking.dispose?.dispose()
+            
+            let image = UIImage.fontAwesomeIconWithName(.SquareO, textColor: UIColor.blackColor(), size: CGSizeMake(25, 25))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Plain, target: self, action: "locateAndTrack")
+            
+        }
+        
+        
+
 
     }
 }
