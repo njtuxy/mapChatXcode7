@@ -6,6 +6,7 @@ pod 'Firebase', '>= 2.4.3'
 pod 'GeoFire', '>= 1.1'
 pod 'Bond', '~> 4.0'
 pod 'FontAwesome.swift'
+pod 'Persei', '~> 2.0.1'
 
 target 'mapChat' do
 

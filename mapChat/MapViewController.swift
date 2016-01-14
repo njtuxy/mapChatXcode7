@@ -14,6 +14,7 @@ import GeoFire
 import Bond
 import Foundation
 import FontAwesome_swift
+import Persei
 
 
 extension UIColor{
@@ -33,6 +34,9 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     
     var currentLocationCoordinate: CLLocationCoordinate2D?
     var currentlyTracking = false;
+    
+
+    
 //    var dispose: DisposableType?
     /*
     var timer: dispatch_source_t!
@@ -93,7 +97,8 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         
 //        mapView.userTrackingMode = .Follow
         
-        
+        super.viewDidLoad()
+                
         //Close the sidemenu when touch the map
         if self.revealViewController() != nil {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -131,6 +136,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Plain, target: self, action: "locateAndTrack")
 
     }
+    
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)

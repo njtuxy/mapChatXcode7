@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Persei.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-mapChat.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,17 +47,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>04C645A002EA76E2D88F5302E32AC1F4</key>
+		<key>16ED56B3536B5EB825CA3C54840E7C2E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>41CE0E548650F701461EAB35CAFC17B9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4C59564BBE4E42E978937BE71BB06DE9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,12 +67,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>7CB5AA9DF5A391225F65910B3DA3FCCA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>80076C510C29F960587E43C0597ECBD5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>B7AC9326D819482593FE118E915409D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BC781EC878DB3A26C6A543097ED7A5F1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
