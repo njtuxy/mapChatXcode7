@@ -242,7 +242,6 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
         if(LocationObservers.observersDict[uidOfContact] == nil){
             LocationObservers.observersDict[uidOfContact] = LocationObserver(uid: uidOfContact, email: email)
         }
-
     }
     
     func removeObservers(uidOfContact:String){

@@ -71,6 +71,7 @@ public class StickyHeaderView: UIView {
             oldValue?.removeFromSuperview()
             if let view = contentView {
                 view.frame = contentContainer.bounds
+                view.layer.cornerRadius = 10.0
                 view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
                 contentContainer.addSubview(view)
                 contentContainer.sendSubviewToBack(view)

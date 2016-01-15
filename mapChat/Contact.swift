@@ -182,6 +182,7 @@ struct CurrentLocatedContact {
 }
 
 enum ContentType: String, CustomStringConvertible {
+    
     case Music = "content_music.png"
     case Films = "content_films.png"
     
@@ -207,6 +208,15 @@ enum ContentType: String, CustomStringConvertible {
             return "Films"
         }
     }
+    
+//    var coordindate: CLLocationCoordinate2D {
+//        switch self {
+//        case .Music:
+//            return [1,2]
+//        case .Films:
+//            return "Films"
+//        }
+//    }
 }
 
 /*

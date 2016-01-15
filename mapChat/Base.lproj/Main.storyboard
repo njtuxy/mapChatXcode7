@@ -15,11 +15,11 @@
                         <viewControllerLayoutGuide type="bottom" id="2PH-np-yFg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latitude:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePf-SC-hH0">
-                                <rect key="frame" x="20" y="61" width="68" height="21"/>
+                                <rect key="frame" x="20" y="60" width="67.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latitude goes here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qT1-jU-4k4">
-                                <rect key="frame" x="139" y="61" width="143" height="21"/>
+                                <rect key="frame" x="139" y="60" width="143" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -43,7 +43,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Message label)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygH-gQ-Wah">
-                                <rect key="frame" x="0.0" y="32" width="320" height="21"/>
+                                <rect key="frame" x="0.0" y="32" width="320" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -131,7 +131,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="Map-25" id="cPa-gy-q4n"/>
                     <navigationItem key="navigationItem" id="VJ6-Dv-vQz">
-                        <barButtonItem key="leftBarButtonItem" image="contacts" id="x79-zD-T42"/>
+                        <barButtonItem key="leftBarButtonItem" image="contacts" id="x79-zD-T42">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="A0y-nu-tnh" id="Qal-8u-2DG"/>
@@ -147,7 +149,7 @@
             <objects>
                 <tableViewController id="wYs-HB-I1E" customClass="TestViewController" customModule="mapChat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Q7V-Ay-GHB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -161,7 +163,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fcb-iL-gcX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="454"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                                 </mapView>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -176,10 +178,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="Fit-5Y-4gR">
                         <barButtonItem key="leftBarButtonItem" image="contacts" style="plain" id="gTJ-RD-riO">
-                            <color key="tintColor" red="0.99215686270000003" green="0.70588235290000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="switchMenu" destination="wYs-HB-I1E" id="BTu-gP-E5P"/>
                             </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="VVT-bj-CM4">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -199,7 +204,7 @@
                         <viewControllerLayoutGuide type="bottom" id="6xQ-kD-uIT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QtW-c3-fVr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="map" id="xmF-jB-Mm8"/>
@@ -576,20 +581,18 @@
             <objects>
                 <tabBarController storyboardIdentifier="tabsView" id="4lZ-Pz-Y7V" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="YeB-kw-JTr">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="YeB-kw-JTr">
                         <autoresizingMask key="autoresizingMask"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                <color key="value" red="0.99215686274509807" green="0.41960784313725491" blue="0.023529411764705882" alpha="1" colorSpace="calibratedRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="ikD-3c-OmL" kind="relationship" relationship="viewControllers" id="zZd-jW-NUv"/>
+                        <segue destination="k5l-V6-RuH" kind="relationship" relationship="viewControllers" id="k78-Xb-bCz"/>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="LZL-Vb-mto"/>
+                        <segue destination="ikD-3c-OmL" kind="relationship" relationship="viewControllers" id="zZd-jW-NUv"/>
                         <segue destination="X2q-9N-cG8" kind="relationship" relationship="viewControllers" id="RQX-V4-2o4"/>
                         <segue destination="seX-3Z-E9f" kind="relationship" relationship="viewControllers" id="bgj-Ps-Dk0"/>
-                        <segue destination="k5l-V6-RuH" kind="relationship" relationship="viewControllers" id="k78-Xb-bCz"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8u0-0d-qT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -628,7 +631,7 @@
             <objects>
                 <tableViewController id="Z6k-Rv-va6" customClass="SettingsViewController" customModule="mapChat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="dhR-Q9-6pq" customClass="Se">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -777,7 +780,7 @@
         <scene sceneID="m3H-8b-tDr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="k5l-V6-RuH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="VUe-TK-hyK"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="map" id="VUe-TK-hyK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="emQ-SV-88R">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
