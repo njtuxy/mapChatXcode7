@@ -79,6 +79,24 @@ class TestViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.delegate = self
+        
+//        let ann = MKPointAnnotation()
+//        ann.coordinate = CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275)
+//        ann.title = "Park here"
+//        ann.subtitle = "Fun awaits down the road!"
+//        self.mapView.addAnnotation(ann)
+//        displayMarkers()
+        
+//
+//        let london = ContactOnMap(title: "London", coordinate: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), info: "Home to the 2012 Summer Olympics.")
+//        let oslo = ContactOnMap(title: "Oslo", coordinate: CLLocationCoordinate2D(latitude: 59.95, longitude: 10.75), info: "Founded over a thousand years ago.")
+//        let paris = ContactOnMap(title: "Paris", coordinate: CLLocationCoordinate2D(latitude: 48.8567, longitude: 2.3508), info: "Often called the City of Light.")
+//        let rome = ContactOnMap(title: "Rome", coordinate: CLLocationCoordinate2D(latitude: 41.9, longitude: 12.5), info: "Has a whole country inside it.")
+//        let washington = ContactOnMap(title: "Washington DC", coordinate: CLLocationCoordinate2D(latitude: 38.895111, longitude: -77.036667), info: "Named after George himself.")
+//        
+
+        
         loadMenu()
         //Init firebase ref:
         ref = Firebase(url:"https://qd.firebaseio.com")
@@ -179,9 +197,6 @@ class TestViewController: UITableViewController{
 // MARK: - MenuViewDelegate
 extension TestViewController: MenuViewDelegate {
     func menu(menu: MenuView, didSelectItemAtIndex index: Int) {
-//        model = model.next()
-        
-
         let uid = contacts[index].uid
         let email = contacts[index].email
 
@@ -214,7 +229,6 @@ extension TestViewController: MenuViewDelegate {
                         if(t_item1.key == "1"){
                                 lng = t_item1.value as! Double
                         }
-                        
                     }
                     
                     let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
@@ -223,6 +237,63 @@ extension TestViewController: MenuViewDelegate {
             }
         })
     }
+    
+}
+
+extension TestViewController: MKMapViewDelegate {
+        
+        // When user taps on the disclosure button you can perform a segue to navigate to another view controller
+        func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+            if control == view.rightCalloutAccessoryView{
+            print(view.annotation!.title) // annotation's title
+            print(view.annotation!.subtitle) // annotation's subttitle
+            
+            //Perform a segue here to navigate to another viewcontroller
+            // On tapping the disclosure button you will get here
+    }
+        }
+        
+        // Here we add disclosure button inside annotation window
+        func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+            
+            print("viewForannotation")
+            if annotation is MKUserLocation {
+                return nil
+            }
+            
+            let reuseId = "pin"
+            var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+            
+            if pinView == nil {
+                //println("Pinview was nil")
+                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                pinView!.canShowCallout = true
+                pinView!.animatesDrop = true
+            }
+            
+            let button = UIButton(type: UIButtonType.DetailDisclosure) as UIButton // button with info sign in it
+            
+            pinView?.rightCalloutAccessoryView = button
+            
+            
+            return pinView
+        }
+        
+        
+//        func displayMarkers() -> Void
+//        {
+//            let annotationView = MKAnnotationView()
+//            let detailButton: UIButton = UIButton(type: UIButtonType.DetailDisclosure) as UIButton
+//            annotationView.rightCalloutAccessoryView = detailButton
+//            
+//            let ann = MKPointAnnotation()
+//            ann.coordinate = CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275)
+//            ann.title = "Park here"
+//            ann.subtitle = "Fun awaits down the road!"
+//            self.mapView.addAnnotation(ann)
+//        }
+
+
 }
 
 

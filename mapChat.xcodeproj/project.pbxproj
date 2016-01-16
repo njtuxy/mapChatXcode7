@@ -28,6 +28,8 @@
 		DAA89DB31BFE8D3A005FB53E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA89DB11BFE8D3A005FB53E /* Main.storyboard */; };
 		DAA89DB51BFE8D3A005FB53E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAA89DB41BFE8D3A005FB53E /* Assets.xcassets */; };
 		DAA89DB81BFE8D3A005FB53E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA89DB61BFE8D3A005FB53E /* LaunchScreen.storyboard */; };
+		DAB117EF1C49ABF900D2FC38 /* ContactOnMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB117EE1C49ABF900D2FC38 /* ContactOnMap.swift */; };
+		DAB117F11C49ACEB00D2FC38 /* NewMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB117F01C49ACEB00D2FC38 /* NewMapController.swift */; };
 		DAE51E611C16473700641F65 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE51E601C16473700641F65 /* Contact.swift */; };
 		DAF135BC1C1F8F6000B8E15E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF135BB1C1F8F6000B8E15E /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +62,8 @@
 		DAA89DB41BFE8D3A005FB53E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DAA89DB71BFE8D3A005FB53E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DAA89DB91BFE8D3A005FB53E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAB117EE1C49ABF900D2FC38 /* ContactOnMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactOnMap.swift; sourceTree = "<group>"; };
+		DAB117F01C49ACEB00D2FC38 /* NewMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMapController.swift; sourceTree = "<group>"; };
 		DAE51E601C16473700641F65 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		DAF135BB1C1F8F6000B8E15E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				DA457ED11C46FB9800CDB606 /* TestViewController.swift */,
+				DAB117F01C49ACEB00D2FC38 /* NewMapController.swift */,
+				DAB117EE1C49ABF900D2FC38 /* ContactOnMap.swift */,
 				DAA89DAF1BFE8D3A005FB53E /* MapViewController.swift */,
 				DAA89DAD1BFE8D3A005FB53E /* CurrentLocationViewController.swift */,
 				DA2E0F1E1C09382900C508E0 /* LoginViewController.swift */,
@@ -301,6 +307,7 @@
 				DA2326741C0CFB0600094165 /* MessageViewController.swift in Sources */,
 				DAE51E611C16473700641F65 /* Contact.swift in Sources */,
 				DA2326761C0CFD8100094165 /* PopupNoticeHelper.swift in Sources */,
+				DAB117EF1C49ABF900D2FC38 /* ContactOnMap.swift in Sources */,
 				DA23267E1C0ECB9200094165 /* NewContactTableViewCell.swift in Sources */,
 				DA84C2291C1774090097F1F7 /* SWRevealViewController.m in Sources */,
 				DA84C22B1C1791830097F1F7 /* LeftSideContactsMenuController.swift in Sources */,
@@ -314,6 +321,7 @@
 				DAA89DAE1BFE8D3A005FB53E /* CurrentLocationViewController.swift in Sources */,
 				DA23267C1C0E2EFA00094165 /* AddNewContactViewController.swift in Sources */,
 				DA2E0F1F1C09382900C508E0 /* LoginViewController.swift in Sources */,
+				DAB117F11C49ACEB00D2FC38 /* NewMapController.swift in Sources */,
 				DA457ED21C46FB9800CDB606 /* TestViewController.swift in Sources */,
 				DA2326801C1008A400094165 /* ContactsViewCell.swift in Sources */,
 			);
