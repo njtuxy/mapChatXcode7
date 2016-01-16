@@ -271,9 +271,14 @@ extension TestViewController: MKMapViewDelegate {
                 pinView!.animatesDrop = true
             }
             
-            let button = UIButton(type: UIButtonType.DetailDisclosure) as UIButton // button with info sign in it
+//            let button = UIButton(type: UIButtonType.ContactAdd)
             
-            pinView?.rightCalloutAccessoryView = button
+            let button1 = UIButton(type: UIButtonType.System)
+            button1.frame = CGRectMake(0, 0, 30, 30)
+            button1.setImage(UIImage.fontAwesomeIconWithName(.CommentsO, textColor: UIColor.blackColor(), size: CGSizeMake(25, 25)), forState: .Normal)
+            pinView?.rightCalloutAccessoryView = button1
+//            pinView?.leftCalloutAccessoryView = button1
+
             
             
             return pinView
