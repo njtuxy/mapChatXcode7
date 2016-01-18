@@ -4,6 +4,9 @@ PODS:
   - FontAwesome.swift (0.6.3)
   - GeoFire (1.1.2):
     - Firebase (~> 2.2)
+  - JSQMessagesViewController (7.2.0):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
   - Persei (2.0.1)
 
 DEPENDENCIES:
@@ -11,6 +14,7 @@ DEPENDENCIES:
   - Firebase (>= 2.4.3)
   - FontAwesome.swift
   - GeoFire (>= 1.1)
+  - JSQMessagesViewController
   - Persei (~> 2.0.1)
 
 SPEC CHECKSUMS:
@@ -18,6 +22,8 @@ SPEC CHECKSUMS:
   Firebase: 48179995b561e2262c5d4060ecdffca45fbbff8b
   FontAwesome.swift: b78c54716317ef914521e38b594b616e1d498a11
   GeoFire: 03db4e390a4cf3ff97422f19eb71ab1aa7d947dd
+  JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Persei: 0cac86b27592be808823a2846e4854ae60332f18
 
 COCOAPODS: 0.39.0

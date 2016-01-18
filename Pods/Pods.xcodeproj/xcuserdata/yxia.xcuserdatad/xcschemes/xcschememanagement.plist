@@ -29,6 +29,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>JSQMessagesViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>JSQSystemSoundPlayer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Persei.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,12 +57,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>16ED56B3536B5EB825CA3C54840E7C2E</key>
+		<key>35432EBBB280CD1F78B22B280BC15E2A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>41CE0E548650F701461EAB35CAFC17B9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5D6074B5EC47D866BAFAE8910AC4E1C5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,12 +82,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7CB5AA9DF5A391225F65910B3DA3FCCA</key>
+		<key>80076C510C29F960587E43C0597ECBD5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>80076C510C29F960587E43C0597ECBD5</key>
+		<key>95DB89A8BFC5FF0BF98458651D0163CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -83,6 +98,11 @@
 			<true/>
 		</dict>
 		<key>BC781EC878DB3A26C6A543097ED7A5F1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EDA125ADA52355B7CA6DF7BA96918357</key>
 		<dict>
 			<key>primary</key>
 			<true/>

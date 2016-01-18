@@ -73,7 +73,7 @@ class TestViewController: UITableViewController{
     override func viewDidDisappear(animated: Bool) {
         super.viewDidAppear(animated)
         ref.removeObserverWithHandle(handle)
-        ref.removeObserverWithHandle(locationHandle)
+//        ref.removeObserverWithHandle(locationHandle)
     }
     
     

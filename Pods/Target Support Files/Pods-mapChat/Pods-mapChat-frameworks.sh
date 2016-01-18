@@ -88,6 +88,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-mapChat/Firebase.framework"
   install_framework "Pods-mapChat/FontAwesome_swift.framework"
   install_framework "Pods-mapChat/GeoFire.framework"
+  install_framework "Pods-mapChat/JSQMessagesViewController.framework"
+  install_framework "Pods-mapChat/JSQSystemSoundPlayer.framework"
   install_framework "Pods-mapChat/Persei.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -95,5 +97,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-mapChat/Firebase.framework"
   install_framework "Pods-mapChat/FontAwesome_swift.framework"
   install_framework "Pods-mapChat/GeoFire.framework"
+  install_framework "Pods-mapChat/JSQMessagesViewController.framework"
+  install_framework "Pods-mapChat/JSQSystemSoundPlayer.framework"
   install_framework "Pods-mapChat/Persei.framework"
 fi
