@@ -189,6 +189,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="fcb-iL-gcX" id="JsY-JO-Vrb"/>
+                        <segue destination="Mr8-G4-hak" kind="modal" identifier="showChatWindow" id="n1y-3h-AY0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8VH-z7-xFt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -534,15 +535,17 @@
                         <viewControllerLayoutGuide type="bottom" id="ry2-D2-2q2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="RDv-oM-fI0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Chat" id="mAe-dT-WFt"/>
+                    <navigationItem key="navigationItem" title="Chat" id="mAe-dT-WFt">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="kT0-mT-XdA"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YLo-jL-d5L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2153" y="-412"/>
+            <point key="canvasLocation" x="2629" y="-1066"/>
         </scene>
         <!--Strangers-->
         <scene sceneID="2VV-xG-rAm">
@@ -611,7 +614,6 @@
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="LZL-Vb-mto"/>
                         <segue destination="X2q-9N-cG8" kind="relationship" relationship="viewControllers" id="RQX-V4-2o4"/>
                         <segue destination="seX-3Z-E9f" kind="relationship" relationship="viewControllers" id="bgj-Ps-Dk0"/>
-                        <segue destination="Mr8-G4-hak" kind="relationship" relationship="viewControllers" id="Qc5-36-svk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8u0-0d-qT2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -831,7 +833,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JMP-OY-xTM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1621" y="-412"/>
+            <point key="canvasLocation" x="2133" y="-1066"/>
         </scene>
     </scenes>
     <resources>

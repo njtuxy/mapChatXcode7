@@ -50,6 +50,8 @@ class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDelegate
     
     
     
+    
+    
 //    func reloadMessagesView() {
 //        self.collectionView?.reloadData()
 //    }

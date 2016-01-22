@@ -248,10 +248,10 @@ extension TestViewController: MKMapViewDelegate {
             if control == view.rightCalloutAccessoryView{
             print(view.annotation!.title) // annotation's title
             print(view.annotation!.subtitle) // annotation's subttitle
-            
+            performSegueWithIdentifier("showChatWindow", sender: self)
             //Perform a segue here to navigate to another viewcontroller
             // On tapping the disclosure button you will get here
-    }
+            }
         }
         
         // Here we add disclosure button inside annotation window
