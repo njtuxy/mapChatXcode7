@@ -68,7 +68,6 @@ extension ChatViewController{
     }
     
     func dismissKeyboard(){
-        print("tap found on view!")
         self.view.endEditing(true)
     }
     
@@ -85,7 +84,6 @@ extension ChatViewController{
     func initFirebase(){
         rootRef = Firebase(url:"https://qd.firebaseio.com/messages")
         messageRef = rootRef.childByAppendingPath(getMessageUid(email1, emailAddress2: email2))
-        print(messageRef)
     }
     
     func downloadMessages(myEmailAddress:String, otherUsersEmailAddress:String){
@@ -98,8 +96,6 @@ extension ChatViewController{
 //            let sender = (i%2 == 0) ? "Server" : self.senderId
 //            let messageContent = "Message nr. \(i)"
             let message = JSQMessage(senderId: sender, displayName: sender, text: text)
-            print("messaeg is here:")
-            print(message)
             self.messages += [message]
 //            self.receivedMessagePressed()
 //            self.reloadMessagesView()
@@ -107,9 +103,7 @@ extension ChatViewController{
         })
     }
     
-    func sendMessage(text:String!, sender: String!){
-        
-        print("mesage sent to firebase!")
+    func sendMessage(text:String!, sender: String!){        
         messageRef.childByAutoId().setValue([
             "text": text,
             "sender": sender
