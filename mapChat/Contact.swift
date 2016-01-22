@@ -80,6 +80,10 @@ struct Status {
     static var trackingMyCurrentLocation = Observable(false)
 }
 
+struct ChatWindow {
+    static var contact:String?
+}
+
 
 struct LoginStatus{
     static var loggedin = false

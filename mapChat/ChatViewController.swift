@@ -40,12 +40,13 @@ class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDelegate
         
         self.addSingleTapGestureOnView()
         
+        self.title = ChatWindow.contact
         
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        collectionView!.collectionViewLayout.springinessEnabled = true
+//        collectionView!.collectionViewLayout.springinessEnabled = true
     }
     
     
