@@ -540,7 +540,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Chat" id="mAe-dT-WFt">
-                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="kT0-mT-XdA"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="kT0-mT-XdA">
+                            <connections>
+                                <action selector="closeChatWindow:" destination="yUm-NF-I1N" id="jIB-y4-Qmf"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YLo-jL-d5L" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -50,6 +50,9 @@ class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDelegate
     
     
     
+    @IBAction func closeChatWindow(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     
 //    func reloadMessagesView() {
