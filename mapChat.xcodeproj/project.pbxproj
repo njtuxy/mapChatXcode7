@@ -18,6 +18,7 @@
 		DA2E0F1F1C09382900C508E0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2E0F1E1C09382900C508E0 /* LoginViewController.swift */; };
 		DA457ED21C46FB9800CDB606 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA457ED11C46FB9800CDB606 /* TestViewController.swift */; };
 		DA77CB331C4CBD060063CD71 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA77CB321C4CBD060063CD71 /* ChatViewController.swift */; };
+		DA77CB361C4CC1FD0063CD71 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA77CB351C4CC1FD0063CD71 /* Message.swift */; };
 		DA7AC64E1C0982D5001B9D39 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7AC64D1C0982D5001B9D39 /* SwiftNotice.swift */; };
 		DA84C2291C1774090097F1F7 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA84C2281C1774090097F1F7 /* SWRevealViewController.m */; };
 		DA84C22B1C1791830097F1F7 /* LeftSideContactsMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84C22A1C1791830097F1F7 /* LeftSideContactsMenuController.swift */; };
@@ -49,6 +50,7 @@
 		DA2E0F1E1C09382900C508E0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DA457ED11C46FB9800CDB606 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		DA77CB321C4CBD060063CD71 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		DA77CB351C4CC1FD0063CD71 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		DA7AC64D1C0982D5001B9D39 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
 		DA84C2261C1774080097F1F7 /* mapChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mapChat-Bridging-Header.h"; sourceTree = "<group>"; };
 		DA84C2271C1774090097F1F7 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				DA77CB321C4CBD060063CD71 /* ChatViewController.swift */,
+				DA77CB351C4CC1FD0063CD71 /* Message.swift */,
 			);
 			name = chat;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				DAF135BC1C1F8F6000B8E15E /* SettingsViewController.swift in Sources */,
 				DAA89DAE1BFE8D3A005FB53E /* CurrentLocationViewController.swift in Sources */,
 				DA23267C1C0E2EFA00094165 /* AddNewContactViewController.swift in Sources */,
+				DA77CB361C4CC1FD0063CD71 /* Message.swift in Sources */,
 				DA2E0F1F1C09382900C508E0 /* LoginViewController.swift in Sources */,
 				DAB117F11C49ACEB00D2FC38 /* NewMapController.swift in Sources */,
 				DA457ED21C46FB9800CDB606 /* TestViewController.swift in Sources */,

@@ -81,6 +81,7 @@ class TestViewController: UITableViewController{
         super.viewDidLoad()
         mapView.delegate = self
         
+        
 //        let ann = MKPointAnnotation()
 //        ann.coordinate = CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275)
 //        ann.title = "Park here"
