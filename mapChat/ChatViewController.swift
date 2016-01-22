@@ -26,21 +26,20 @@ class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDelegate
     let outgoingBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleGreenColor())
     var messages = [JSQMessage]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         automaticallyScrollsToMostRecentMessage = true
         
         self.setup()
-//        self.addDemoMessages()
+        
         self.initFirebase()
         
-        self.getMessageWithThisUser(email1, otherUsersEmailAddress: email2)
+        self.downloadMessages(email1, otherUsersEmailAddress: email2)
         
-        let singleTap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        singleTap.delegate = self
-        self.collectionView?.addGestureRecognizer(singleTap)
-        self.collectionView?.userInteractionEnabled = true
+        self.addSingleTapGestureOnView()
+        
         
     }
     
@@ -49,6 +48,24 @@ class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDelegate
         collectionView!.collectionViewLayout.springinessEnabled = true
     }
     
+    
+    
+//    func reloadMessagesView() {
+//        self.collectionView?.reloadData()
+//    }
+    
+}
+
+
+//Guesture controls
+extension ChatViewController{
+
+    func addSingleTapGestureOnView(){
+        let singleTap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        singleTap.delegate = self
+        self.collectionView?.addGestureRecognizer(singleTap)
+        self.collectionView?.userInteractionEnabled = true
+    }
     
     func dismissKeyboard(){
         print("tap found on view!")
@@ -59,13 +76,9 @@ class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDelegate
         shouldRecognizeSimultaneouslyWithGestureRecognizer:UIGestureRecognizer) -> Bool {
             return true
     }
-    
-    func reloadMessagesView() {
-        self.collectionView?.reloadData()
-    }
-    
-}
 
+
+}
 //Firebase functions:
 extension ChatViewController{
     
@@ -75,7 +88,7 @@ extension ChatViewController{
         print(messageRef)
     }
     
-    func getMessageWithThisUser(myEmailAddress:String, otherUsersEmailAddress:String){
+    func downloadMessages(myEmailAddress:String, otherUsersEmailAddress:String){
         let messageHandle = messageRef.queryLimitedToNumberOfChildren(25).observeEventType(FEventType.ChildAdded, withBlock: { (snapShot) in
 
             let text = snapShot.value["text"] as? String
@@ -121,6 +134,7 @@ extension ChatViewController{
 //General message methods:
 extension ChatViewController{
     
+    
     func getMessageUid(emailAddress1:String, emailAddress2: String) -> String{
         var emailAddress1 = emailAddress1.stringByReplacingOccurrencesOfString(".", withString: "DOT")
         var emailAddress2 = emailAddress2.stringByReplacingOccurrencesOfString(".", withString: "DOT")
@@ -137,16 +151,6 @@ extension ChatViewController{
 
 //MARK - Setup
 extension ChatViewController {
-    func addDemoMessages() {
-//        for i in 1...10 {
-//            let sender = (i%2 == 0) ? "Server" : self.senderId
-//            let messageContent = "Message nr. \(i)"
-//            let message = JSQMessage(senderId: sender, displayName: sender, text: messageContent)
-//            self.messages += [message]
-//        }
-        
-
-    }
     
     func setup() {
         self.senderId = UIDevice.currentDevice().identifierForVendor?.UUIDString
@@ -188,9 +192,26 @@ extension ChatViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
-        return nil
+        let niceColor = UIColor ( red: 93.0/255.0, green: 138.0/255.0, blue: 168.0/255.0, alpha: 1.0 )
+        let avatar = UIImage.fontAwesomeIconWithName(.Chrome, textColor: UIColor.orangeColor(), size: CGSizeMake(35, 35))
+        let avatar1 = UIImage.fontAwesomeIconWithName(.HackerNews, textColor: niceColor, size: CGSizeMake(25, 25))
+        
+        let message = self.messages[indexPath.item];
+        
+        if message.senderId == senderId {
+            return JSQMessagesAvatarImage(placeholder: avatar)
+        }else{
+            return JSQMessagesAvatarImage(placeholder: avatar1)
+        }
+        
+
+        
+
+//        return UIImage.fontAwesomeIconWithName(.CommentsO, textColor: UIColor.blackColor(), size: CGSizeMake(25, 25))
     }
     
+
+/*
     //Configure each cell
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
@@ -209,16 +230,18 @@ extension ChatViewController {
         return cell
     }
     
-    // Show  usernames above bubbles
+    */
+    
+    //Show  usernames above bubbles
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
         let message = self.messages[indexPath.item];
         
-        // Sent by me, skip
+        //Sent by me, skip
         if message.senderId == senderId {
             return nil;
         }
         
-        // Same as previous sender, skip
+         //Same as previous sender, skip
         if indexPath.item > 0 {
             let previousMessage = messages[indexPath.item - 1];
             if previousMessage.senderId == message.senderId {
@@ -226,7 +249,8 @@ extension ChatViewController {
             }
         }
         
-        return NSAttributedString(string:message.senderId)
+//        return NSAttributedString(string:message.senderId)
+        return NSAttributedString(string:"Yan Xia")
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
@@ -247,6 +271,8 @@ extension ChatViewController {
         
         return kJSQMessagesCollectionViewCellLabelHeightDefault
     }
+    
+    
 
 }
 
@@ -256,8 +282,8 @@ extension ChatViewController {
         let message = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
         self.sendMessage(text, sender: senderId)
 //        self.finishSendingMessage()
-        self.reloadMessagesView()
-        self.finishSendingMessage()
+//        self.reloadMessagesView()
+        self.finishSendingMessageAnimated(true)
 
     }
     
