@@ -55,11 +55,21 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
         FirebaseHelper.myRootRef.createUser(email, password: password,
             withValueCompletionBlock: { error, result in
                 if error != nil {
-                    print(error.userInfo.description)
-                    print(error.code)
+//                    print(error.userInfo.description)
+//                    print(error.localizedDescription)
+                    if(error.code == -9){
+                        self.showNoticeTextWithDelay("The specified email address is already in use.", delay: 1)
+                        return
+                    } else{
+                        self.showNoticeTextWithDelay("Unkonwn error.", delay: 1)
+                        return
+                    }
+                    
                 } else {
-                    let uid = result["uid"] as? String
-                    print("Successfully created user account with uid: \(uid)")
+//                    let uid = result["uid"] as? String
+                    let message = "Successfully created user account!"
+                    self.showNoticeTextWithDelay(message, delay: 1)
+//                    print("Successfully created user account with uid: \(uid)")                    
                     self.login()
                 }
         })
