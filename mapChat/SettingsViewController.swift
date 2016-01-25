@@ -11,9 +11,11 @@ import UIKit
 class SettingsViewController: UITableViewController {
     
     @IBAction func logoutButton(sender: AnyObject) {
-        FirebaseHelper.logOut()
         let myStoryBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = myStoryBoard.instantiateViewControllerWithIdentifier("loginView") as! LoginViewController
         self.presentViewController(vc, animated: true, completion: nil)
+        FirebaseHelper.logOut()
     }
+    
+    
 }

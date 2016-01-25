@@ -41,20 +41,22 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         super.viewDidAppear(animated)
         
         //Check current auth status:
-        if FirebaseHelper.userAlreadyLoggedIn(){
-            currentLoginStatus.text = "already logged in"
-            FirebaseHelper.addContactsObserver()
-        }else{
-            currentLoginStatus.text = "not logged in"
-            //LoginStatus.loggedin = false
-        }
+//        if FirebaseHelper.userAlreadyLoggedIn(){
+//            currentLoginStatus.text = "already logged in"
+//            FirebaseHelper.addContactsObserver()
+//        }else{
+//            currentLoginStatus.text = "not logged in"
+//            //LoginStatus.loggedin = false
+//        }
+        
+        
     }
-    
-    @IBAction func logOut(sender: AnyObject) {
-        FirebaseHelper.logOut()
-        showNoticeTextWithDelay("You have logged out!", delay: 2)
-        self.removeAuthDataFromNSUserDefaults()
-    }
+//    
+//    @IBAction func logOut(sender: AnyObject) {
+//        FirebaseHelper.logOut()
+//        showNoticeTextWithDelay("You have logged out!", delay: 2)
+//        self.removeAuthDataFromNSUserDefaults()
+//    }
     
     @IBAction func logIn(sender: UIButton) {
         let username = txtUsername.text!
@@ -84,8 +86,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
 //                    self.updateLoginStatus()
                     
                     let myStoryBoard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = myStoryBoard.instantiateViewControllerWithIdentifier("tabsView") as! UIViewController
-                    
+                    let vc = myStoryBoard.instantiateViewControllerWithIdentifier("tabsView")
                     self.presentViewController(vc, animated: true, completion: nil)
 
                     
@@ -100,32 +101,29 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     }
     
     
-    func disableLoginItems(){
-        self.txtUsername.borderStyle = UITextBorderStyle.None
-        self.txtPassword.borderStyle = UITextBorderStyle.None
-        self.txtUsername.enabled = false
-        self.txtPassword.enabled = false
-        self.loginButton.enabled = false
-        
-        //if the current textBox is empty, and there is auth data, fill int he textFile user authData
-        if self.txtUsername.text == "" {
-            self.txtUsername.text = readLoginEmailFromNSUserDefaults()
-        }
-        
-            
-    }
+//    func disableLoginItems(){
+//        self.txtUsername.borderStyle = UITextBorderStyle.None
+//        self.txtPassword.borderStyle = UITextBorderStyle.None
+//        self.txtUsername.enabled = false
+//        self.txtPassword.enabled = false
+//        self.loginButton.enabled = false
+//        
+//        //if the current textBox is empty, and there is auth data, fill int he textFile user authData
+//        if self.txtUsername.text == "" {
+//            self.txtUsername.text = readLoginEmailFromNSUserDefaults()
+//        }
+//    }
 
-    func enableLoginItems(){
-        self.txtUsername.borderStyle = UITextBorderStyle.RoundedRect
-        self.txtPassword.borderStyle = UITextBorderStyle.RoundedRect
-        self.txtUsername.enabled = true
-        self.txtPassword.enabled = true
-        self.loginButton.enabled = true
-    }
-        
+//    func enableLoginItems(){
+//        self.txtUsername.borderStyle = UITextBorderStyle.RoundedRect
+//        self.txtPassword.borderStyle = UITextBorderStyle.RoundedRect
+//        self.txtUsername.enabled = true
+//        self.txtPassword.enabled = true
+//        self.loginButton.enabled = true
+//    }
+//        
     
     func delay(delay:Double, closure:()->()) {
-        
         dispatch_after(
             dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
     }
@@ -152,22 +150,31 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         return true;
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func dosomething(sender: AnyObject) {
+        
+        print("logging from here")
+        
+        let myStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = myStoryBoard.instantiateViewControllerWithIdentifier("signUpWindow")
+        self.presentViewController(vc, animated: true, completion: nil)
+
     }
     
-    func updateLoginStatus() {
-
-        if FirebaseHelper.userAlreadyLoggedIn(){
-            currentLoginStatus.text = "already logged in"
-            disableLoginItems()
-            LoginStatus.loggedin = true
-        }else{
-            currentLoginStatus.text = "not logged in"
-            LoginStatus.loggedin = false
-        }
-    }
+//    @IBAction func showSignUpWindow(sender: AnyObject) {
+//    }
+    
+    
+//    func updateLoginStatus() {
+//
+//        if FirebaseHelper.userAlreadyLoggedIn(){
+//            currentLoginStatus.text = "already logged in"
+//            LoginStatus.loggedin = true
+//        }else{
+//            currentLoginStatus.text = "not logged in"
+//            LoginStatus.loggedin = false
+//        }
+//    }
     
     func saveAuthDataIntoNSUserDefaults(authData: FAuthData){
         //Save authData with NSUserDefaults

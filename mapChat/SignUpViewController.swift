@@ -1,0 +1,114 @@
+//
+//  SignUpViewController.swift
+//  mapChat
+//
+//  Created by Yan Xia on 1/22/16.
+//  Copyright © 2016 yxia. All rights reserved.
+//
+
+import UIKit
+import Firebase
+
+class SingUpViewController: UIViewController, UITextFieldDelegate{
+    
+    @IBOutlet weak var txtUserEmail: UITextField!
+    
+    @IBOutlet weak var txtPassword: UITextField!
+    
+    @IBOutlet weak var txtPasswordConfirmation: UITextField!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        txtUserEmail.delegate = self
+        txtPassword.delegate = self
+        txtPasswordConfirmation.delegate = self
+        
+        
+    }
+    
+
+    @IBAction func signUp(sender: UIButton) {
+        let email = txtUserEmail.text
+        let password = txtPassword.text
+        let passwordConfirmation = txtPasswordConfirmation.text
+        
+        if(email == ""){
+            self.showNoticeTextWithDelay("user email is empty", delay: 1)
+            return
+        }
+        
+        if(password == ""){
+            self.showNoticeTextWithDelay("password is empty", delay: 1)
+            return
+        }
+        
+        if(passwordConfirmation == ""){
+            self.showNoticeTextWithDelay("please confirm your password", delay: 1)
+            return
+        }
+        
+        if(password != passwordConfirmation){
+            self.showNoticeTextWithDelay("password and confirmation don't match!", delay: 1)
+            return
+        }
+
+        FirebaseHelper.myRootRef.createUser(email, password: password,
+            withValueCompletionBlock: { error, result in
+                if error != nil {
+                    print(error.userInfo.description)
+                    print(error.code)
+                } else {
+                    let uid = result["uid"] as? String
+                    print("Successfully created user account with uid: \(uid)")
+                    self.login()
+                }
+        })
+    }
+    
+    func login(){
+        FirebaseHelper.myRootRef .authUser("bobtony@example.com", password: "correcthorsebatterystaple",
+            withCompletionBlock: { error, authData in
+                if error != nil {
+                    // There was an error logging in to this account
+                } else {
+                    // We are now logged in
+                    print("logged in!")
+                    self.saveUserInfoLocally(authData)
+                    self.showRootView()
+            }
+        })
+    }
+    
+    func showRootView(){
+        let myStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = myStoryBoard.instantiateViewControllerWithIdentifier("tabsView")
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    func saveUserInfoLocally(authData: FAuthData){
+        //Save authData with NSUserDefaults
+        FirebaseHelper.saveAuthDataIntoNSUserDefaults(authData)
+        let uid = FirebaseHelper.readUidFromNSUserDefaults()
+        let email = FirebaseHelper.readLoginEmailFromNSUserDefaults()
+        FirebaseHelper.saveUserInfoInFirebase(uid, email: email)
+
+    }
+    
+    @IBAction func closeWindow(sender: AnyObject) {
+         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
+    }
+    
+    func showNoticeTextWithDelay(text:String, delay:Double){
+        self.noticeOnlyText(text)
+        self.delay(delay){
+            self.clearAllNotice()
+        }
+    }
+
+    
+}
