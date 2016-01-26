@@ -88,9 +88,9 @@ struct FirebaseHelper {
         return uid as! String
     }
     
-    static func saveUserInfoInFirebase(uid: String, email: String){
+    static func saveUserInfoInFirebase(uid: String, email: String, name:String){
         let user = myRootRef.childByAppendingPath("users").childByAppendingPath(uid)
-        let user_info = ["email": email, "uid": uid]
+        let user_info = ["email": email, "uid": uid, "name": name]
         user.updateChildValues(user_info)
         
     }

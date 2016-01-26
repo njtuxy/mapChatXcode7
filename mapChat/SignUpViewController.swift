@@ -17,13 +17,14 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
     
     @IBOutlet weak var txtPasswordConfirmation: UITextField!
     
+    @IBOutlet weak var txtUserName: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         txtUserEmail.delegate = self
         txtPassword.delegate = self
         txtPasswordConfirmation.delegate = self
-        
-        
+        txtUserName.delegate = self
     }
     
 
@@ -31,6 +32,7 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
         let email = txtUserEmail.text
         let password = txtPassword.text
         let passwordConfirmation = txtPasswordConfirmation.text
+        let name = txtUserName.text
         
         if(email == ""){
             self.showNoticeTextWithDelay("user email is empty", delay: 1)
@@ -49,6 +51,11 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
         
         if(password != passwordConfirmation){
             self.showNoticeTextWithDelay("password and confirmation don't match!", delay: 1)
+            return
+        }
+        
+        if(name == ""){
+            self.showNoticeTextWithDelay("name is empty", delay: 1)
             return
         }
 
@@ -76,7 +83,7 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
     }
     
     func login(){
-        FirebaseHelper.myRootRef .authUser("bobtony@example.com", password: "correcthorsebatterystaple",
+        FirebaseHelper.myRootRef .authUser(txtUserEmail.text, password: txtPassword.text,
             withCompletionBlock: { error, authData in
                 if error != nil {
                     // There was an error logging in to this account
@@ -100,8 +107,8 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
         FirebaseHelper.saveAuthDataIntoNSUserDefaults(authData)
         let uid = FirebaseHelper.readUidFromNSUserDefaults()
         let email = FirebaseHelper.readLoginEmailFromNSUserDefaults()
-        FirebaseHelper.saveUserInfoInFirebase(uid, email: email)
-
+        let name = txtUserName.text
+        FirebaseHelper.saveUserInfoInFirebase(uid, email: email, name: name!)
     }
     
     @IBAction func closeWindow(sender: AnyObject) {

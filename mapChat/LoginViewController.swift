@@ -88,14 +88,9 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
                     let myStoryBoard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = myStoryBoard.instantiateViewControllerWithIdentifier("tabsView")
                     self.presentViewController(vc, animated: true, completion: nil)
-
-                    
                     
                     //Save authData with NSUserDefaults
                     FirebaseHelper.saveAuthDataIntoNSUserDefaults(authData)
-                    let uid = FirebaseHelper.readUidFromNSUserDefaults()
-                    let email = FirebaseHelper.readLoginEmailFromNSUserDefaults()
-                    FirebaseHelper.saveUserInfoInFirebase(uid, email: email)
             }
         }                 
     }

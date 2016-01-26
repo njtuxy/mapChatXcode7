@@ -159,7 +159,7 @@
                                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Y03-cr-xVE" id="cJn-vr-Yct">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="454.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fcb-iL-gcX">
@@ -420,7 +420,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oad-GR-q0N">
-                                        <rect key="frame" x="31" y="150" width="209" height="30"/>
+                                        <rect key="frame" x="31" y="136" width="209" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -442,7 +442,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="confirm password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="joA-sX-yQs">
-                                        <rect key="frame" x="31" y="219" width="209" height="30"/>
+                                        <rect key="frame" x="31" y="174" width="209" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -454,6 +454,11 @@
                                             <action selector="closeWindow:" destination="KZk-jP-u6M" eventType="touchUpInside" id="Qnp-mH-lVW"/>
                                         </connections>
                                     </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="name your self" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UEs-cy-vvK">
+                                        <rect key="frame" x="31" y="240" width="209" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.70588235290000001" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -464,6 +469,7 @@
                         <outlet property="txtPassword" destination="oad-GR-q0N" id="Z9y-1n-BaC"/>
                         <outlet property="txtPasswordConfirmation" destination="joA-sX-yQs" id="zwl-lZ-bPo"/>
                         <outlet property="txtUserEmail" destination="mAe-61-fag" id="QZ9-an-K2B"/>
+                        <outlet property="txtUserName" destination="UEs-cy-vvK" id="phI-tb-4mp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wGM-Cu-RkN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -647,7 +653,7 @@
                                 <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BsH-FH-4zl" id="NRW-9W-401">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMP-hb-hMZ">
