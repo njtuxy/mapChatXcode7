@@ -52,7 +52,7 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         
-        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
+        let myUid = Me.authData.uid
         let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
 
         var t_strangers_list = [User]()
@@ -99,7 +99,7 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
     
 
     func addToContactListInFirebase(uidOfStranger: String, indexInTable: Int){
-        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
+        let myUid = Me.authData.uid
         let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
         //Save the stranger's UID to current user's node
         

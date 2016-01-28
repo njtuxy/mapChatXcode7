@@ -58,12 +58,18 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
             self.showNoticeTextWithDelay("name is empty", delay: 1)
             return
         }
-
+        
+        self.signUp()
+    }
+    
+    func signUp(){
+        let email = txtUserEmail.text
+        let password = txtPassword.text
         FirebaseHelper.myRootRef.createUser(email, password: password,
             withValueCompletionBlock: { error, result in
                 if error != nil {
-//                    print(error.userInfo.description)
-//                    print(error.localizedDescription)
+                    //                    print(error.userInfo.description)
+                    //                    print(error.localizedDescription)
                     if(error.code == -9){
                         self.showNoticeTextWithDelay("The specified email address is already in use.", delay: 1)
                         return
@@ -73,10 +79,10 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
                     }
                     
                 } else {
-//                    let uid = result["uid"] as? String
+                    //                    let uid = result["uid"] as? String
                     let message = "Successfully created user account!"
                     self.showNoticeTextWithDelay(message, delay: 1)
-//                    print("Successfully created user account with uid: \(uid)")                    
+                    //                    print("Successfully created user account with uid: \(uid)")
                     self.login()
                 }
         })
@@ -90,7 +96,8 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
                 } else {
                     // We are now logged in
                     print("logged in!")
-                    self.saveUserInfoLocally(authData)
+//                    self.saveUserInfoLocally(authData)
+                    Me.authData = MyInfo(authData: authData)
                     self.showRootView()
             }
         })
@@ -100,15 +107,6 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
         let myStoryBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = myStoryBoard.instantiateViewControllerWithIdentifier("tabsView")
         self.presentViewController(vc, animated: true, completion: nil)
-    }
-    
-    func saveUserInfoLocally(authData: FAuthData){
-        //Save authData with NSUserDefaults
-        FirebaseHelper.saveAuthDataIntoNSUserDefaults(authData)
-        let uid = FirebaseHelper.readUidFromNSUserDefaults()
-        let email = FirebaseHelper.readLoginEmailFromNSUserDefaults()
-        let name = txtUserName.text
-        FirebaseHelper.saveUserInfoInFirebase(uid, email: email, name: name!)
     }
     
     @IBAction func closeWindow(sender: AnyObject) {

@@ -32,7 +32,7 @@ class TestViewController: UITableViewController{
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
+        let myUid = Me.authData.uid
         let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
         let image2 = UIImage(named: "menu_icon_0")
         myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
@@ -46,11 +46,25 @@ class TestViewController: UITableViewController{
             if my_contacts_snapshot.exists(){
                 for item in my_contacts_snapshot.children{
                     let t_item = item as! FDataSnapshot
+//                    print("wait for it:::")
+//                    print(t_item)
+//                    print(t_item.key)
+//                    print(t_item.value)
+//                    print("ending here::::")
                     let uidOfThisContact = t_item.key
                     let selectedStatusOfThisContact = t_item.value as! Bool
                     let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
                     pathOfThisContact.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
+//                        print("uid of this contact:")
+//                        print(uidOfThisContact)
+//                        print("value of the snapshot: ")
+//                        print(thisContactSnapShot)
+//                        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
+//                        print("valu of my uid:")
+//                        print(myUid)
                         t_email = thisContactSnapShot.value as! String
+//                        print("value of t_email:")
+//                        print(t_email)
                         t_contactsArray.append(MenuItem(image: image2!, email: t_email, uid: uidOfThisContact))
                         self.contacts = t_contactsArray
                         self.refreshMenuItems()
@@ -80,7 +94,6 @@ class TestViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        
         
 //        let ann = MKPointAnnotation()
 //        ann.coordinate = CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275)

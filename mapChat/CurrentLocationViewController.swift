@@ -127,7 +127,7 @@ class CurrentLocationViewController: UIViewController, CLLocationManagerDelegate
     }
     
     func updateLocationLabels(location:CLLocation){
-        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
+        let myUid = Me.authData.uid
             latitudeLabel.text = String(format: "%.8f", location.coordinate.latitude)
             longtitudeLabel.text = String(format: "%8f", location.coordinate.longitude)
         //Save location to Firebase

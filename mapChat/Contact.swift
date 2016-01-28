@@ -11,6 +11,22 @@ import Firebase
 import Bond
 import MapKit
 
+struct MyInfo {
+    let uid: String!
+    let email: String!
+    
+    init(authData: FAuthData){
+        self.email = authData.providerData["email"] as! String
+        self.uid = authData.uid
+    }
+}
+
+struct Me{
+    static var authData:MyInfo!
+}
+
+
+
 struct Contact {
     
     let email: String!

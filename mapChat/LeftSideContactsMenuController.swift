@@ -203,7 +203,8 @@ class LeftSideContactsMenuController: UIViewController, UITableViewDataSource, U
     
     func setContactSelectedStatus(uidOfContact: String, status: Bool, localIndex: Int){
         
-        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
+        let myUid = Me.authData.uid
+        
         let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
         
         //Save status to Firebase:

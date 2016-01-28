@@ -39,24 +39,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        //Check current auth status:
-//        if FirebaseHelper.userAlreadyLoggedIn(){
-//            currentLoginStatus.text = "already logged in"
-//            FirebaseHelper.addContactsObserver()
-//        }else{
-//            currentLoginStatus.text = "not logged in"
-//            //LoginStatus.loggedin = false
-//        }
-        
-        
     }
-//    
-//    @IBAction func logOut(sender: AnyObject) {
-//        FirebaseHelper.logOut()
-//        showNoticeTextWithDelay("You have logged out!", delay: 2)
-//        self.removeAuthDataFromNSUserDefaults()
-//    }
     
     @IBAction func logIn(sender: UIButton) {
         let username = txtUsername.text!
@@ -81,42 +64,18 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
                     self.showNoticeTextWithDelay(error.localizedDescription, delay: 2)
 
                 } else {
-                    // user is logged in, check authData for data
                     self.showNoticeTextWithDelay("Logged in succesfully!", delay: 1)
-//                    self.updateLoginStatus()
-                    
+
+                    //Show root view
                     let myStoryBoard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = myStoryBoard.instantiateViewControllerWithIdentifier("tabsView")
                     self.presentViewController(vc, animated: true, completion: nil)
                     
-                    //Save authData with NSUserDefaults
-                    FirebaseHelper.saveAuthDataIntoNSUserDefaults(authData)
+                    //Save authData to local
+                    Me.authData = MyInfo(authData: authData)
             }
         }                 
     }
-    
-    
-//    func disableLoginItems(){
-//        self.txtUsername.borderStyle = UITextBorderStyle.None
-//        self.txtPassword.borderStyle = UITextBorderStyle.None
-//        self.txtUsername.enabled = false
-//        self.txtPassword.enabled = false
-//        self.loginButton.enabled = false
-//        
-//        //if the current textBox is empty, and there is auth data, fill int he textFile user authData
-//        if self.txtUsername.text == "" {
-//            self.txtUsername.text = readLoginEmailFromNSUserDefaults()
-//        }
-//    }
-
-//    func enableLoginItems(){
-//        self.txtUsername.borderStyle = UITextBorderStyle.RoundedRect
-//        self.txtPassword.borderStyle = UITextBorderStyle.RoundedRect
-//        self.txtUsername.enabled = true
-//        self.txtPassword.enabled = true
-//        self.loginButton.enabled = true
-//    }
-//        
     
     func delay(delay:Double, closure:()->()) {
         dispatch_after(
@@ -130,110 +89,10 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         }
     }
     
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if (textField == self.txtPassword) {
-            textField.resignFirstResponder()
-            // call the login logic
-//            login();
-            
-        } else if (textField == self.txtUsername) {
-            textField.resignFirstResponder()
-//            self.passwordText.becomeFirstResponder();
-        }
-        
-        return true;
-    }
-    
-    
     @IBAction func dosomething(sender: AnyObject) {
-        
-        print("logging from here")
-        
         let myStoryBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = myStoryBoard.instantiateViewControllerWithIdentifier("signUpWindow")
         self.presentViewController(vc, animated: true, completion: nil)
 
     }
-    
-//    @IBAction func showSignUpWindow(sender: AnyObject) {
-//    }
-    
-    
-//    func updateLoginStatus() {
-//
-//        if FirebaseHelper.userAlreadyLoggedIn(){
-//            currentLoginStatus.text = "already logged in"
-//            LoginStatus.loggedin = true
-//        }else{
-//            currentLoginStatus.text = "not logged in"
-//            LoginStatus.loggedin = false
-//        }
-//    }
-    
-    func saveAuthDataIntoNSUserDefaults(authData: FAuthData){
-        //Save authData with NSUserDefaults
-        let email = authData.providerData["email"]
-        let uid = authData.uid
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(email, forKey: "firebase_email")
-        defaults.setObject(uid, forKey: "firebase_uid")
-    }
-    
-    func removeAuthDataFromNSUserDefaults(){
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.removeObjectForKey("firebase_email")
-        defaults.removeObjectForKey("firebase_uid")
-    }
-    
-    func readLoginEmailFromNSUserDefaults() -> String{
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let email = defaults.objectForKey("firebase_email")
-        return email as! String
-    }
-
-    func readUidFromNSUserDefaults() -> String{
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let uid = defaults.objectForKey("firebase_uid")
-        return uid as! String
-    }
-    
-//    func loadContacts(){
-//        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
-//        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
-//        let myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
-//        
-//        myContacts.observeEventType(.Value, withBlock: { my_contacts_snapshot in
-//            
-//            print("contacts loadded now")
-//            var t_contactsArray = [Contact]()
-//            var t_email = String()
-//            
-//            if my_contacts_snapshot.exists(){
-//                
-//                for item in my_contacts_snapshot.children{
-//                    
-//                    let t_item = item as! FDataSnapshot
-//                    
-//                    let uidOfThisContact = t_item.key
-//                    let selectedStatusOfThisContact = t_item.value as! Bool
-//                    
-//                    let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
-//                    pathOfThisContact.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
-//                        t_email = thisContactSnapShot.value as! String
-//                        t_contactsArray.append(Contact(uid: uidOfThisContact , email: t_email, selected: selectedStatusOfThisContact))
-//                        Contacts.contacts = t_contactsArray
-//                        Status.contactsLoaded.next(true)
-//                    })
-//                }
-//            }
-//                
-//            else{
-//                Contacts.contacts = []
-//                Status.contactsLoaded.next(true)
-//            }
-//        })
-//    }
-
-
 }

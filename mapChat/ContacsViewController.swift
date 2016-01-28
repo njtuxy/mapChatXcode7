@@ -81,7 +81,7 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
     func removeContact(thisContactUID: String, indexInTable: Int){
         
         let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
-        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
+        let myUid = Me.authData.uid
         
         
         //Firebase - Remove from my contact list

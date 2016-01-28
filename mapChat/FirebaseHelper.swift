@@ -22,6 +22,7 @@ struct FirebaseHelper {
             return false
         }
         else{
+            Me.authData  = MyInfo(authData: myRootRef.authData)
             return true
         }
     }
@@ -82,11 +83,11 @@ struct FirebaseHelper {
         return email as! String
     }
     
-    static func readUidFromNSUserDefaults() -> String{
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let uid = defaults.objectForKey("firebase_uid")
-        return uid as! String
-    }
+//    static func readUidFromNSUserDefaults() -> String{
+//        let defaults = NSUserDefaults.standardUserDefaults()
+//        let uid = defaults.objectForKey("firebase_uid")
+//        return uid as! String
+//    }
     
     static func saveUserInfoInFirebase(uid: String, email: String, name:String){
         let user = myRootRef.childByAppendingPath("users").childByAppendingPath(uid)
@@ -106,7 +107,7 @@ struct FirebaseHelper {
     
     static func addContactsObserver(){
         //Load all the contacts and send a singal to the observers to get the latest contacts list
-        let myUid = FirebaseHelper.readUidFromNSUserDefaults()
+        let myUid = Me.authData.uid
         let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
         let myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
         
