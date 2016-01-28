@@ -66,7 +66,10 @@ class TestViewController: UITableViewController{
                     let uidOfThisContact = t_item.key
                     //let selectedStatusOfThisContact = t_item.value as! Bool
                     let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
+                    print(pathOfThisContact)
                     pathOfThisContact.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
+                        print(thisContactSnapShot)
+                        print(myUid)
                         t_email = thisContactSnapShot.value as! String
                         t_contactsArray.append(MenuItem(image: image2!, email: t_email, uid: uidOfThisContact))
                         self.contacts = t_contactsArray

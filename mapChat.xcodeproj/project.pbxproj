@@ -105,19 +105,13 @@
 		DA2326711C0CFA5F00094165 /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				DA457ED11C46FB9800CDB606 /* TestViewController.swift */,
-				DAB117F01C49ACEB00D2FC38 /* NewMapController.swift */,
-				DAB117EE1C49ABF900D2FC38 /* ContactOnMap.swift */,
-				DAA89DAF1BFE8D3A005FB53E /* MapViewController.swift */,
-				DAA89DAD1BFE8D3A005FB53E /* CurrentLocationViewController.swift */,
-				DA2326731C0CFB0600094165 /* MessageViewController.swift */,
-				DA2326791C0D0E8D00094165 /* ContacsViewController.swift */,
-				DA23267F1C1008A400094165 /* ContactsViewCell.swift */,
-				DA23267B1C0E2EFA00094165 /* AddNewContactViewController.swift */,
-				DA23267D1C0ECB9200094165 /* NewContactTableViewCell.swift */,
-				DA84C22A1C1791830097F1F7 /* LeftSideContactsMenuController.swift */,
-				DA84C22C1C1791C50097F1F7 /* LeftSideMenuContactsCell.swift */,
-				DAF135BB1C1F8F6000B8E15E /* SettingsViewController.swift */,
+				DA77CB341C4CBD110063CD71 /* chat */,
+				DA5C9C021C52FE310053BB63 /* account */,
+				DA71AB7E1C59F225006D2833 /* mapView */,
+				DA71AB7F1C59F247006D2833 /* currentLocation */,
+				DA71AB7C1C59EEC1006D2833 /* contacts */,
+				DA71AB7D1C59F1FE006D2833 /* settings */,
+				DA71AB801C59F25B006D2833 /* others */,
 			);
 			name = viewControllers;
 			sourceTree = "<group>";
@@ -138,6 +132,54 @@
 				DA5C9C031C52FE7B0053BB63 /* SignUpViewController.swift */,
 			);
 			name = account;
+			sourceTree = "<group>";
+		};
+		DA71AB7C1C59EEC1006D2833 /* contacts */ = {
+			isa = PBXGroup;
+			children = (
+				DA2326791C0D0E8D00094165 /* ContacsViewController.swift */,
+				DA23267F1C1008A400094165 /* ContactsViewCell.swift */,
+				DA23267B1C0E2EFA00094165 /* AddNewContactViewController.swift */,
+				DA23267D1C0ECB9200094165 /* NewContactTableViewCell.swift */,
+			);
+			name = contacts;
+			sourceTree = "<group>";
+		};
+		DA71AB7D1C59F1FE006D2833 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				DAF135BB1C1F8F6000B8E15E /* SettingsViewController.swift */,
+			);
+			name = settings;
+			sourceTree = "<group>";
+		};
+		DA71AB7E1C59F225006D2833 /* mapView */ = {
+			isa = PBXGroup;
+			children = (
+				DA457ED11C46FB9800CDB606 /* TestViewController.swift */,
+			);
+			name = mapView;
+			sourceTree = "<group>";
+		};
+		DA71AB7F1C59F247006D2833 /* currentLocation */ = {
+			isa = PBXGroup;
+			children = (
+				DAA89DAD1BFE8D3A005FB53E /* CurrentLocationViewController.swift */,
+			);
+			name = currentLocation;
+			sourceTree = "<group>";
+		};
+		DA71AB801C59F25B006D2833 /* others */ = {
+			isa = PBXGroup;
+			children = (
+				DAB117F01C49ACEB00D2FC38 /* NewMapController.swift */,
+				DAB117EE1C49ABF900D2FC38 /* ContactOnMap.swift */,
+				DAA89DAF1BFE8D3A005FB53E /* MapViewController.swift */,
+				DA2326731C0CFB0600094165 /* MessageViewController.swift */,
+				DA84C22A1C1791830097F1F7 /* LeftSideContactsMenuController.swift */,
+				DA84C22C1C1791C50097F1F7 /* LeftSideMenuContactsCell.swift */,
+			);
+			name = others;
 			sourceTree = "<group>";
 		};
 		DA77CB341C4CBD110063CD71 /* chat */ = {
@@ -180,8 +222,6 @@
 		DAA89DAA1BFE8D3A005FB53E /* mapChat */ = {
 			isa = PBXGroup;
 			children = (
-				DA77CB341C4CBD110063CD71 /* chat */,
-				DA5C9C021C52FE310053BB63 /* account */,
 				DA2326711C0CFA5F00094165 /* viewControllers */,
 				DAAB80651C0444A4003065F7 /* lib */,
 				DAA89DAB1BFE8D3A005FB53E /* AppDelegate.swift */,
