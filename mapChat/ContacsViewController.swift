@@ -20,6 +20,7 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
     override func viewDidLoad() {
+        super.viewDidLoad()
         //Make a transparent navigation bar:
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController!.navigationBar.shadowImage = UIImage()
@@ -27,6 +28,10 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
         self.downloadContacts()
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        FirebaseHelper.myRootRef.removeObserverWithHandle(handle)
+    }
 }
 
 //Firebase DataSource:

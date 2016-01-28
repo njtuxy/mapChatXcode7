@@ -19,24 +19,68 @@ class TestViewController: UITableViewController{
     
     var subTitleShown:Bool = false
     var subTitleLabel:UILabel!
-
-    var ref:Firebase!
     var myContacts: Firebase!
-
     var handle: UInt!
     var locationHandle: UInt!
-    
     var contacts = [MenuItem]()
 
+    
     //---------------------------------------------------------------------------------------------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         loadMenu()
-        ref = Firebase(url:"https://qd.firebaseio.com")
+        configNavigationBar()
+    }
 
-        //---------------------------------------------------------------------------------------------------------------------------------------------
-        //Configure the navigation bar:
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        loadContacts()
+    }
+    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidAppear(animated)
+        FirebaseHelper.myRootRef.removeObserverWithHandle(handle)
+        //ref.removeObserverWithHandle(locationHandle)
+    }
+    
+}
+
+//Map Operations:
+extension TestViewController{
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func centerMapToCoordinate(coordinate: CLLocationCoordinate2D, mapView: MKMapView){
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, 2000, 2000)
+        mapView.setRegion(mapView.regionThatFits(region), animated: true)
+        mapView.mapType = .Standard
+    }
+    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func addContactToMapAndCenterMapToIt(uidOfContact:String, email: String, lat: Double, lng: Double){
+        let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
+        Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: email, subtitle: "this is the user")
+        let annotations = Array(Annotations.annotationsDict.values)
+        let allAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allAnnotations)
+        self.mapView.addAnnotations(annotations)
+        centerMapToCoordinate(t_location, mapView: self.mapView)
+    }
+}
+
+//UI Configurations:
+extension TestViewController{
+    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    // MARK: - Actions
+    @IBAction
+    private func switchMenu() {
+        menu.setRevealed(!menu.revealed, animated: true)
+    }
+    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func configNavigationBar(){
         let navBar = self.navigationController?.navigationBar
         navBar!.barStyle = UIBarStyle.Black
         navBar!.barTintColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
@@ -46,11 +90,28 @@ class TestViewController: UITableViewController{
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
     }
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func loadMenu() {
+        let menu = MenuView()
+        menu.backgroundColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
+        tableView.addSubview(menu)
+        menu.delegate = self
+        self.menu = menu
+    }
+    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func refreshMenuItems(){
+        menu.items = self.contacts
+    }
     
 
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+
+}
+
+//Firebase DataSource:
+//---------------------------------------------------------------------------------------------------------------------------------------------
+extension TestViewController{
+    func loadContacts(){
         let myUid = Me.authData.uid
         let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
         let image2 = UIImage(named: "menu_icon_0")
@@ -82,54 +143,6 @@ class TestViewController: UITableViewController{
             }
         })
     }
-    
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    func refreshMenuItems(){
-        menu.items = self.contacts
-    }
-    
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidAppear(animated)
-        ref.removeObserverWithHandle(handle)
-        //ref.removeObserverWithHandle(locationHandle)
-    }
-    
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-      // MARK: - Actions
-    @IBAction
-    private func switchMenu() {
-            menu.setRevealed(!menu.revealed, animated: true)
-    }
-    
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    private func loadMenu() {
-        print("Loadding the menu")
-        let menu = MenuView()
-        menu.backgroundColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
-        tableView.addSubview(menu)
-        menu.delegate = self
-        self.menu = menu
-    }
-    
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    func centerMapToCoordinate(coordinate: CLLocationCoordinate2D, mapView: MKMapView){
-        let region = MKCoordinateRegionMakeWithDistance(coordinate, 2000, 2000)
-        mapView.setRegion(mapView.regionThatFits(region), animated: true)
-        mapView.mapType = .Standard
-    }
-    
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    func addContactToMapAndCenterMapToIt(uidOfContact:String, email: String, lat: Double, lng: Double){
-        let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
-        Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: email, subtitle: "this is the user")
-        let annotations = Array(Annotations.annotationsDict.values)
-        let allAnnotations = self.mapView.annotations
-        self.mapView.removeAnnotations(allAnnotations)
-        self.mapView.addAnnotations(annotations)
-        centerMapToCoordinate(t_location, mapView: self.mapView)
-    }
-    
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -137,7 +150,7 @@ extension TestViewController: MenuViewDelegate {
     func menu(menu: MenuView, didSelectItemAtIndex index: Int) {
         let uid = contacts[index].uid
         let email = contacts[index].email
-        let location = ref.childByAppendingPath("locations").childByAppendingPath(uid)
+        let location = FirebaseHelper.myRootRef.childByAppendingPath("locations").childByAppendingPath(uid)
         
         locationHandle = location.observeEventType(.Value, withBlock: { SnapShot in
             print("listening to user" + uid)
