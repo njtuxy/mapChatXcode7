@@ -23,6 +23,10 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var userName: UILabel!
     
     override func viewDidLoad() {
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         self.userName.text = Me.account.name
         self.profilePhoto.image = Me.account.profilePhoto
     }

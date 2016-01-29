@@ -41,6 +41,7 @@ class ProfileViewController:UIViewController, UIImagePickerControllerDelegate, U
     
     func uploadProfilePhotoToFirebase(image: UIImage){
         FirebaseHelper.rootRef.childByAppendingPath("users").childByAppendingPath(Me.account.uid).childByAppendingPath("profilePhoto").setValue(image.toBase64())
+        Me.account.profilePhoto = image
     }
     
 }
