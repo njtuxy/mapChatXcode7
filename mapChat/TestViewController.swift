@@ -55,7 +55,6 @@ class TestViewController: UITableViewController{
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
     func readUserAccountInfo(){
-        print("INSIDE THIS METHOD")
         accountHandle = myAccountRef.observeEventType(.Value, withBlock: { (snapShot) in
             print("account Handle in Test View Controller!")
             let email = snapShot.value["email"] as! String
@@ -66,8 +65,8 @@ class TestViewController: UITableViewController{
             if base64String.isEmpty {
                 image = UIImage(named: "empty")
             }else{
-                let decodedData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions(rawValue: 0))
-                image = UIImage(data: decodedData!)
+                let imageData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+                image = UIImage(data: imageData!)
             }
             Me.account  = Account( uid:uid, email: email, name:name, profilePhoto: image)
         })
