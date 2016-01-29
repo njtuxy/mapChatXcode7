@@ -57,14 +57,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
                     //Show root view
                     let myStoryBoard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = myStoryBoard.instantiateViewControllerWithIdentifier("tabsView")
-                    self.presentViewController(vc, animated: true, completion: nil)
-                    
-                    //Save authData to local
-                    
-                    let email = authData.providerData["email"] as! String
-                    let uid = authData.uid
-                    let name = "SignUpUBaba"
-                    Me.account  = Account( uid:uid, email: email, name:name)
+                    self.presentViewController(vc, animated: true, completion: nil)                    
             }
         }                 
     }

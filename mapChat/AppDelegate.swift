@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     override init() {
         super.init()
-        Firebase.defaultConfig().persistenceEnabled = true                
+//        Firebase.defaultConfig().persistenceEnabled = true                
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -37,24 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    func readUserAccountInfo(){
-        let authData = FirebaseHelper.rootRef.authData
-        let email = authData.providerData["email"] as! String
-        let uid = authData.uid
-        let name = "UBaba"
-        Me.account  = Account( uid:uid, email: email, name:name)
-    }
-
-    //---------------------------------------------------------------------------------------------------------------------------------------------
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         setUpTabBarUI()
         
         if FirebaseHelper.rootRef.authData == nil{
             showLoginWindow()
-        }
-        else{
-            readUserAccountInfo()
         }
         
         return true

@@ -11,10 +11,15 @@ import Firebase
 import GeoFire
 
 struct FirebaseHelper {
+    static let rootURL = "https://qd.firebaseio.com"
+    static let usersURL = "https://qd.firebaseio.com/users"
     static let rootRef = Firebase(url:"https://qd.firebaseio.com")
+    static let uid = rootRef.authData.uid    
     static let geoLocation = rootRef.childByAppendingPath("locations")
     static let geoFire = GeoFire(firebaseRef: geoLocation)
-    static let name = rootRef.childByAppendingPath("users")
+    static let myAccountRef = rootRef.childByAppendingPath("users").childByAppendingPath(rootRef.authData.uid)
+//    static let myNameRef = rootRef.childByAppendingPath("users").childByAppendingPath(Me.account.uid).childByAppendingPath("name")
+//    static let myProfilePhotoRef = rootRef.childByAppendingPath("useres").childByAppendingPath(Me.account.uid).childByAppendingPath("profilePhoto")
     
     func showError(error: NSError) -> NSError{
         return error

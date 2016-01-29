@@ -87,8 +87,10 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
     }
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    func saveUserNameInFirebase(uid:String){
-        FirebaseHelper.rootRef.childByAppendingPath("users").childByAppendingPath(uid).setValue(txtUserName.text)
+    func saveUserAccountInfoInFirebase(uid:String){
+        FirebaseHelper.rootRef.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("name").setValue(txtUserName.text)
+        FirebaseHelper.rootRef.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("uid").setValue(uid)
+        FirebaseHelper.rootRef.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("email").setValue(txtUserEmail.text)
     }
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -97,12 +99,8 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
             withCompletionBlock: { error, authData in
                 if error != nil {
                 } else {
-                    let email = authData.providerData["email"] as! String
-                    let uid = authData.uid
-                    let name = "SingUpUBaba"
-                    Me.account  = Account( uid:uid, email: email, name:name)
                     self.showRootView()
-                    self.saveUserNameInFirebase(authData.uid)
+                    self.saveUserAccountInfoInFirebase(authData.uid)
             }
         })
     }

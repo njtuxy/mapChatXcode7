@@ -18,10 +18,12 @@ class SettingsViewController: UITableViewController {
     }
     
     
+    @IBOutlet weak var profilePhoto: UIImageView!
     
     @IBOutlet weak var userName: UILabel!
     
     override func viewDidLoad() {
         self.userName.text = Me.account.name
+        self.profilePhoto.image = Me.account.profilePhoto
     }
 }

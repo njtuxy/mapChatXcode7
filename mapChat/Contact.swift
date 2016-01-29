@@ -15,6 +15,7 @@ struct Account{
     var uid: String
     var email: String
     var name: String
+    var profilePhoto: UIImage
 }
 
 struct UserInfo {

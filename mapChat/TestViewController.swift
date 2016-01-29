@@ -19,33 +19,59 @@ class TestViewController: UITableViewController{
     
     var subTitleShown:Bool = false
     var subTitleLabel:UILabel!
-    var myContacts: Firebase!
-    var handle: UInt!
+    var myContactsRef: Firebase!
+    var myAccountRef: Firebase!
+    
+    var contactsHandle: UInt!
     var locationHandle: UInt!
+    var accountHandle: UInt!
     var contacts = [MenuItem]()
 
-    
     //---------------------------------------------------------------------------------------------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
+        myAccountRef = Firebase(url: FirebaseHelper.usersURL).childByAppendingPath(FirebaseHelper.uid)
+        myContactsRef = Firebase(url: FirebaseHelper.usersURL).childByAppendingPath(FirebaseHelper.uid).childByAppendingPath("contacts")
         mapView.delegate = self
         loadMenu()
         configNavigationBar()
+        
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        readUserAccountInfo()
         loadContacts()
     }
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
     override func viewDidDisappear(animated: Bool) {
         super.viewDidAppear(animated)
-        FirebaseHelper.rootRef.removeObserverWithHandle(handle)
+        myContactsRef.removeObserverWithHandle(contactsHandle)
+        myAccountRef.removeObserverWithHandle(accountHandle)
         //ref.removeObserverWithHandle(locationHandle)
     }
     
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func readUserAccountInfo(){
+        print("INSIDE THIS METHOD")
+        accountHandle = myAccountRef.observeEventType(.Value, withBlock: { (snapShot) in
+            print("account Handle in Test View Controller!")
+            let email = snapShot.value["email"] as! String
+            let name = snapShot.value["name"] as! String
+            let uid = snapShot.value["uid"] as! String
+            let base64String = snapShot.value["profilePhoto"] as! String
+            let image:UIImage!
+            if base64String.isEmpty {
+                image = UIImage(named: "empty")
+            }else{
+                let decodedData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions(rawValue: 0))
+                image = UIImage(data: decodedData!)
+            }
+            Me.account  = Account( uid:uid, email: email, name:name, profilePhoto: image)
+        })
+    }
 }
 
 //Map Operations:
@@ -112,13 +138,12 @@ extension TestViewController{
 //---------------------------------------------------------------------------------------------------------------------------------------------
 extension TestViewController{
     func loadContacts(){
-        let myUid = Me.account.uid
+        let myUid = FirebaseHelper.rootRef.authData.uid
         let users = FirebaseHelper.rootRef.childByAppendingPath("users")
         let image2 = UIImage(named: "menu_icon_0")
-        myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
         //---------------------------------------------------------------------------------------------------------------------------------------------
-        handle = myContacts.observeEventType(.Value, withBlock: { my_contacts_snapshot in
-            print("contacts loadded now")
+        contactsHandle = myContactsRef.observeEventType(.Value, withBlock: { my_contacts_snapshot in
+            print("Contacts handle in Test View Controller!")
             var t_contactsArray = [MenuItem]()
             var t_email = String()
             if my_contacts_snapshot.exists(){
@@ -127,10 +152,7 @@ extension TestViewController{
                     let uidOfThisContact = t_item.key
                     //let selectedStatusOfThisContact = t_item.value as! Bool
                     let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
-                    print(pathOfThisContact)
                     pathOfThisContact.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
-                        print(thisContactSnapShot)
-                        print(myUid)
                         t_email = thisContactSnapShot.value as! String
                         t_contactsArray.append(MenuItem(image: image2!, email: t_email, uid: uidOfThisContact))
                         self.contacts = t_contactsArray
