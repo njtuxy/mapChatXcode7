@@ -30,6 +30,7 @@
 		DAA89DB31BFE8D3A005FB53E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA89DB11BFE8D3A005FB53E /* Main.storyboard */; };
 		DAA89DB51BFE8D3A005FB53E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAA89DB41BFE8D3A005FB53E /* Assets.xcassets */; };
 		DAA89DB81BFE8D3A005FB53E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAA89DB61BFE8D3A005FB53E /* LaunchScreen.storyboard */; };
+		DAA8CF2D1C5AF80000ADDF9B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA8CF2C1C5AF80000ADDF9B /* ProfileViewController.swift */; };
 		DAB117EF1C49ABF900D2FC38 /* ContactOnMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB117EE1C49ABF900D2FC38 /* ContactOnMap.swift */; };
 		DAB117F11C49ACEB00D2FC38 /* NewMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB117F01C49ACEB00D2FC38 /* NewMapController.swift */; };
 		DAE51E611C16473700641F65 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE51E601C16473700641F65 /* Contact.swift */; };
@@ -66,6 +67,7 @@
 		DAA89DB41BFE8D3A005FB53E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DAA89DB71BFE8D3A005FB53E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DAA89DB91BFE8D3A005FB53E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAA8CF2C1C5AF80000ADDF9B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DAB117EE1C49ABF900D2FC38 /* ContactOnMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactOnMap.swift; sourceTree = "<group>"; };
 		DAB117F01C49ACEB00D2FC38 /* NewMapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMapController.swift; sourceTree = "<group>"; };
 		DAE51E601C16473700641F65 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				DA71AB7F1C59F247006D2833 /* currentLocation */,
 				DA71AB7C1C59EEC1006D2833 /* contacts */,
 				DA71AB7D1C59F1FE006D2833 /* settings */,
+				DAA8CF2B1C5AF7DA00ADDF9B /* profile */,
 				DA71AB801C59F25B006D2833 /* others */,
 			);
 			name = viewControllers;
@@ -233,6 +236,14 @@
 				DAE51E601C16473700641F65 /* Contact.swift */,
 			);
 			path = mapChat;
+			sourceTree = "<group>";
+		};
+		DAA8CF2B1C5AF7DA00ADDF9B /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				DAA8CF2C1C5AF80000ADDF9B /* ProfileViewController.swift */,
+			);
+			name = profile;
 			sourceTree = "<group>";
 		};
 		DAAB80651C0444A4003065F7 /* lib */ = {
@@ -381,6 +392,7 @@
 				DAA89DAC1BFE8D3A005FB53E /* AppDelegate.swift in Sources */,
 				DA23267A1C0D0E8D00094165 /* ContacsViewController.swift in Sources */,
 				DA2E0F1D1C0831A900C508E0 /* FirebaseHelper.swift in Sources */,
+				DAA8CF2D1C5AF80000ADDF9B /* ProfileViewController.swift in Sources */,
 				DAF135BC1C1F8F6000B8E15E /* SettingsViewController.swift in Sources */,
 				DAA89DAE1BFE8D3A005FB53E /* CurrentLocationViewController.swift in Sources */,
 				DA23267C1C0E2EFA00094165 /* AddNewContactViewController.swift in Sources */,

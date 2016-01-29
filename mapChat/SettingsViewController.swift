@@ -19,5 +19,9 @@ class SettingsViewController: UITableViewController {
     
     
     
+    @IBOutlet weak var userName: UILabel!
     
+    override func viewDidLoad() {
+        self.userName.text = Me.account.name
+    }
 }

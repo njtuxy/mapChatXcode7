@@ -11,29 +11,17 @@ import Firebase
 import GeoFire
 
 struct FirebaseHelper {
-    static let myRootRef = Firebase(url:"https://qd.firebaseio.com")
-    static let geoLocation = myRootRef.childByAppendingPath("locations")
+    static let rootRef = Firebase(url:"https://qd.firebaseio.com")
+    static let geoLocation = rootRef.childByAppendingPath("locations")
     static let geoFire = GeoFire(firebaseRef: geoLocation)
-    
-//    static var user_email_list = [String]()
-    
-    static func userAlreadyLoggedIn()-> Bool{
-        if myRootRef.authData == nil{
-            return false
-        }
-        else{
-            Me.authData  = MyInfo(authData: myRootRef.authData)
-            return true
-        }
-    }
+    static let name = rootRef.childByAppendingPath("users")
     
     func showError(error: NSError) -> NSError{
         return error
     }
-
     
     static func loginWithEmail(email: String, password: String){
-        myRootRef.authUser(email, password: password) {
+        rootRef.authUser(email, password: password) {
             error, authData in
             if error != nil {
                 // an error occured while attempting login
@@ -46,7 +34,7 @@ struct FirebaseHelper {
     }
     
     static func logOut(){
-        myRootRef.unauth()
+        rootRef.unauth()
     }
     
     static func saveAuthDataIntoNSUserDefaults(authData: FAuthData){
@@ -90,7 +78,7 @@ struct FirebaseHelper {
 //    }
     
     static func saveUserInfoInFirebase(uid: String, email: String, name:String){
-        let user = myRootRef.childByAppendingPath("users").childByAppendingPath(uid)
+        let user = rootRef.childByAppendingPath("users").childByAppendingPath(uid)
         let user_info = ["email": email, "uid": uid, "name": name]
         user.updateChildValues(user_info)
         
@@ -107,8 +95,8 @@ struct FirebaseHelper {
     
     static func addContactsObserver(){
         //Load all the contacts and send a singal to the observers to get the latest contacts list
-        let myUid = Me.authData.uid
-        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
+        let myUid = Me.account.uid
+        let users = FirebaseHelper.rootRef.childByAppendingPath("users")
         let myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
         
         myContacts.observeEventType(.Value, withBlock: { my_contacts_snapshot in
@@ -145,7 +133,7 @@ struct FirebaseHelper {
         var ref: Firebase!
         var handle: FirebaseHandle!
         
-        ref = FirebaseHelper.myRootRef.childByAppendingPath("locations").childByAppendingPath(uid)
+        ref = FirebaseHelper.rootRef.childByAppendingPath("locations").childByAppendingPath(uid)
         
         handle = ref.observeEventType(.Value, withBlock: { SnapShot in
             

@@ -108,13 +108,13 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         
         //Show login view if user hasn't loggedin:
         
-        if(!FirebaseHelper.userAlreadyLoggedIn()){
-            let myStoryBoard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = myStoryBoard.instantiateViewControllerWithIdentifier("loginView") as! LoginViewController
-            self.presentViewController(vc, animated: true, completion: nil)
-        }else{
-            FirebaseHelper.addContactsObserver()
-        }
+//        if(!FirebaseHelper.userAlreadyLoggedIn()){
+//            let myStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = myStoryBoard.instantiateViewControllerWithIdentifier("loginView") as! LoginViewController
+//            self.presentViewController(vc, animated: true, completion: nil)
+//        }else{
+//            FirebaseHelper.addContactsObserver()
+//        }
         
         
         //Setting the map view delegate, with sideMenu width:

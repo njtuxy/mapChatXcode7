@@ -11,18 +11,26 @@ import Firebase
 import Bond
 import MapKit
 
-struct MyInfo {
+struct Account{
+    var uid: String
+    var email: String
+    var name: String
+}
+
+struct UserInfo {
     let uid: String!
     let email: String!
+    let name: String!
     
-    init(authData: FAuthData){
-        self.email = authData.providerData["email"] as! String
+    init(authData: FAuthData, name:String){
+        self.email = authData.providerData["email"] as! String        
         self.uid = authData.uid
+        self.name = name
     }
 }
 
 struct Me{
-    static var authData:MyInfo!
+    static var account: Account!
 }
 
 
@@ -132,7 +140,7 @@ struct LocationObserver {
         
         print("adding a firebase ob for this user: " + email)
         
-        ref = FirebaseHelper.myRootRef.childByAppendingPath("locations").childByAppendingPath(uid)
+        ref = FirebaseHelper.rootRef.childByAppendingPath("locations").childByAppendingPath(uid)
         handle = ref.observeEventType(.Value, withBlock: { SnapShot in
 
             print("listening to user" + uid)

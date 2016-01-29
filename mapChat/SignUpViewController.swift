@@ -18,7 +18,8 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var txtPasswordConfirmation: UITextField!
     
     @IBOutlet weak var txtUserName: UITextField!
-    
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
         txtUserEmail.delegate = self
@@ -27,7 +28,7 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
         txtUserName.delegate = self
     }
     
-
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     @IBAction func signUp(sender: UIButton) {
         let email = txtUserEmail.text
         let password = txtPassword.text
@@ -61,15 +62,14 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
         
         self.signUp()
     }
-    
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     func signUp(){
         let email = txtUserEmail.text
         let password = txtPassword.text
-        FirebaseHelper.myRootRef.createUser(email, password: password,
+        FirebaseHelper.rootRef.createUser(email, password: password,
             withValueCompletionBlock: { error, result in
                 if error != nil {
-                    //                    print(error.userInfo.description)
-                    //                    print(error.localizedDescription)
                     if(error.code == -9){
                         self.showNoticeTextWithDelay("The specified email address is already in use.", delay: 1)
                         return
@@ -79,45 +79,53 @@ class SingUpViewController: UIViewController, UITextFieldDelegate{
                     }
                     
                 } else {
-                    //                    let uid = result["uid"] as? String
                     let message = "Successfully created user account!"
                     self.showNoticeTextWithDelay(message, delay: 1)
-                    //                    print("Successfully created user account with uid: \(uid)")
                     self.login()
                 }
         })
     }
     
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func saveUserNameInFirebase(uid:String){
+        FirebaseHelper.rootRef.childByAppendingPath("users").childByAppendingPath(uid).setValue(txtUserName.text)
+    }
+    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     func login(){
-        FirebaseHelper.myRootRef .authUser(txtUserEmail.text, password: txtPassword.text,
+        FirebaseHelper.rootRef .authUser(txtUserEmail.text, password: txtPassword.text,
             withCompletionBlock: { error, authData in
                 if error != nil {
-                    // There was an error logging in to this account
                 } else {
-                    // We are now logged in
-                    print("logged in!")
-//                    self.saveUserInfoLocally(authData)
-                    Me.authData = MyInfo(authData: authData)
+                    let email = authData.providerData["email"] as! String
+                    let uid = authData.uid
+                    let name = "SingUpUBaba"
+                    Me.account  = Account( uid:uid, email: email, name:name)
                     self.showRootView()
+                    self.saveUserNameInFirebase(authData.uid)
             }
         })
     }
     
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     func showRootView(){
         let myStoryBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = myStoryBoard.instantiateViewControllerWithIdentifier("tabsView")
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     @IBAction func closeWindow(sender: AnyObject) {
          self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     func delay(delay:Double, closure:()->()) {
         dispatch_after(
             dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
     }
     
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     func showNoticeTextWithDelay(text:String, delay:Double){
         self.noticeOnlyText(text)
         self.delay(delay){

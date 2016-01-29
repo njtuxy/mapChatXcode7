@@ -17,31 +17,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     override init() {
         super.init()
-//        Firebase.defaultConfig().persistenceEnabled = true                
+        Firebase.defaultConfig().persistenceEnabled = true                
     }
-    
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
 
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func setUpTabBarUI(){
         UITabBar.appearance().barStyle = UIBarStyle.Black
         UITabBar.appearance().barTintColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
         UITabBar.appearance().tintColor = UIColor.whiteColor()
         UITabBar.appearance().translucent = false
         UITabBar.appearance().shadowImage = UIImage()
+    }
+    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func showLoginWindow(){
+        let storyboard = UIStoryboard(name:"Main", bundle: nil)
+        let loginController = storyboard.instantiateViewControllerWithIdentifier("loginWindow") as UIViewController
+        window?.rootViewController = loginController
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func readUserAccountInfo(){
+        let authData = FirebaseHelper.rootRef.authData
+        let email = authData.providerData["email"] as! String
+        let uid = authData.uid
+        let name = "UBaba"
+        Me.account  = Account( uid:uid, email: email, name:name)
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // Override point for customization after application launch.
+        setUpTabBarUI()
         
-        if !FirebaseHelper.userAlreadyLoggedIn(){
-            let storyboard = UIStoryboard(name:"Main", bundle: nil)
-            let loginController = storyboard.instantiateViewControllerWithIdentifier("loginWindow") as UIViewController
-            window?.rootViewController = loginController
+        if FirebaseHelper.rootRef.authData == nil{
+            showLoginWindow()
+        }
+        else{
+            readUserAccountInfo()
         }
         
-//        navBar!.barStyle = UIBarStyle.Black
-//        navBar!.barTintColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
-//        navBar!.translucent = false
-
         return true
     }
 
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

@@ -25,16 +25,6 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         txtUsername.delegate = self
         txtPassword.delegate = self
-        
-        //        updateLoginStatus()
-        
-        
-        //        showCurrentLoggedInStatus(FirebaseHelper.userAlreadyLoggedIn())
-        
-        //        showCurrentLoggedInStatus(true)
-        
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -52,13 +42,11 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
 
         if(password == ""){
             self.showNoticeTextWithDelay("password is empty", delay: 1)
-            
             return
         }
         
-        //Authenticate with firebase
         
-        FirebaseHelper.myRootRef.authUser(username, password:password){
+        FirebaseHelper.rootRef.authUser(username, password:password){
                 error, authData in
                 if error != nil {
                     self.showNoticeTextWithDelay(error.localizedDescription, delay: 2)
@@ -72,7 +60,11 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
                     self.presentViewController(vc, animated: true, completion: nil)
                     
                     //Save authData to local
-                    Me.authData = MyInfo(authData: authData)
+                    
+                    let email = authData.providerData["email"] as! String
+                    let uid = authData.uid
+                    let name = "SignUpUBaba"
+                    Me.account  = Account( uid:uid, email: email, name:name)
             }
         }                 
     }

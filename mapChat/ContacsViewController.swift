@@ -30,7 +30,7 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        FirebaseHelper.myRootRef.removeObserverWithHandle(handle)
+        FirebaseHelper.rootRef.removeObserverWithHandle(handle)
     }
 }
 
@@ -38,8 +38,8 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
 extension ContacsViewController{
     //---------------------------------------------------------------------------------------------------------------------------------------------
     func downloadContacts(){
-        let myUid = Me.authData.uid
-        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
+        let myUid = Me.account.uid
+        let users = FirebaseHelper.rootRef.childByAppendingPath("users")
         myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
         //---------------------------------------------------------------------------------------------------------------------------------------------
         handle = myContacts.observeEventType(.Value, withBlock: { my_contacts_snapshot in
@@ -74,8 +74,8 @@ extension ContacsViewController{
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
     func removeContact(thisContactUID: String, indexInTable: Int){
-        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
-        let myUid = Me.authData.uid
+        let users = FirebaseHelper.rootRef.childByAppendingPath("users")
+        let myUid = Me.account.uid
         //Firebase - Remove from my contact list
         let thisContact = users.childByAppendingPath(myUid).childByAppendingPath("contacts").childByAppendingPath(thisContactUID)
         thisContact.removeValue()

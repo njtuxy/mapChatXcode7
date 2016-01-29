@@ -41,7 +41,7 @@ class MessageViewController: UIViewController{
     
     func monitorUserLocaiton(itsUID: String){
         
-        ref = FirebaseHelper.myRootRef.childByAppendingPath("locations").childByAppendingPath(itsUID)
+        ref = FirebaseHelper.rootRef.childByAppendingPath("locations").childByAppendingPath(itsUID)
         
         handle = ref.observeEventType(.Value, withBlock: { SnapShot in
 //            print("New value got!")

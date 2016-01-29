@@ -42,7 +42,7 @@ class TestViewController: UITableViewController{
     //---------------------------------------------------------------------------------------------------------------------------------------------
     override func viewDidDisappear(animated: Bool) {
         super.viewDidAppear(animated)
-        FirebaseHelper.myRootRef.removeObserverWithHandle(handle)
+        FirebaseHelper.rootRef.removeObserverWithHandle(handle)
         //ref.removeObserverWithHandle(locationHandle)
     }
     
@@ -112,8 +112,8 @@ extension TestViewController{
 //---------------------------------------------------------------------------------------------------------------------------------------------
 extension TestViewController{
     func loadContacts(){
-        let myUid = Me.authData.uid
-        let users = FirebaseHelper.myRootRef.childByAppendingPath("users")
+        let myUid = Me.account.uid
+        let users = FirebaseHelper.rootRef.childByAppendingPath("users")
         let image2 = UIImage(named: "menu_icon_0")
         myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
         //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -150,7 +150,7 @@ extension TestViewController: MenuViewDelegate {
     func menu(menu: MenuView, didSelectItemAtIndex index: Int) {
         let uid = contacts[index].uid
         let email = contacts[index].email
-        let location = FirebaseHelper.myRootRef.childByAppendingPath("locations").childByAppendingPath(uid)
+        let location = FirebaseHelper.rootRef.childByAppendingPath("locations").childByAppendingPath(uid)
         
         locationHandle = location.observeEventType(.Value, withBlock: { SnapShot in
             print("listening to user" + uid)
