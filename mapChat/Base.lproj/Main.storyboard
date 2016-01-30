@@ -744,10 +744,11 @@
         <scene sceneID="19w-R3-pWa">
             <objects>
                 <tableViewController id="Z6k-Rv-va6" customClass="SettingsViewController" customModule="mapChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="dhR-Q9-6pq" userLabel="Settings" customClass="Se">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="dhR-Q9-6pq" userLabel="Settings" customClass="Se">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                         <sections>
                             <tableViewSection id="1og-ZB-Od9">
                                 <cells>
@@ -755,7 +756,7 @@
                                         <rect key="frame" x="0.0" y="99" width="600" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XQw-Qb-3Gm" id="qPw-SL-2ZA">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="71"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jwT-3S-6O3">
@@ -805,30 +806,52 @@
                             </tableViewSection>
                             <tableViewSection id="egT-EL-Vyn">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="6oH-30-GFk">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="6oH-30-GFk">
                                         <rect key="frame" x="0.0" y="206" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6oH-30-GFk" id="Dba-mP-b8o">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3WK-tr-gcG">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="320" id="zGK-VZ-WDM"/>
-                                                    </constraints>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Login as" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nek-k1-rBA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="nek-k1-rBA" firstAttribute="leading" secondItem="Dba-mP-b8o" secondAttribute="leading" id="PQF-kI-nNy"/>
+                                                <constraint firstAttribute="trailing" secondItem="nek-k1-rBA" secondAttribute="trailing" id="ROh-WH-j8M"/>
+                                                <constraint firstAttribute="bottom" secondItem="nek-k1-rBA" secondAttribute="bottom" id="pKh-QH-gnH"/>
+                                                <constraint firstItem="nek-k1-rBA" firstAttribute="top" secondItem="Dba-mP-b8o" secondAttribute="top" id="vnv-ND-Wem"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="MAa-rg-Y4c">
+                                        <rect key="frame" x="0.0" y="250" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MAa-rg-Y4c" id="hnC-Nu-VZA">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCw-jL-Dct">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                                     <state key="normal" title="Log out">
                                                         <color key="titleColor" red="1" green="0.2470276545" blue="0.55070451249999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="logoutButton:" destination="Z6k-Rv-va6" eventType="touchUpInside" id="fqh-Wd-jO9"/>
+                                                        <action selector="logoutButton:" destination="Z6k-Rv-va6" eventType="touchUpInside" id="SXw-hc-aCT"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="3WK-tr-gcG" firstAttribute="top" secondItem="Dba-mP-b8o" secondAttribute="top" id="4LX-Fe-q0l"/>
-                                                <constraint firstItem="3WK-tr-gcG" firstAttribute="leading" secondItem="Dba-mP-b8o" secondAttribute="leading" id="dkU-0f-Faw"/>
-                                                <constraint firstAttribute="bottom" secondItem="3WK-tr-gcG" secondAttribute="bottom" id="kkK-S1-Fr9"/>
+                                                <constraint firstItem="dCw-jL-Dct" firstAttribute="leading" secondItem="hnC-Nu-VZA" secondAttribute="leading" id="AM4-ML-Xhk"/>
+                                                <constraint firstAttribute="bottom" secondItem="dCw-jL-Dct" secondAttribute="bottom" id="HWO-6d-Htl"/>
+                                                <constraint firstAttribute="trailing" secondItem="dCw-jL-Dct" secondAttribute="trailing" id="Il4-eb-IeW"/>
+                                                <constraint firstItem="dCw-jL-Dct" firstAttribute="top" secondItem="hnC-Nu-VZA" secondAttribute="top" id="Ydt-hH-938"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -844,6 +867,7 @@
                     <navigationItem key="navigationItem" title="Settings" id="ggp-Az-ntc"/>
                     <connections>
                         <outlet property="profilePhoto" destination="jwT-3S-6O3" id="eiV-Ns-H86"/>
+                        <outlet property="userEmail" destination="nek-k1-rBA" id="81Q-LT-1BV"/>
                         <outlet property="userName" destination="Occ-kz-V9x" id="L2u-r9-vRc"/>
                     </connections>
                 </tableViewController>

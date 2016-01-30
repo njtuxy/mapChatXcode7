@@ -21,6 +21,7 @@ class TestViewController: UITableViewController{
     var subTitleLabel:UILabel!
     var myContactsRef: Firebase!
     var myAccountRef: Firebase!
+    var myContactsLocationRef: Firebase!
     
     var contactsHandle: UInt!
     var locationHandle: UInt!
@@ -50,6 +51,12 @@ class TestViewController: UITableViewController{
         super.viewDidAppear(animated)
         myContactsRef.removeObserverWithHandle(contactsHandle)
         myAccountRef.removeObserverWithHandle(accountHandle)
+        if let lh = locationHandle {
+            myContactsRef.removeObserverWithHandle(lh)
+        }
+        
+
+        
         //ref.removeObserverWithHandle(locationHandle)
     }
     
@@ -171,9 +178,9 @@ extension TestViewController: MenuViewDelegate {
     func menu(menu: MenuView, didSelectItemAtIndex index: Int) {
         let uid = contacts[index].uid
         let email = contacts[index].email
-        let location = FirebaseHelper.rootRef.childByAppendingPath("locations").childByAppendingPath(uid)
+        myContactsLocationRef = Firebase(url: FirebaseHelper.rootURL).childByAppendingPath("locations").childByAppendingPath(uid)
         
-        locationHandle = location.observeEventType(.Value, withBlock: { SnapShot in
+        locationHandle = myContactsLocationRef.observeEventType(.Value, withBlock: { SnapShot in
             print("listening to user" + uid)
             //FIX IT? IT MIGHT NOT A GOOD SOLUTION, THINKING ABOUT SUBSCRIPT
             //PERFORMACE ISSUE HERE?
