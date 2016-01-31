@@ -41,7 +41,10 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         self.myContactsRef.removeObserverWithHandle(self.myContactsHandle)
-        self.singleContactRef.removeObserverWithHandle(self.singleContactHandle)
+        if let sh = singleContactHandle {
+            self.singleContactRef.removeObserverWithHandle(sh)
+        }
+
     }
 }
 
@@ -49,10 +52,11 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
 extension ContacsViewController{
     //---------------------------------------------------------------------------------------------------------------------------------------------
     func downloadContacts(){
-            print("download contacts method get called!")
         //---------------------------------------------------------------------------------------------------------------------------------------------
         myContactsHandle = self.myContactsRef.observeEventType(.Value, withBlock: { my_contacts_snapshot in
-            print("my contacts ref called")
+            print("contacts handle get called!")
+            var t_contactsArray = [Contact]()
+            var t_udidArray = [String]()
             if my_contacts_snapshot.exists(){
                 for item in my_contacts_snapshot.children{
                     let t_item = item as! FDataSnapshot
@@ -60,8 +64,7 @@ extension ContacsViewController{
                     let selectedStatusOfThisContact = t_item.value as! Bool
                     self.singleContactRef = Firebase(url: FirebaseHelper.rootURL).childByAppendingPath("users").childByAppendingPath(uidOfThisContact)
                     self.singleContactHandle = self.singleContactRef.observeEventType(.Value, withBlock: { thisContactSnapShot in
-                                    print("single contact ref called")
-                        var t_contactsArray = [Contact]()
+                        print("single contact ref called")
                         let email = thisContactSnapShot.value["email"] as! String
                         let name = thisContactSnapShot.value["name"] as! String
                         let uid = thisContactSnapShot.value["uid"] as! String
@@ -73,7 +76,10 @@ extension ContacsViewController{
                             let imageData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
                             image = UIImage(data: imageData!)
                         }
-                        t_contactsArray.append(Contact(uid: uid, email: email, name: name, profilePhtoto: image, selected: selectedStatusOfThisContact))
+                        if !t_udidArray.contains(uid){
+                            t_contactsArray.append(Contact(uid: uid, email: email, name: name, profilePhtoto: image, selected: selectedStatusOfThisContact))
+                            t_udidArray.append(uid)
+                        }
                         self.contactsArray = t_contactsArray
                         print(self.contactsArray)
                         self.allContactsTable.reloadData()
@@ -84,6 +90,7 @@ extension ContacsViewController{
             }
                 
             else{
+                print("empty array is here!")
                 self.contactsArray = []
                 self.allContactsTable.reloadData()
             }
