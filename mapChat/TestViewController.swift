@@ -31,17 +31,16 @@ class TestViewController: UITableViewController{
     //---------------------------------------------------------------------------------------------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
-        myAccountRef = Firebase(url: FirebaseHelper.usersURL).childByAppendingPath(FirebaseHelper.uid)
-        myContactsRef = Firebase(url: FirebaseHelper.usersURL).childByAppendingPath(FirebaseHelper.uid).childByAppendingPath("contacts")
         mapView.delegate = self
         loadMenu()
         configNavigationBar()
-        
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        myAccountRef = Firebase(url: FirebaseHelper.usersURL).childByAppendingPath(FirebaseHelper.uid)
+        myContactsRef = Firebase(url: FirebaseHelper.usersURL).childByAppendingPath(FirebaseHelper.uid).childByAppendingPath("contacts")
         readUserAccountInfo()
         loadContacts()
     }
@@ -54,9 +53,6 @@ class TestViewController: UITableViewController{
         if let lh = locationHandle {
             myContactsRef.removeObserverWithHandle(lh)
         }
-        
-
-        
         //ref.removeObserverWithHandle(locationHandle)
     }
     
@@ -76,7 +72,12 @@ class TestViewController: UITableViewController{
                 image = UIImage(data: imageData!)
             }
             Me.account  = Account( uid:uid, email: email, name:name, profilePhoto: image)
+            self.removeeAccountObserver()
         })
+    }
+    
+    func removeeAccountObserver(){
+        myAccountRef.removeObserverWithHandle(accountHandle)
     }
 }
 

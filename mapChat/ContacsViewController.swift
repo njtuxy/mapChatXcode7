@@ -14,9 +14,14 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBOutlet weak var allContactsTable: UITableView!
     
-     var myContacts:Firebase!
+     var myContactsRef:Firebase!
+     var myContactsHandle: UInt!
+    
+    var singleContactRef: Firebase!
+    var singleContactHandle: UInt!
+    
      var contactsArray = [Contact]()
-     var handle: UInt!
+
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
     override func viewDidLoad() {
@@ -25,12 +30,18 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController!.navigationBar.shadowImage = UIImage()
         self.navigationController!.navigationBar.translucent = true
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        myContactsRef = Firebase(url: FirebaseHelper.rootURL).childByAppendingPath("users").childByAppendingPath(Me.account.uid).childByAppendingPath("contacts")
         self.downloadContacts()
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        FirebaseHelper.rootRef.removeObserverWithHandle(handle)
+        self.myContactsRef.removeObserverWithHandle(self.myContactsHandle)
+        self.singleContactRef.removeObserverWithHandle(self.singleContactHandle)
     }
 }
 
@@ -38,27 +49,40 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
 extension ContacsViewController{
     //---------------------------------------------------------------------------------------------------------------------------------------------
     func downloadContacts(){
-        let myUid = Me.account.uid
-        let users = FirebaseHelper.rootRef.childByAppendingPath("users")
-        myContacts = users.childByAppendingPath(myUid).childByAppendingPath("contacts")
+            print("download contacts method get called!")
         //---------------------------------------------------------------------------------------------------------------------------------------------
-        handle = myContacts.observeEventType(.Value, withBlock: { my_contacts_snapshot in
-            var t_contactsArray = [Contact]()
-            var t_email = String()
+        myContactsHandle = self.myContactsRef.observeEventType(.Value, withBlock: { my_contacts_snapshot in
+            print("my contacts ref called")
             if my_contacts_snapshot.exists(){
                 for item in my_contacts_snapshot.children{
                     let t_item = item as! FDataSnapshot
                     let uidOfThisContact = t_item.key
                     let selectedStatusOfThisContact = t_item.value as! Bool
-                    let pathOfThisContact = users.childByAppendingPath(uidOfThisContact).childByAppendingPath("email")
-                    pathOfThisContact.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
-                        t_email = thisContactSnapShot.value as! String
-                        t_contactsArray.append(Contact(uid: uidOfThisContact, email: t_email, selected: selectedStatusOfThisContact))
+                    self.singleContactRef = Firebase(url: FirebaseHelper.rootURL).childByAppendingPath("users").childByAppendingPath(uidOfThisContact)
+                    self.singleContactHandle = self.singleContactRef.observeEventType(.Value, withBlock: { thisContactSnapShot in
+                                    print("single contact ref called")
+                        var t_contactsArray = [Contact]()
+                        let email = thisContactSnapShot.value["email"] as! String
+                        let name = thisContactSnapShot.value["name"] as! String
+                        let uid = thisContactSnapShot.value["uid"] as! String
+                        let base64String = thisContactSnapShot.value["profilePhoto"] as! String
+                        let image:UIImage!
+                        if base64String.isEmpty {
+                            image = UIImage(named: "empty")
+                        }else{
+                            let imageData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+                            image = UIImage(data: imageData!)
+                        }
+                        t_contactsArray.append(Contact(uid: uid, email: email, name: name, profilePhtoto: image, selected: selectedStatusOfThisContact))
                         self.contactsArray = t_contactsArray
+                        print(self.contactsArray)
                         self.allContactsTable.reloadData()
                     })
+                    //Remove the observer immeidately after get the data. PUT here or on level up? Need to DEBUG.
+//                    self.singleContactRef.removeObserverWithHandle(self.singleContactHandle)
                 }
             }
+                
             else{
                 self.contactsArray = []
                 self.allContactsTable.reloadData()
@@ -98,7 +122,7 @@ extension ContacsViewController{
         
         let index = indexPath.row
         // Configure the cell...
-        cell.txtUserEmail.text = self.contactsArray[index].email
+        cell.txtUserEmail.text = self.contactsArray[index].name
         cell.txtUserEmail.textColor = UIColor.whiteColor()
         cell.btnRemoveContact.tag = index
         cell.btnRemoveContact.addTarget(self, action: "removeThisContact:", forControlEvents: .TouchUpInside)
