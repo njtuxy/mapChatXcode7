@@ -51,6 +51,17 @@ struct FirebaseHelper {
         defaults.setObject(uid, forKey: "firebase_uid")
     }
     
+    static func readUserImage(base64String: String) -> UIImage{
+        let image:UIImage!
+        if base64String.isEmpty {
+            image = UIImage(named: "empty")
+        }else{
+            let imageData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+            image = UIImage(data: imageData!)
+        }
+        return image
+    }
+
 //    static func saveConctactsArrayIntoNSUserDefaults(contacts: [Contact]){
 //        let defaults = NSUserDefaults.standardUserDefaults()
 //        var array: [Contact] = [Contact]()

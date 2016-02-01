@@ -14,13 +14,14 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBOutlet weak var allContactsTable: UITableView!
     
-     var myContactsRef:Firebase!
+     var conatctViewContactsRef:Firebase!
      var myContactsHandle: UInt!
     
-    var singleContactRef: Firebase!
-    var singleContactHandle: UInt!
+     var singleContactRef: Firebase!
+     var singleContactHandle: UInt!
     
      var contactsArray = [Contact]()
+     var contactsUidArray = [String]()
 
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -34,64 +35,44 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        myContactsRef = Firebase(url: FirebaseHelper.rootURL).childByAppendingPath("users").childByAppendingPath(Me.account.uid).childByAppendingPath("contacts")
-        self.downloadContacts()
+        self.conatctViewContactsRef = Firebase(url: FirebaseHelper.rootURL).childByAppendingPath("users").childByAppendingPath(Me.account.uid).childByAppendingPath("contacts")
+        self.downloadMyContacts()
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        self.myContactsRef.removeObserverWithHandle(self.myContactsHandle)
-        if let sh = singleContactHandle {
-            self.singleContactRef.removeObserverWithHandle(sh)
-        }
-
     }
 }
 
 //Firebase DataSource:
 extension ContacsViewController{
+    
+    func loadContacts(contacts: FDataSnapshot){
+        for contact in contacts.children{
+            let item = contact as! FDataSnapshot
+            let uid = item.key
+            let status = item.value as! Bool
+            let singleContactRef = Firebase(url: FirebaseHelper.rootURL).childByAppendingPath("users").childByAppendingPath(uid)
+            singleContactRef.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
+                let email = thisContactSnapShot.value["email"] as! String
+                let name = thisContactSnapShot.value["name"] as! String
+                let uid = thisContactSnapShot.value["uid"] as! String
+                let base64String = thisContactSnapShot.value["profilePhoto"] as! String
+                let profilePhoto = FirebaseHelper.readUserImage(base64String)
+                self.contactsArray.append(Contact(uid: uid, email: email, name: name, profilePhtoto: profilePhoto, selected: status))
+                self.allContactsTable.reloadData()
+            })
+        }
+    }
+    
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    func downloadContacts(){
-        //---------------------------------------------------------------------------------------------------------------------------------------------
-        myContactsHandle = self.myContactsRef.observeEventType(.Value, withBlock: { my_contacts_snapshot in
+    func downloadMyContacts(){
+        conatctViewContactsRef.observeSingleEventOfType(.Value, withBlock: { my_contacts_snapshot in
             print("contacts handle get called!")
-            var t_contactsArray = [Contact]()
-            var t_udidArray = [String]()
-            if my_contacts_snapshot.exists(){
-                for item in my_contacts_snapshot.children{
-                    let t_item = item as! FDataSnapshot
-                    let uidOfThisContact = t_item.key
-                    let selectedStatusOfThisContact = t_item.value as! Bool
-                    self.singleContactRef = Firebase(url: FirebaseHelper.rootURL).childByAppendingPath("users").childByAppendingPath(uidOfThisContact)
-                    self.singleContactHandle = self.singleContactRef.observeEventType(.Value, withBlock: { thisContactSnapShot in
-                        print("single contact ref called")
-                        let email = thisContactSnapShot.value["email"] as! String
-                        let name = thisContactSnapShot.value["name"] as! String
-                        let uid = thisContactSnapShot.value["uid"] as! String
-                        let base64String = thisContactSnapShot.value["profilePhoto"] as! String
-                        let image:UIImage!
-                        if base64String.isEmpty {
-                            image = UIImage(named: "empty")
-                        }else{
-                            let imageData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
-                            image = UIImage(data: imageData!)
-                        }
-                        if !t_udidArray.contains(uid){
-                            t_contactsArray.append(Contact(uid: uid, email: email, name: name, profilePhtoto: image, selected: selectedStatusOfThisContact))
-                            t_udidArray.append(uid)
-                        }
-                        self.contactsArray = t_contactsArray
-                        print(self.contactsArray)
-                        self.allContactsTable.reloadData()
-                    })
-                    //Remove the observer immeidately after get the data. PUT here or on level up? Need to DEBUG.
-//                    self.singleContactRef.removeObserverWithHandle(self.singleContactHandle)
-                }
-            }
-                
-            else{
-                print("empty array is here!")
-                self.contactsArray = []
+            self.contactsArray = []
+            if my_contacts_snapshot.exists() {
+                self.loadContacts(my_contacts_snapshot)
+            }else{
                 self.allContactsTable.reloadData()
             }
         })
@@ -113,6 +94,7 @@ extension ContacsViewController{
         //Firebase - Also from me this users's contact
         let me = users.childByAppendingPath(thisContactUID).childByAppendingPath("contacts").childByAppendingPath(myUid)
         me.removeValue()
+        downloadMyContacts()
     }
 }
 
