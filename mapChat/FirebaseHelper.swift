@@ -25,6 +25,14 @@ struct FirebaseHelper {
         return error
     }
     
+    
+    //New instance -> reload local table view
+    
+    func loadContactsList(){
+        var contactsArray = [String]()
+    }
+    
+    
     static func loginWithEmail(email: String, password: String){
         rootRef.authUser(email, password: password) {
             error, authData in
