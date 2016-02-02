@@ -117,6 +117,7 @@ extension TestViewController{
     func configNavigationBar(){
         let navBar = self.navigationController?.navigationBar
         navBar!.barStyle = UIBarStyle.Black
+        navBar!.tintColor = UIColor(red: 239.0 / 255.0, green: 184.0 / 255.0, blue: 60.0 / 255.0, alpha: 1.0)
         navBar!.barTintColor = UIColor(red: 72.0 / 255.0, green: 77.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0)
         navBar!.translucent = false
         title = "4 contacts online"

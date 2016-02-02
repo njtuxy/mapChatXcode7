@@ -178,7 +178,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="Fit-5Y-4gR">
                         <barButtonItem key="leftBarButtonItem" image="contacts" style="plain" id="gTJ-RD-riO">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="switchMenu" destination="wYs-HB-I1E" id="BTu-gP-E5P"/>
                             </connections>

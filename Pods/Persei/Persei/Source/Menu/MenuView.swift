@@ -78,13 +78,12 @@ public class MenuView: StickyHeaderView {
     }
     
     private func updateContentLayout() {
-        let inset = ceil(contentHeight / 6.0)
+        let inset = ceil(contentHeight / 20.0)
         let spacing = floor(inset / 2.0)
-    
         collectionLayout.minimumLineSpacing = 0.0
         collectionLayout.minimumInteritemSpacing = 0.0
-        collectionView.contentInset = UIEdgeInsets(top: 0.0, left: inset, bottom: -10.0 , right: inset)
-        collectionLayout.itemSize = CGSize(width: contentHeight - inset, height: contentHeight - inset)
+        collectionView.contentInset = UIEdgeInsets(top: -10.0, left: inset, bottom: -10.0 , right: inset)
+        collectionLayout.itemSize = CGSize(width: contentHeight*1.2, height: contentHeight*1.2)
     }
 }
 
