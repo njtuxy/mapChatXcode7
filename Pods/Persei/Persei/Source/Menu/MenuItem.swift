@@ -38,8 +38,6 @@ extension UIImage {
     }
     var circle: UIImage? {
         let square = CGSize(width: min(size.width, size.height), height: min(size.width, size.height))
-        print(size.width)
-        print(size.height)
         let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
         imageView.contentMode = .ScaleAspectFill
         imageView.image = self
