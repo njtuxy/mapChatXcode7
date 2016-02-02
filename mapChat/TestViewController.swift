@@ -117,7 +117,7 @@ extension TestViewController{
     func configNavigationBar(){
         let navBar = self.navigationController?.navigationBar
         navBar!.barStyle = UIBarStyle.Black
-        navBar!.tintColor = UIColor(red: 239.0 / 255.0, green: 184.0 / 255.0, blue: 60.0 / 255.0, alpha: 1.0)
+        navBar!.tintColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
         navBar!.barTintColor = UIColor(red: 72.0 / 255.0, green: 77.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0)
         navBar!.translucent = false
         title = "4 contacts online"
@@ -235,18 +235,28 @@ extension TestViewController: MKMapViewDelegate {
                     return nil
                 }
             
+            var v: MKAnnotationView! = nil
+            if let t = annotation.title {
                 let reuseId = "pin"
-                var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
-                if pinView == nil {
-                    pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-                    pinView!.canShowCallout = true
-                    pinView!.animatesDrop = true
+                v = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+                if v == nil {
+                    v = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                    v.image = UIImage(named: "woman")?.circle2
+                    v.canShowCallout = true
+                    
+                    v.bounds.size.height /= 10.0
+                    v.bounds.size.width /= 10.0
+                    //                    pinView!.animatesDrop = true
                 }
-                let button1 = UIButton(type: UIButtonType.System)
-                button1.frame = CGRectMake(0, 0, 30, 30)
-                button1.setImage(UIImage.fontAwesomeIconWithName(.CommentsO, textColor: UIColor.blackColor(), size: CGSizeMake(25, 25)), forState: .Normal)
-                pinView?.rightCalloutAccessoryView = button1
-                return pinView
+                
+            }
+            
+            let button1 = UIButton(type: UIButtonType.System)
+            button1.frame = CGRectMake(0, 0, 30, 30)
+            button1.setImage(UIImage.fontAwesomeIconWithName(.CommentsO, textColor: UIColor.blackColor(), size: CGSizeMake(25, 25)), forState: .Normal)
+            v.rightCalloutAccessoryView = button1
+            v.annotation = annotation
+            return v
         }
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -262,6 +272,27 @@ extension TestViewController: MKMapViewDelegate {
 
 }
 
+extension UIImage{
+    var circle2: UIImage? {
+    let square = CGSize(width: min(size.width, size.height), height: min(size.width, size.height))
+    print(size.width)
+    print(size.height)
+    let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
+    imageView.contentMode = .ScaleAspectFill
+    imageView.image = self
+    imageView.layer.cornerRadius = square.width/2
+    imageView.layer.masksToBounds = true
+    imageView.layer.borderColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0).CGColor
+    imageView.layer.borderWidth = 5
+    UIGraphicsBeginImageContext(imageView.bounds.size)
+    guard let context = UIGraphicsGetCurrentContext() else { return nil }
+    imageView.layer.renderInContext(context)
+    let result = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return result
+    }
+
+}
 
 /*
 func hideSubTitle(){
