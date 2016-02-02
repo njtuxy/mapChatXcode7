@@ -236,7 +236,7 @@ extension TestViewController: MKMapViewDelegate {
                     return nil
                 }
             var v: MKAnnotationView! = nil
-            if let _ = annotation.title {
+            if  annotation is Annotation{
                 let newAnnotation = annotation as! Annotation
                 let reuseId = "pin"
                 v = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
