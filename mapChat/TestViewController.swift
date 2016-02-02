@@ -34,7 +34,6 @@ class TestViewController: UITableViewController{
         mapView.delegate = self
         loadMenu()
         configNavigationBar()
-        showSubtitle()
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -104,9 +103,9 @@ extension TestViewController{
     //---------------------------------------------------------------------------------------------------------------------------------------------
     func showSubtitle(){
         let navBar = self.navigationController?.navigationBar
-        let firstFrame = CGRect(x: navBar!.frame.width/3, y: 23, width: navBar!.frame.width/2, height: navBar!.frame.height/2)
+        let firstFrame = CGRect(x: navBar!.frame.width/3, y: 25, width: navBar!.frame.width/2, height: navBar!.frame.height/2)
         subTitleLabel = UILabel(frame: firstFrame)
-        subTitleLabel.text = "Choose a contact:"
+        subTitleLabel.text = "You can add a contact from contacts tab"
         subTitleLabel.textColor = UIColor.whiteColor()
         subTitleLabel.textAlignment = NSTextAlignment.Left
         subTitleLabel.font = UIFont (name: "HelveticaNeue-Light", size: 12)
@@ -128,7 +127,9 @@ extension TestViewController{
     //---------------------------------------------------------------------------------------------------------------------------------------------
     func loadMenu() {
         let menu = MenuView()
-        menu.backgroundColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
+//        menu.backgroundColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
+        menu.backgroundColor = UIColor(red: 72.0 / 255.0, green: 77.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0)
+        
         tableView.addSubview(menu)
         menu.delegate = self
         self.menu = menu
@@ -279,7 +280,7 @@ extension UIImage{
         let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
         imageView.contentMode = .ScaleAspectFill
         imageView.image = self
-        imageView.layer.cornerRadius = square.width/2
+        imageView.layer.cornerRadius = square.width/10
         imageView.layer.masksToBounds = true
 //        imageView.layer.borderColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0).CGColor
         imageView.layer.borderColor = UIColor.whiteColor().CGColor
