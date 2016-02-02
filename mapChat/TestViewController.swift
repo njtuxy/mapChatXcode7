@@ -89,17 +89,6 @@ extension TestViewController{
         mapView.setRegion(mapView.regionThatFits(region), animated: true)
         mapView.mapType = .Standard
     }
-    
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    func addContactToMapAndCenterMapToIt(uidOfContact:String, email: String, name:String, lat: Double, lng: Double){
-        let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
-        Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: name, subtitle: email)
-        let annotations = Array(Annotations.annotationsDict.values)
-        let allAnnotations = self.mapView.annotations
-        self.mapView.removeAnnotations(allAnnotations)
-        self.mapView.addAnnotations(annotations)
-        centerMapToCoordinate(t_location, mapView: self.mapView)
-    }
 }
 
 //UI Configurations:
@@ -210,39 +199,53 @@ extension TestViewController: MenuViewDelegate {
     
 }
 
+//Map Annotations functions
 //---------------------------------------------------------------------------------------------------------------------------------------------
 extension TestViewController: MKMapViewDelegate {
+
+        //Open chat window if user click on the annotation popup callout accessory:
         //---------------------------------------------------------------------------------------------------------------------------------------------
-        // When user taps on the disclosure button you can perform a segue to navigate to another view controller
         func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
             if control == view.rightCalloutAccessoryView{
-                ChatWindow.contact = view.annotation!.title!
+                ChatWindow.contact = (view.annotation as! Annotation).title
+                ChatWindow.contactEmail = (view.annotation as! Annotation).email
                 performSegueWithIdentifier("showChatWindow", sender: self)
             }
         }
 
+        //Configure the annotation callout UI
         //---------------------------------------------------------------------------------------------------------------------------------------------
-        // Here we add disclosure button inside annotation window
         func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-            if annotation is MKUserLocation {
-                return nil
-            }
+
+                if annotation is MKUserLocation {
+                    return nil
+                }
             
-            let reuseId = "pin"
-            var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
-            
-            if pinView == nil {
-                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-                pinView!.canShowCallout = true
-                pinView!.animatesDrop = true
-            }
-            
-            let button1 = UIButton(type: UIButtonType.System)
-            button1.frame = CGRectMake(0, 0, 30, 30)
-            button1.setImage(UIImage.fontAwesomeIconWithName(.CommentsO, textColor: UIColor.blackColor(), size: CGSizeMake(25, 25)), forState: .Normal)
-            pinView?.rightCalloutAccessoryView = button1
-            return pinView
+                let reuseId = "pin"
+                var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+                if pinView == nil {
+                    pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                    pinView!.canShowCallout = true
+                    pinView!.animatesDrop = true
+                }
+                let button1 = UIButton(type: UIButtonType.System)
+                button1.frame = CGRectMake(0, 0, 30, 30)
+                button1.setImage(UIImage.fontAwesomeIconWithName(.CommentsO, textColor: UIColor.blackColor(), size: CGSizeMake(25, 25)), forState: .Normal)
+                pinView?.rightCalloutAccessoryView = button1
+                return pinView
         }
+    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func addContactToMapAndCenterMapToIt(uidOfContact:String, email: String, name:String, lat: Double, lng: Double){
+        let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
+        Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: name, subtitle: email, email: email)
+        let annotations = Array(Annotations.annotationsDict.values)
+        let allAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allAnnotations)
+        self.mapView.addAnnotations(annotations)
+        centerMapToCoordinate(t_location, mapView: self.mapView)
+    }
+
 }
 
 

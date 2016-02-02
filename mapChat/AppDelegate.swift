@@ -17,16 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     override init() {
         super.init()
-//        Firebase.defaultConfig().persistenceEnabled = true                
+        Firebase.defaultConfig().persistenceEnabled = true                
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------
     func setUpTabBarUI(){
-        UITabBar.appearance().barStyle = UIBarStyle.Black
-        UITabBar.appearance().barTintColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
-        UITabBar.appearance().tintColor = UIColor.whiteColor()
-        UITabBar.appearance().translucent = false
-        UITabBar.appearance().shadowImage = UIImage()
+//        UITabBar.appearance().barStyle = UIBarStyle.Black
+//        UITabBar.appearance().barTintColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
+//        UITabBar.appearance().tintColor = UIColor.whiteColor()
+//        UITabBar.appearance().translucent = false
+//        UITabBar.appearance().shadowImage = UIImage()
     }
     
     //---------------------------------------------------------------------------------------------------------------------------------------------

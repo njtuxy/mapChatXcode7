@@ -71,18 +71,20 @@ struct SideMenuContacts{
     static var contacts = [SideMenuContact]()
 }
 
-
+//Customized map annotation class: 
 class Annotation : NSObject, MKAnnotation{
     var uid: String
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
+    var email: String?
     
-    init(uid: String, coordinate: CLLocationCoordinate2D, title: String, subtitle: String){
+    init(uid: String, coordinate: CLLocationCoordinate2D, title: String, subtitle: String, email:String){
         self.uid = uid
         self.coordinate = coordinate
         self.title = title
         self.subtitle = subtitle
+        self.email = email
     }
 }
 
@@ -102,6 +104,7 @@ struct Status {
 
 struct ChatWindow {
     static var contact:String?
+    static var contactEmail:String?
 }
 
 
@@ -194,7 +197,7 @@ func addAnnotationFromObserver(uidOfContact:String, email: String, lat: Double, 
     
     let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
     
-    Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: email, subtitle: "this is the user")
+    Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: email, subtitle: "this is the user", email: email)
     
     print("Going to update the annotations array - add event")
     
