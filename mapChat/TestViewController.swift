@@ -60,7 +60,6 @@ class TestViewController: UITableViewController{
     //---------------------------------------------------------------------------------------------------------------------------------------------
     func readUserAccountInfo(){
         accountHandle = myAccountRef.observeEventType(.Value, withBlock: { (snapShot) in
-            print("account Handle in Test View Controller!")
             let email = snapShot.value["email"] as! String
             let name = snapShot.value["name"] as! String
             let uid = snapShot.value["uid"] as! String
@@ -166,7 +165,6 @@ extension TestViewController {
     //---------------------------------------------------------------------------------------------------------------------------------------------
     func downloadMyContacts(){
         mapViewContactsRef.observeSingleEventOfType(.Value, withBlock: { my_contacts_snapshot in
-            print("contacts handle get called!")
             self.contacts = []
             if my_contacts_snapshot.exists() {
                 self.loadContacts(my_contacts_snapshot)
@@ -184,10 +182,12 @@ extension TestViewController: MenuViewDelegate {
         let uid = contacts[index].uid
         let email = contacts[index].email
         let name = contacts[index].name
+        let image = contacts[index].image
+        
         myContactsLocationRef = Firebase(url: FirebaseHelper.rootURL).childByAppendingPath("locations").childByAppendingPath(uid)
         
         locationHandle = myContactsLocationRef.observeEventType(.Value, withBlock: { SnapShot in
-            print("listening to user" + uid)
+//            print("listening to user" + uid)
             //FIX IT? IT MIGHT NOT A GOOD SOLUTION, THINKING ABOUT SUBSCRIPT
             //PERFORMACE ISSUE HERE?
             for item in SnapShot.children{
@@ -205,7 +205,7 @@ extension TestViewController: MenuViewDelegate {
                         }
                     }
                     //let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
-                    self.addContactToMapAndCenterMapToIt(uid, email: email, name: name, lat: lat, lng: lng)
+                    self.addContactToMapAndCenterMapToIt(uid, email: email, name: name, lat: lat, lng: lng, image:image)
                 }
             }
         })
@@ -234,14 +234,15 @@ extension TestViewController: MKMapViewDelegate {
                 if annotation is MKUserLocation {
                     return nil
                 }
-            
             var v: MKAnnotationView! = nil
-            if let t = annotation.title {
+            if let _ = annotation.title {
+                let newAnnotation = annotation as! Annotation
                 let reuseId = "pin"
                 v = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
                 if v == nil {
                     v = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-                    v.image = UIImage(named: "woman")?.circle2
+//                    print(annotation.title)
+                    v.image = newAnnotation.image?.circle2
                     v.canShowCallout = true
                     
                     v.bounds.size.height /= 10.0
@@ -260,9 +261,9 @@ extension TestViewController: MKMapViewDelegate {
         }
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    func addContactToMapAndCenterMapToIt(uidOfContact:String, email: String, name:String, lat: Double, lng: Double){
+    func addContactToMapAndCenterMapToIt(uidOfContact:String, email: String, name:String, lat: Double, lng: Double, image:UIImage){
         let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
-        Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: name, subtitle: email, email: email)
+        Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: name, subtitle: email, email: email, image:image)
         let annotations = Array(Annotations.annotationsDict.values)
         let allAnnotations = self.mapView.annotations
         self.mapView.removeAnnotations(allAnnotations)
@@ -273,23 +274,40 @@ extension TestViewController: MKMapViewDelegate {
 }
 
 extension UIImage{
-    var circle2: UIImage? {
-    let square = CGSize(width: min(size.width, size.height), height: min(size.width, size.height))
-    print(size.width)
-    print(size.height)
-    let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
-    imageView.contentMode = .ScaleAspectFill
-    imageView.image = self
-    imageView.layer.cornerRadius = square.width/2
-    imageView.layer.masksToBounds = true
-    imageView.layer.borderColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0).CGColor
-    imageView.layer.borderWidth = 5
-    UIGraphicsBeginImageContext(imageView.bounds.size)
-    guard let context = UIGraphicsGetCurrentContext() else { return nil }
-    imageView.layer.renderInContext(context)
-    let result = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    return result
+        var circle2: UIImage? {
+        let square = CGSize(width: min(size.width, size.height), height: min(size.width, size.height))
+        let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
+        imageView.contentMode = .ScaleAspectFill
+        imageView.image = self
+        imageView.layer.cornerRadius = square.width/2
+        imageView.layer.masksToBounds = true
+//        imageView.layer.borderColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0).CGColor
+        imageView.layer.borderColor = UIColor.whiteColor().CGColor
+        imageView.layer.borderWidth = 30
+        UIGraphicsBeginImageContext(imageView.bounds.size)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        imageView.layer.renderInContext(context)
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return result
+        }
+
+        var chatAvatar: UIImage? {
+        let square = CGSize(width: min(size.width, size.height), height: min(size.width, size.height))
+        let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
+        imageView.contentMode = .ScaleAspectFill
+        imageView.image = self
+        imageView.layer.cornerRadius = square.width/10
+        imageView.layer.masksToBounds = true
+//        imageView.layer.borderColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0).CGColor
+        imageView.layer.borderColor = UIColor.whiteColor().CGColor
+        imageView.layer.borderWidth = 15
+        UIGraphicsBeginImageContext(imageView.bounds.size)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        imageView.layer.renderInContext(context)
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return result
     }
 
 }

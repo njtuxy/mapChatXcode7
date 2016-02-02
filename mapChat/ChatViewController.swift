@@ -195,7 +195,9 @@ extension ChatViewController {
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
         let niceColor = UIColor ( red: 93.0/255.0, green: 138.0/255.0, blue: 168.0/255.0, alpha: 1.0 )
-        let avatar = UIImage.fontAwesomeIconWithName(.Chrome, textColor: UIColor.orangeColor(), size: CGSizeMake(35, 35))
+        let avatar =  Me.account.profilePhoto.chatAvatar
+//        let avatar1 = 
+//        let avatar = UIImage.fontAwesomeIconWithName(.Chrome, textColor: UIColor.orangeColor(), size: CGSizeMake(35, 35))
         let avatar1 = UIImage.fontAwesomeIconWithName(.HackerNews, textColor: niceColor, size: CGSizeMake(25, 25))
         
         let message = self.messages[indexPath.item];

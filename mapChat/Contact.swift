@@ -78,13 +78,15 @@ class Annotation : NSObject, MKAnnotation{
     var title: String?
     var subtitle: String?
     var email: String?
+    var image: UIImage?
     
-    init(uid: String, coordinate: CLLocationCoordinate2D, title: String, subtitle: String, email:String){
+    init(uid: String, coordinate: CLLocationCoordinate2D, title: String, subtitle: String, email:String, image:UIImage){
         self.uid = uid
         self.coordinate = coordinate
         self.title = title
         self.subtitle = subtitle
         self.email = email
+        self.image = image
     }
 }
 
@@ -177,7 +179,7 @@ struct LocationObserver {
                         }
                     }
                     
-                    addAnnotationFromObserver(uid, email:email, lat: lat, lng: lng)
+//                    addAnnotationFromObserver(uid, email:email, lat: lat, lng: lng)
                     
                 }
                 
@@ -191,18 +193,18 @@ struct LocationObservers {
     static var observersDict = [String: LocationObserver]()
 }
 
-func addAnnotationFromObserver(uidOfContact:String, email: String, lat: Double, lng: Double){
-    
-    print("adding a local ob for this user: " + email)
-    
-    let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
-    
-    Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: email, subtitle: "this is the user", email: email)
-    
-    print("Going to update the annotations array - add event")
-    
-    Status.annotationUpdated.next(true)
-}
+//func addAnnotationFromObserver(uidOfContact:String, email: String, lat: Double, lng: Double){
+//    
+//    print("adding a local ob for this user: " + email)
+//    
+//    let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
+//    
+//    Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: email, subtitle: "this is the user", email: email)
+//    
+//    print("Going to update the annotations array - add event")
+//    
+//    Status.annotationUpdated.next(true)
+//}
 
 struct CurrentLocatedContact {
     static var location = CLLocationCoordinate2D()
