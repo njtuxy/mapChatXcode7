@@ -34,6 +34,7 @@ class TestViewController: UITableViewController{
         mapView.delegate = self
         loadMenu()
         configNavigationBar()
+        showSubtitle()
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -102,11 +103,23 @@ extension TestViewController{
     }
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
+    func showSubtitle(){
+        let navBar = self.navigationController?.navigationBar
+        let firstFrame = CGRect(x: navBar!.frame.width/3, y: 23, width: navBar!.frame.width/2, height: navBar!.frame.height/2)
+        subTitleLabel = UILabel(frame: firstFrame)
+        subTitleLabel.text = "Choose a contact:"
+        subTitleLabel.textColor = UIColor.whiteColor()
+        subTitleLabel.textAlignment = NSTextAlignment.Left
+        subTitleLabel.font = UIFont (name: "HelveticaNeue-Light", size: 12)
+        navBar!.addSubview(subTitleLabel)
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     func configNavigationBar(){
         let navBar = self.navigationController?.navigationBar
         navBar!.barStyle = UIBarStyle.Black
-        navBar!.barTintColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
+        navBar!.barTintColor = UIColor(red: 72.0 / 255.0, green: 77.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0)
         navBar!.translucent = false
+        title = "4 contacts online"
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont (name: "HelveticaNeue-Light", size: 20)!]
         //This 2 lines of code are for hidding the navigation bar border:
         self.navigationController?.navigationBar.shadowImage = UIImage()

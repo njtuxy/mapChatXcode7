@@ -19,8 +19,8 @@ class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDelegate
     var messageRef:Firebase!
     var messageHandle:UInt!
     
-    var email1:String = "a@a.com"
-    var email2:String = "a@123.com"
+    var email1:String = Me.account.email
+    var email2:String = ChatWindow.contactEmail!
     
     let incomingBubble = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor(red: 10/255, green: 180/255, blue: 230/255, alpha: 1.0))
     let outgoingBubble = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleGreenColor())
@@ -29,6 +29,8 @@ class ChatViewController: JSQMessagesViewController, UIGestureRecognizerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(ChatWindow.contactEmail)
         
         automaticallyScrollsToMostRecentMessage = true
         
