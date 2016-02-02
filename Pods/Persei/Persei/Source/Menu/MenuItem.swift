@@ -10,17 +10,17 @@ public struct MenuItem {
     public var backgroundColor = UIColor.clearColor()
 //    public var highlightedBackgroundColor = UIColor(red: 1.0, green: 61.0 / 255.0, blue: 130.0 / 255.0, alpha: 1.0)
     public var highlightedBackgroundColor = UIColor.orangeColor()
-    
     public var shadowColor = UIColor.clearColor()
-
     public let  email: String
     public let  uid: String
+    public let name:String
 
     // MARK: - Init
-    public init(image: UIImage, email: String, uid: String) {
+    public init(image: UIImage, email: String, uid: String, name:String) {
         self.image = image
         self.email = email
-        self.uid = uid        
+        self.uid = uid
+        self.name = name
     }
     
 //    init(snapshot: FDataSnapshot) {

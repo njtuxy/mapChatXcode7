@@ -91,9 +91,9 @@ extension TestViewController{
     }
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    func addContactToMapAndCenterMapToIt(uidOfContact:String, email: String, lat: Double, lng: Double){
+    func addContactToMapAndCenterMapToIt(uidOfContact:String, email: String, name:String, lat: Double, lng: Double){
         let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
-        Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: email, subtitle: "this is the user")
+        Annotations.annotationsDict[uidOfContact] = Annotation(uid: uidOfContact, coordinate: t_location, title: name, subtitle: email)
         let annotations = Array(Annotations.annotationsDict.values)
         let allAnnotations = self.mapView.annotations
         self.mapView.removeAnnotations(allAnnotations)
@@ -150,11 +150,11 @@ extension TestViewController {
             let singleContactRef = Firebase(url: FirebaseHelper.rootURL).childByAppendingPath("users").childByAppendingPath(uid)
             singleContactRef.observeSingleEventOfType(.Value, withBlock: { thisContactSnapShot in
                 let email = thisContactSnapShot.value["email"] as! String
-//                let name = thisContactSnapShot.value["name"] as! String
+                let name = thisContactSnapShot.value["name"] as! String
                 let uid = thisContactSnapShot.value["uid"] as! String
                 let base64String = thisContactSnapShot.value["profilePhoto"] as! String
                 let profilePhoto = FirebaseHelper.readUserImage(base64String)
-                self.contacts.append(MenuItem(image: profilePhoto, email: email, uid: uid))
+                self.contacts.append(MenuItem(image: profilePhoto, email: email, uid: uid, name: name))
                 self.refreshMenuItems()
             })
         }
@@ -180,6 +180,7 @@ extension TestViewController: MenuViewDelegate {
     func menu(menu: MenuView, didSelectItemAtIndex index: Int) {
         let uid = contacts[index].uid
         let email = contacts[index].email
+        let name = contacts[index].name
         myContactsLocationRef = Firebase(url: FirebaseHelper.rootURL).childByAppendingPath("locations").childByAppendingPath(uid)
         
         locationHandle = myContactsLocationRef.observeEventType(.Value, withBlock: { SnapShot in
@@ -201,7 +202,7 @@ extension TestViewController: MenuViewDelegate {
                         }
                     }
                     //let t_location = CLLocationCoordinate2D(latitude:lat, longitude:lng)
-                    self.addContactToMapAndCenterMapToIt(uid, email: email, lat: lat, lng: lng)
+                    self.addContactToMapAndCenterMapToIt(uid, email: email, name: name, lat: lat, lng: lng)
                 }
             }
         })
