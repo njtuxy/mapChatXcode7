@@ -13,49 +13,14 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
 
     @IBOutlet var contactsTable: UITableView!
     
-    struct User {
-        let uid: String!
-        let email: String!
-        let contacts: [String]!
-        
-        init(snapShot: FDataSnapshot){
-            let value = snapShot.value
-            uid = value["uid"] as! String
-            email = value["email"] as! String
-            contacts = []
-        }
-    }
-    
-    var strangerList = [User]()
-    
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return strangerList.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("NewContactListItem", forIndexPath: indexPath) as! NewContactTableViewCell
-        
-        cell.selectionStyle = .None
-        
-        let index = indexPath.row
-
-        // Configure the cell...
-        cell.txtUserEmail.text = self.strangerList[index].email
-        cell.btnAddContact.tag = index
-        cell.btnAddContact.addTarget(self, action: "addThisUser:", forControlEvents: .TouchUpInside)
-        return cell
-        
-    }
-    
+    var strangerList = [Contact]()
     
     override func viewDidLoad() {
         
         let myUid = Me.account.uid
         let users = FirebaseHelper.rootRef.childByAppendingPath("users")
 
-        var t_strangers_list = [User]()
+        var t_strangers_list = [Contact]()
         
 
         //Add observer to the users list, order by UID, and listen to ChildAdded Event
@@ -74,8 +39,12 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
                         
                         //If not exists, it means it is not my contact, then show it on the stangers screen
                         if !contactsSnapShot.exists() {
-                            let user_item = User(snapShot: usersSnapShot)
-                            t_strangers_list.append(user_item)
+                            let email = usersSnapShot.value["email"] as! String
+                            let name = usersSnapShot.value["name"] as! String
+                            let uid = usersSnapShot.value["uid"] as! String
+                            let base64String = usersSnapShot.value["profilePhoto"] as! String
+                            let profilePhoto = FirebaseHelper.readUserImage(base64String)
+                            t_strangers_list.append(Contact(uid: uid, email: email, name: name, profilePhtoto: profilePhoto, selected: false))
                         }
                         
                         self.strangerList = t_strangers_list
@@ -111,5 +80,26 @@ class AddNewContactViewController: UIViewController, UITableViewDataSource, UITa
         let contactListOfStanger = users.childByAppendingPath(uidOfStranger).childByAppendingPath("contacts").childByAppendingPath(myUid)
         contactListOfStanger.setValue(false)
     }
+}
+
+//Table Functions:
+extension AddNewContactViewController {
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return strangerList.count
+    }
     
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("NewContactListItem", forIndexPath: indexPath) as! NewContactTableViewCell
+        cell.selectionStyle = .None
+        let index = indexPath.row
+        
+        // Configure the cell...
+        cell.profilePhoto.image = self.strangerList[index].profilePhtoto
+        cell.txtUserEmail.text = self.strangerList[index].name
+        cell.btnAddContact.tag = index
+        cell.btnAddContact.addTarget(self, action: "addThisUser:", forControlEvents: .TouchUpInside)
+        return cell
+    }
 }

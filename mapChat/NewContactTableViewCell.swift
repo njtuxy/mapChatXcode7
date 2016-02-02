@@ -12,6 +12,7 @@ class NewContactTableViewCell: UITableViewCell {
 
     
     
+    @IBOutlet weak var profilePhoto: UIImageView!
     @IBOutlet weak var txtUserEmail: UILabel!
     @IBOutlet weak var btnAddContact: UIButton!
     

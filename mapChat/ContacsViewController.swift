@@ -112,7 +112,8 @@ extension ContacsViewController{
         let index = indexPath.row
         // Configure the cell...
         cell.txtUserEmail.text = self.contactsArray[index].name
-        cell.txtUserEmail.textColor = UIColor.whiteColor()
+        cell.profilePhoto.image = self.contactsArray[index].profilePhtoto
+//        cell.txtUserEmail.textColor = UIColor.whiteColor()
         cell.btnRemoveContact.tag = index
         cell.btnRemoveContact.addTarget(self, action: "removeThisContact:", forControlEvents: .TouchUpInside)
         cell.btnRemoveContact.titleLabel?.font = UIFont.fontAwesomeOfSize(20)

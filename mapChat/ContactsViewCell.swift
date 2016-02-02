@@ -12,6 +12,8 @@ class ContactsViewCell: UITableViewCell {
 
     @IBOutlet weak var txtUserEmail: UILabel!
     
+    @IBOutlet weak var profilePhoto: UIImageView!
+    
     @IBOutlet weak var btnRemoveContact: UIButton!
     
     override func awakeFromNib() {
