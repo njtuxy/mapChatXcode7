@@ -25,6 +25,12 @@ class SettingsViewController: UITableViewController {
     
     override func viewDidLoad() {
     }
+
+//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        print("click :")
+//        print(indexPath.section)        
+//        print(indexPath.row)
+//    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

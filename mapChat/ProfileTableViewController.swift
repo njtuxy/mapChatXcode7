@@ -1,23 +1,19 @@
 //
-//  ProfileViewController.swift
+//  ProfileTableViewController.swift
 //  mapChat
 //
-//  Created by Yan Xia on 1/28/16.
+//  Created by Yan Xia on 2/2/16.
 //  Copyright © 2016 yxia. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class ProfileViewController:UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-    
+class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+
     @IBOutlet weak var profilePhoto: UIImageView!
     let imagepicker = UIImagePickerController()
     
-    @IBAction func closeWindow(sender: AnyObject) {
-        print("close the window")
-            self.dismissViewControllerAnimated(true, completion: nil)
-    }
+    @IBOutlet weak var userName: UILabel!
     
     @IBAction func editProfilePhoto(sender: AnyObject) {
         imagepicker.allowsEditing = false
@@ -25,16 +21,24 @@ class ProfileViewController:UIViewController, UIImagePickerControllerDelegate, U
         presentViewController(imagepicker, animated: true, completion: nil)
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let smallerProfilePhoto = self.scaleUIImageToSize(Me.account.profilePhoto, size: CGSizeMake(80, 80.0))
-        self.profilePhoto.image = smallerProfilePhoto
         imagepicker.delegate = self
+        self.profilePhoto.image = Me.account.profilePhoto
+        self.userName.text = Me.account.name
     }
     
+    
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         profilePhoto.contentMode = .ScaleAspectFit
-        let scaledImage = self.scaleUIImageToSize(image, size: CGSizeMake(80, 80.0))
+        let scaledImage = self.scaleUIImageToSize(image, size: CGSizeMake(200.0, 200.0))
         profilePhoto.image = scaledImage
         dismissViewControllerAnimated(true, completion: nil)
         uploadProfilePhotoToFirebase(scaledImage)
@@ -44,10 +48,16 @@ class ProfileViewController:UIViewController, UIImagePickerControllerDelegate, U
         FirebaseHelper.rootRef.childByAppendingPath("users").childByAppendingPath(Me.account.uid).childByAppendingPath("profilePhoto").setValue(image.toBase64())
         Me.account.profilePhoto = image
     }
-    
 }
 
-extension ProfileViewController{
+extension UIImage{
+    func toBase64() -> String{
+        let imageData = UIImagePNGRepresentation(self)!
+        return imageData.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+    }
+}
+
+extension ProfileTableViewController{
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
     func ResizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
@@ -86,7 +96,7 @@ extension ProfileViewController{
         UIGraphicsEndImageContext()
         return newImage
     }
-
+    
     //---------------------------------------------------------------------------------------------------------------------------------------------
     /*
     Image Resizing Techniques: http://bit.ly/1Hv0T6i
@@ -104,8 +114,3 @@ extension ProfileViewController{
         return scaledImage
     }
 }
-
-//        UIImagePickerControllerSourceType.PhotoLibrary
-//        UIImagePickerControllerSourceType.Camera
-//        UIImagePickerControllerSourceType.SavedPhotosAlbum
-
