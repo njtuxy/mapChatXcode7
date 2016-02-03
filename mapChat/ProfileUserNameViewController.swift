@@ -32,6 +32,7 @@ class ProfileUserNameViewController: UIViewController, UITextFieldDelegate{
     @IBAction func saveUserName(sender: AnyObject) {
         let userNameRef = Firebase(url: FirebaseHelper.rootURL).childByAppendingPath("users").childByAppendingPath(Me.account.uid).childByAppendingPath("name")
         userNameRef.setValue(userName.text)
+        Me.account.name = userName.text!
         self.navigationController?.popViewControllerAnimated(true)
     }
     

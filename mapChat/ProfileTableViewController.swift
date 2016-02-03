@@ -25,6 +25,9 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
     override func viewDidLoad() {
         super.viewDidLoad()
         imagepicker.delegate = self
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         self.profilePhoto.image = Me.account.profilePhoto
         self.userName.text = Me.account.name
     }
