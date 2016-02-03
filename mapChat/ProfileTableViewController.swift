@@ -32,8 +32,6 @@ class ProfileTableViewController: UITableViewController, UIImagePickerController
         self.userName.text = Me.account.name
     }
     
-    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -117,3 +115,11 @@ extension ProfileTableViewController{
         return scaledImage
     }
 }
+
+extension ProfileTableViewController{
+    //This functions is for making sure the table cell's hightlight is gone after click
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+}
+

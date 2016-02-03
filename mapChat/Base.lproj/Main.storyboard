@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -1099,6 +1098,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="TGG-2Y-YRU" secondAttribute="trailing" constant="25" id="Hc0-d4-B3f"/>
+                                                <constraint firstItem="fzg-Z2-x3D" firstAttribute="leading" secondItem="7k8-Su-71o" secondAttribute="leadingMargin" constant="8" id="Jw2-bM-if3"/>
                                                 <constraint firstItem="fzg-Z2-x3D" firstAttribute="leading" secondItem="7k8-Su-71o" secondAttribute="leadingMargin" constant="8" id="L7X-L0-8NR"/>
                                                 <constraint firstAttribute="trailing" secondItem="WrR-3d-NBj" secondAttribute="trailing" id="OFy-T3-Ba7"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="TGG-2Y-YRU" secondAttribute="trailing" constant="25" id="e2U-CP-tTr"/>
@@ -1125,12 +1125,6 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZ1-pb-rz3">
-                                                    <rect key="frame" x="43" y="11" width="45" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDN-AX-QAB">
                                                     <rect key="frame" x="296" y="11" width="110" height="21"/>
                                                     <constraints>
@@ -1140,16 +1134,21 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZ1-pb-rz3">
+                                                    <rect key="frame" x="20" y="11" width="45" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="3Iq-Pn-ssJ" firstAttribute="top" secondItem="XDf-b1-etT" secondAttribute="topMargin" constant="11" id="6WA-bg-VjT"/>
                                                 <constraint firstItem="wDN-AX-QAB" firstAttribute="centerY" secondItem="XDf-b1-etT" secondAttribute="centerY" id="76f-lI-2xm"/>
-                                                <constraint firstItem="lZ1-pb-rz3" firstAttribute="leading" secondItem="XDf-b1-etT" secondAttribute="leadingMargin" constant="35" id="GkT-pc-FEr"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="3Iq-Pn-ssJ" secondAttribute="bottom" constant="-4.5" id="KaE-0X-6cj"/>
                                                 <constraint firstItem="wDN-AX-QAB" firstAttribute="top" secondItem="XDf-b1-etT" secondAttribute="topMargin" constant="3" id="Kb2-Db-npD"/>
                                                 <constraint firstItem="wDN-AX-QAB" firstAttribute="trailing" secondItem="XDf-b1-etT" secondAttribute="trailingMargin" id="LCK-cB-q9g"/>
-                                                <constraint firstItem="wDN-AX-QAB" firstAttribute="firstBaseline" secondItem="lZ1-pb-rz3" secondAttribute="firstBaseline" id="hNk-hM-rqh"/>
-                                                <constraint firstItem="wDN-AX-QAB" firstAttribute="baseline" secondItem="lZ1-pb-rz3" secondAttribute="baseline" id="rOh-tL-dsb"/>
+                                                <constraint firstItem="lZ1-pb-rz3" firstAttribute="leading" secondItem="XDf-b1-etT" secondAttribute="leadingMargin" constant="12" id="SI2-Is-zal"/>
+                                                <constraint firstItem="lZ1-pb-rz3" firstAttribute="top" secondItem="XDf-b1-etT" secondAttribute="topMargin" constant="3" id="lkj-5f-95W"/>
                                                 <constraint firstItem="3Iq-Pn-ssJ" firstAttribute="leading" secondItem="wDN-AX-QAB" secondAttribute="trailing" constant="70" id="sof-Gk-mcr"/>
                                                 <constraint firstItem="wDN-AX-QAB" firstAttribute="top" secondItem="XDf-b1-etT" secondAttribute="topMargin" constant="3" id="tfB-LI-fr0"/>
                                             </constraints>
