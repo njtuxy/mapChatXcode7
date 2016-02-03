@@ -16,6 +16,7 @@
 		DA2326801C1008A400094165 /* ContactsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23267F1C1008A400094165 /* ContactsViewCell.swift */; };
 		DA2E0F1D1C0831A900C508E0 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2E0F1C1C0831A900C508E0 /* FirebaseHelper.swift */; };
 		DA2E0F1F1C09382900C508E0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2E0F1E1C09382900C508E0 /* LoginViewController.swift */; };
+		DA3C13E41C62A7FA001321CB /* ProfileUserNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3C13E31C62A7FA001321CB /* ProfileUserNameViewController.swift */; };
 		DA457ED21C46FB9800CDB606 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA457ED11C46FB9800CDB606 /* TestViewController.swift */; };
 		DA5C9C041C52FE7B0053BB63 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C9C031C52FE7B0053BB63 /* SignUpViewController.swift */; };
 		DA77CB331C4CBD060063CD71 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA77CB321C4CBD060063CD71 /* ChatViewController.swift */; };
@@ -51,6 +52,7 @@
 		DA23267F1C1008A400094165 /* ContactsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewCell.swift; sourceTree = "<group>"; };
 		DA2E0F1C1C0831A900C508E0 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		DA2E0F1E1C09382900C508E0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		DA3C13E31C62A7FA001321CB /* ProfileUserNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileUserNameViewController.swift; sourceTree = "<group>"; };
 		DA457ED11C46FB9800CDB606 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		DA5C9C031C52FE7B0053BB63 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		DA77CB321C4CBD060063CD71 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				DAA8CF2C1C5AF80000ADDF9B /* ProfileViewController.swift */,
+				DA3C13E31C62A7FA001321CB /* ProfileUserNameViewController.swift */,
 				DAC5ED9D1C616F5100EE0DA0 /* ProfileTableViewController.swift */,
 			);
 			name = profile;
@@ -393,6 +396,7 @@
 				DA23267E1C0ECB9200094165 /* NewContactTableViewCell.swift in Sources */,
 				DA84C2291C1774090097F1F7 /* SWRevealViewController.m in Sources */,
 				DA84C22B1C1791830097F1F7 /* LeftSideContactsMenuController.swift in Sources */,
+				DA3C13E41C62A7FA001321CB /* ProfileUserNameViewController.swift in Sources */,
 				DAA89DB01BFE8D3A005FB53E /* MapViewController.swift in Sources */,
 				DA84C22D1C1791C50097F1F7 /* LeftSideMenuContactsCell.swift in Sources */,
 				DA7AC64E1C0982D5001B9D39 /* SwiftNotice.swift in Sources */,
