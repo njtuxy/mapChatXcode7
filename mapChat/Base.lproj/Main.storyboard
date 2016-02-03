@@ -1122,7 +1122,7 @@
                                         <rect key="frame" x="0.0" y="99" width="414" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lxy-eD-OfF" id="7k8-Su-71o">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="83.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="84"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ih9-d2-d4E">
@@ -1259,7 +1259,29 @@
                     <view key="view" contentMode="scaleToFill" id="OUT-ww-esf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cd4-qF-ixf">
+                                <rect key="frame" x="0.0" y="79" width="414" height="40"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="you name is here" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="VFT-Ol-DPT">
+                                        <rect key="frame" x="8" y="0.0" width="399" height="40"/>
+                                        <color key="backgroundColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kbd-UO-1H2"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Cd4-qF-ixf" firstAttribute="top" secondItem="Mjz-Bp-Ejb" secondAttribute="bottom" constant="15" id="H46-Cv-Pge"/>
+                            <constraint firstItem="Cd4-qF-ixf" firstAttribute="leading" secondItem="OUT-ww-esf" secondAttribute="leading" id="slj-cT-4F7"/>
+                            <constraint firstItem="Cd4-qF-ixf" firstAttribute="centerX" secondItem="OUT-ww-esf" secondAttribute="centerX" id="ykt-cr-Ohz"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
