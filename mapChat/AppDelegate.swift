@@ -19,14 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         super.init()
         Firebase.defaultConfig().persistenceEnabled = true                
     }
-
+    
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    func setUpTabBarUI(){
-//        UITabBar.appearance().barStyle = UIBarStyle.Black
-//        UITabBar.appearance().barTintColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
-//        UITabBar.appearance().tintColor = UIColor.whiteColor()
-//        UITabBar.appearance().translucent = false
-//        UITabBar.appearance().shadowImage = UIImage()
+    func setUpNavigationBarUI(){
+        UINavigationBar.appearance().barStyle = UIBarStyle.Black
+        UINavigationBar.appearance().tintColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
+        UINavigationBar.appearance().barTintColor = UIColor(red: 72.0 / 255.0, green: 77.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0)
+        UINavigationBar.appearance().translucent = false
+        UINavigationBar.appearance().titleTextAttributes = [ NSFontAttributeName: UIFont (name: "HelveticaNeue-Light", size: 15)!]
     }
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //---------------------------------------------------------------------------------------------------------------------------------------------
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        setUpTabBarUI()
+        setUpNavigationBarUI()
         
         if FirebaseHelper.rootRef.authData == nil{
             showLoginWindow()

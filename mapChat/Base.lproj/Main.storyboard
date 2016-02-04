@@ -118,8 +118,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0y-nu-tnh">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0y-nu-tnh">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="lgW-wp-R8o"/>
+                                </constraints>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -917,28 +920,40 @@
                                                     <state key="normal" title="Remove"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jIK-Vp-jrG">
-                                                    <rect key="frame" x="88" y="12" width="185" height="21"/>
+                                                    <rect key="frame" x="74" y="8" width="185" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="185" id="Y7p-0W-es0"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VkG-62-BR9">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Hally Berry" translatesAutoresizingMaskIntoConstraints="NO" id="VkG-62-BR9">
                                                     <rect key="frame" x="13" y="4" width="44" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="44" id="ewD-Nz-6VB"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle can show longer test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWf-cT-FBi">
+                                                    <rect key="frame" x="74" y="33" width="180" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="DRJ-8q-WLe"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="jIK-Vp-jrG" firstAttribute="leading" secondItem="VkG-62-BR9" secondAttribute="trailing" constant="31" id="1Pw-zB-FzW"/>
+                                                <constraint firstItem="jIK-Vp-jrG" firstAttribute="leading" secondItem="VkG-62-BR9" secondAttribute="trailing" constant="17" id="1Pw-zB-FzW"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="FWC-WS-znI" secondAttribute="trailing" constant="94" id="1jd-KH-aJR"/>
                                                 <constraint firstItem="VkG-62-BR9" firstAttribute="leading" secondItem="TXD-p8-PSf" secondAttribute="leadingMargin" constant="5" id="H1B-Vu-QIa"/>
+                                                <constraint firstItem="FWf-cT-FBi" firstAttribute="top" secondItem="jIK-Vp-jrG" secondAttribute="bottom" constant="4" id="NJc-br-BXo"/>
+                                                <constraint firstItem="FWf-cT-FBi" firstAttribute="leading" secondItem="VkG-62-BR9" secondAttribute="trailing" constant="17" id="TM4-y7-5hO"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="FWC-WS-znI" secondAttribute="trailing" constant="94" id="VSd-C1-WUv"/>
-                                                <constraint firstItem="VkG-62-BR9" firstAttribute="centerY" secondItem="jIK-Vp-jrG" secondAttribute="centerY" constant="3.5" id="ZqL-aO-Czc"/>
+                                                <constraint firstItem="VkG-62-BR9" firstAttribute="centerY" secondItem="jIK-Vp-jrG" secondAttribute="centerY" constant="7.5" id="ZqL-aO-Czc"/>
                                                 <constraint firstItem="VkG-62-BR9" firstAttribute="top" secondItem="TXD-p8-PSf" secondAttribute="top" constant="4" id="crc-rS-Mr4"/>
+                                                <constraint firstItem="FWf-cT-FBi" firstAttribute="bottom" secondItem="VkG-62-BR9" secondAttribute="bottom" id="dtY-7U-E8P"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="VkG-62-BR9" secondAttribute="bottom" constant="-5" id="hTP-gZ-tmi"/>
                                                 <constraint firstItem="VkG-62-BR9" firstAttribute="top" secondItem="TXD-p8-PSf" secondAttribute="topMargin" constant="-4" id="ors-eE-jLz"/>
                                                 <constraint firstItem="VkG-62-BR9" firstAttribute="centerY" secondItem="FWC-WS-znI" secondAttribute="centerY" constant="4" id="z01-Hh-ZaE"/>
@@ -1258,6 +1273,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Hally Berry" width="115" height="115"/>
         <image name="Map-25" width="25" height="25"/>
         <image name="Settings-25" width="25" height="25"/>
         <image name="chatbubble-outline" width="25" height="25"/>

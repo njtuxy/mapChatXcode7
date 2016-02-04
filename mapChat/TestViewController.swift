@@ -33,7 +33,7 @@ class TestViewController: UITableViewController{
         super.viewDidLoad()
         mapView.delegate = self
         loadMenu()
-        configNavigationBar()
+//        configNavigationBar()
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------

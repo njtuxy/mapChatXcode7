@@ -27,11 +27,7 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
     //---------------------------------------------------------------------------------------------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Make a transparent navigation bar:
-        self.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        self.navigationController!.navigationBar.shadowImage = UIImage()
-        self.navigationController!.navigationBar.translucent = true
-        configNavigationBar()
+//        configNavigationBar()
         
     }
     
