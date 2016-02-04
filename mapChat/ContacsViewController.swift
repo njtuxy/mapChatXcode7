@@ -31,6 +31,8 @@ class ContacsViewController: UIViewController, UITableViewDataSource, UITableVie
         self.navigationController!.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController!.navigationBar.shadowImage = UIImage()
         self.navigationController!.navigationBar.translucent = true
+        configNavigationBar()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -58,7 +60,7 @@ extension ContacsViewController{
                 let name = thisContactSnapShot.value["name"] as! String
                 let uid = thisContactSnapShot.value["uid"] as! String
                 let base64String = thisContactSnapShot.value["profilePhoto"] as! String
-                let profilePhoto = FirebaseHelper.readUserImage(base64String)
+                let profilePhoto = FirebaseHelper.readUserImage(base64String).circle2
                 self.contactsArray.append(Contact(uid: uid, email: email, name: name, profilePhtoto: profilePhoto, selected: status))
                 self.allContactsTable.reloadData()
             })
@@ -123,6 +125,20 @@ extension ContacsViewController{
     }
 }
 
+extension ContacsViewController{
+    func configNavigationBar(){
+        let navBar = self.navigationController?.navigationBar
+        navBar!.barStyle = UIBarStyle.Black
+        navBar!.tintColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0)
+        navBar!.barTintColor = UIColor(red: 72.0 / 255.0, green: 77.0 / 255.0, blue: 77.0 / 255.0, alpha: 1.0)
+        navBar!.translucent = false
+        title = "My Contacts"
+//        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont (name: "HelveticaNeue-Light", size: 20)!]
+        //This 2 lines of code are for hidding the navigation bar border:
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+    }
+}
 
 //        //Add contacts observer
 //        Status.contactsLoaded.observeNew{ value in
