@@ -280,11 +280,11 @@ extension UIImage{
         let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: square))
         imageView.contentMode = .ScaleAspectFill
         imageView.image = self
-        imageView.layer.cornerRadius = square.width/10
+        imageView.layer.cornerRadius = square.width/20
         imageView.layer.masksToBounds = true
 //        imageView.layer.borderColor = UIColor(red: 0.0 / 255.0, green: 157.0 / 255.0, blue: 203.0 / 255.0, alpha: 1.0).CGColor
         imageView.layer.borderColor = UIColor.whiteColor().CGColor
-        imageView.layer.borderWidth = 30
+        imageView.layer.borderWidth = 5
         UIGraphicsBeginImageContext(imageView.bounds.size)
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
         imageView.layer.renderInContext(context)

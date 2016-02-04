@@ -19,6 +19,7 @@
 		DA3C13E41C62A7FA001321CB /* ProfileUserNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3C13E31C62A7FA001321CB /* ProfileUserNameViewController.swift */; };
 		DA457ED21C46FB9800CDB606 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA457ED11C46FB9800CDB606 /* TestViewController.swift */; };
 		DA5C9C041C52FE7B0053BB63 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5C9C031C52FE7B0053BB63 /* SignUpViewController.swift */; };
+		DA6B01F01C6306E3000B1588 /* ProfilePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6B01EF1C6306E3000B1588 /* ProfilePhotoViewController.swift */; };
 		DA77CB331C4CBD060063CD71 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA77CB321C4CBD060063CD71 /* ChatViewController.swift */; };
 		DA7AC64E1C0982D5001B9D39 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7AC64D1C0982D5001B9D39 /* SwiftNotice.swift */; };
 		DA84C2291C1774090097F1F7 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA84C2281C1774090097F1F7 /* SWRevealViewController.m */; };
@@ -54,6 +55,7 @@
 		DA3C13E31C62A7FA001321CB /* ProfileUserNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileUserNameViewController.swift; sourceTree = "<group>"; };
 		DA457ED11C46FB9800CDB606 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		DA5C9C031C52FE7B0053BB63 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		DA6B01EF1C6306E3000B1588 /* ProfilePhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoViewController.swift; sourceTree = "<group>"; };
 		DA77CB321C4CBD060063CD71 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		DA7AC64D1C0982D5001B9D39 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
 		DA84C2261C1774080097F1F7 /* mapChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mapChat-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			children = (
 				DA3C13E31C62A7FA001321CB /* ProfileUserNameViewController.swift */,
 				DAC5ED9D1C616F5100EE0DA0 /* ProfileTableViewController.swift */,
+				DA6B01EF1C6306E3000B1588 /* ProfilePhotoViewController.swift */,
 			);
 			name = profile;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				DAB117EF1C49ABF900D2FC38 /* ContactOnMap.swift in Sources */,
 				DADB48631C5FD025006D2E07 /* ContactsList.swift in Sources */,
 				DA23267E1C0ECB9200094165 /* NewContactTableViewCell.swift in Sources */,
+				DA6B01F01C6306E3000B1588 /* ProfilePhotoViewController.swift in Sources */,
 				DA84C2291C1774090097F1F7 /* SWRevealViewController.m in Sources */,
 				DA84C22B1C1791830097F1F7 /* LeftSideContactsMenuController.swift in Sources */,
 				DA3C13E41C62A7FA001321CB /* ProfileUserNameViewController.swift in Sources */,
